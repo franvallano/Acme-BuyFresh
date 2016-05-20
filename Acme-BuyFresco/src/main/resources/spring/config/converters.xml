@@ -22,6 +22,47 @@
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 
 		-->
-	</util:list>
+			<bean class="converters.StringToOrderConverter" />
+		<bean class="converters.OrderToStringConverter" />
 	
+		<bean class="converters.StringToCategoryConverter" />
+		<bean class="converters.CategoryToStringConverter" />
+	
+		<bean class="converters.StringToUserConverter" />
+		<bean class="converters.UserToStringConverter" />
+	
+		<bean class="converters.StringToRecipeConverter" />
+		<bean class="converters.RecipeToStringConverter" />
+	
+		<bean class="converters.StringToAssessmentConverter" />
+		<bean class="converters.AssessmentToStringConverter" />
+	
+		<bean class="converters.StringToQuantityConverter" />
+		<bean class="converters.QuantityToStringConverter" />
+	
+		<bean class="converters.StringToSubstitutesConverter" />
+		<bean class="converters.SubstitutesToStringConverter" />
+	
+		<bean class="converters.StringToAdministratorConverter" />
+		<bean class="converters.AdministratorToStringConverter" />
+	
+		<bean class="converters.StringToIngredientConverter" />
+		<bean class="converters.IngredientToStringConverter" />
+	
+		<bean class="converters.StringToActorConverter" />
+		<bean class="converters.ActorToStringConverter" />
+	
+		<bean class="converters.StringToClerkConverter" />
+		<bean class="converters.ClerkToStringConverter" />
+	
+		<bean class="converters.StringToMenuConverter" />
+		<bean class="converters.MenuToStringConverter" />
+	
+		<bean class="converters.StringToSubscriptionConverter" />
+		<bean class="converters.SubscriptionToStringConverter" />
+	
+		<bean class="converters.StringToAllergenConverter" />
+		<bean class="converters.AllergenToStringConverter" />
+	
+</util:list>
 </beans>
