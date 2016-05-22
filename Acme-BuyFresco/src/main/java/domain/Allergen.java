@@ -7,6 +7,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -15,7 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Allergen extends DomainEntity{
 
 	//Attributes --------------------------------------------------------------------------------
-	public String name;
+	private String name;
 
 
 	
@@ -39,62 +40,56 @@ public class Allergen extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 	
-	public Collection<Ingredient> replaceables;
-	public Collection<Ingredient> allergens;
-	public Collection<Recipe> recipes;
-	public Category category;
-	public Collection<User> users;
+	private Collection<Ingredient> replaceables;
+	private Collection<Ingredient> allergens;
+	private Collection<Recipe> recipes;
+	private Category category;
+	private Collection<User> users;
 
-
+	@Valid
 	@ManyToMany
 	public Collection<Ingredient> getReplaceables() {
 		return replaceables;
 	}
-
-
 	public void setReplaceables(Collection<Ingredient> replaceables) {
 		this.replaceables = replaceables;
 	}
 	
+	@Valid
 	@ManyToMany
 	public Collection<Ingredient> getAllergens() {
 		return allergens;
 	}
-
-
 	public void setAllergens(Collection<Ingredient> allergens) {
 		this.allergens = allergens;
 	}
-
+	
+	@Valid
 	@ManyToMany
 	public Collection<Recipe> getRecipes() {
 		return recipes;
 	}
-
 	public void setRecipes(Collection<Recipe> recipes) {
 		this.recipes = recipes;
 	}
 
+	@Valid
 	@ManyToOne(optional = false)
 	public Category getCategory() {
 		return category;
 	}
-
 	public void setCategory(Category category) {
 		this.category = category;
 	}
 
+	@Valid
 	@ManyToMany(mappedBy = "allergens")
 	public Collection<User> getUsers() {
 		return users;
 	}
-
-
 	public void setUsers(Collection<User> users) {
 		this.users = users;
 	}
-	
-	
 	
 	
 }

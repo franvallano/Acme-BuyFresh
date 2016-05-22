@@ -1,17 +1,13 @@
 package domain;
 
-import java.util.Collection;
-
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import javax.xml.stream.events.Comment;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -25,12 +21,13 @@ public abstract class Actor extends DomainEntity{
 
 	
 	//Attributes --------------------------------------------------------------------------------
-	private String name, surname,phone;
+	private String name, surname,phone, email;
 	//Constructor -------------------------------------------------------------------------------
 	public Actor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	//Getters and setter ------------------------------------------------------------------------
 	@NotBlank
 	public String getName() {
@@ -38,6 +35,14 @@ public abstract class Actor extends DomainEntity{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@NotBlank
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	@NotBlank

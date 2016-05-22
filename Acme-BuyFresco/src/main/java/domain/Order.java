@@ -8,17 +8,22 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Order extends DomainEntity{
 	
 	//Attributes --------------------------------------------------------------------------------
-	public String address;
-	public Date shippingDAte, arrivalDate;
-	public String notes;
+	private String address;
+	private Date shippingDate, arrivalDate;
+	private String notes;
 
 	
 	//Constructor -------------------------------------------------------------------------------
@@ -35,28 +40,26 @@ public class Order extends DomainEntity{
 	public String getAddress() {
 		return address;
 	}
-
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
-
-	public Date getShippingDAte() {
-		return shippingDAte;
+	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getShippingDate() {
+		return shippingDate;
+	}
+	public void setShippingDate(Date shippingDate) {
+		this.shippingDate = shippingDate;
 	}
 
-
-	public void setShippingDAte(Date shippingDAte) {
-		this.shippingDAte = shippingDAte;
-	}
-
-
+	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getArrivalDate() {
 		return arrivalDate;
 	}
-
-
 	public void setArrivalDate(Date arrivalDate) {
 		this.arrivalDate = arrivalDate;
 	}
@@ -65,62 +68,52 @@ public class Order extends DomainEntity{
 	public String getNotes() {
 		return notes;
 	}
-
-
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 	
 	//Relationships -----------------------------------------------------------------------------
 
-	public Menu menu;
-	public Collection<Subscription> subscriptions;
-	public Collection<Substitutes> substitutes;
-	public Clerk clerk;
+	private Menu menu;
+	private Subscription subscription;
+	private Collection<Substitutes> substitutes;
+	private Clerk clerk;
 
+	@Valid
 	@ManyToOne(optional = false)
 	public Menu getMenu() {
 		return menu;
 	}
-
-
 	public void setMenu(Menu menu) {
 		this.menu = menu;
 	}
 
+	@Valid
 	@ManyToOne(optional = true)
 	public Clerk getClerk() {
 		return clerk;
 	}
-
-
 	public void setClerk(Clerk clerk) {
 		this.clerk = clerk;
 	}
 
-	@OneToMany(mappedBy = "order")
-	public Collection<Subscription> getSubscriptions() {
-		return subscriptions;
+	@Valid
+	@ManyToOne
+	public Subscription getSubscription() {
+		return subscription;
+	}
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
 	}
 
-
-	public void setSubscriptions(Collection<Subscription> subscriptions) {
-		this.subscriptions = subscriptions;
-	}
-
+	@Valid
 	@OneToMany(mappedBy = "order")
 	public Collection<Substitutes> getSubstitutes() {
 		return substitutes;
 	}
-
-
 	public void setSubstitutes(Collection<Substitutes> substitutes) {
 		this.substitutes = substitutes;
 	}
-	
-	
-	
-	
 	
 
 }

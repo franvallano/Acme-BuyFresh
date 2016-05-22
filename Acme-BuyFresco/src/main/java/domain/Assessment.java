@@ -7,10 +7,13 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -18,10 +21,10 @@ public class Assessment extends DomainEntity{
 	
 	//Attributes --------------------------------------------------------------------------------
 	
-	public Date moment;
-	public Integer generalRating, locationRating, serviceRating, qualityPriceRating;
-	public String text;
-	public Boolean deleted;
+	private Date moment;
+	private Integer rating;
+	private String text;
+	private boolean deleted;
 
 	
 	//Constructor -------------------------------------------------------------------------------
@@ -35,86 +38,49 @@ public class Assessment extends DomainEntity{
 	//Getters and setter ------------------------------------------------------------------------
 
 	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getMoment() {
 		return moment;
 	}
-
-
 	public void setMoment(Date moment) {
 		this.moment = moment;
 	}
 
-	@Range(min = 0, max = 5)
-	public Integer getGeneralRating() {
-		return generalRating;
-	}
-
-
-	public void setGeneralRating(Integer generalRating) {
-		this.generalRating = generalRating;
-	}
 
 	@Range(min = 0, max = 5)
-	public Integer getLocationRating() {
-		return locationRating;
+	public Integer getRating() {
+		return rating;
 	}
-
-
-	public void setLocationRAting(Integer locationRating) {
-		this.locationRating = locationRating;
-	}
-
-	@Range(min = 0, max = 5)
-	public Integer getServiceRating() {
-		return serviceRating;
-	}
-
-
-	public void setServiceRating(Integer serviceRating) {
-		this.serviceRating = serviceRating;
-	}
-
-	@Range(min = 0, max = 5)
-	public Integer getQualityPriceRating() {
-		return qualityPriceRating;
-	}
-
-
-	public void setQualityPriceRating(Integer qualityPriceRating) {
-		this.qualityPriceRating = qualityPriceRating;
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 
 	@NotBlank
 	public String getText() {
 		return text;
 	}
-
-
 	public void setText(String text) {
 		this.text = text;
 	}
 
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return deleted;
 	}
-
-
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 	
 	
 	//Relationships -----------------------------------------------------------------------------
 	
-	public User user;
+	private User user;
 
 	@ManyToOne(optional = false)
 	public User getUser() {
 		return user;
 	}
-
-
 	public void setUser(User user) {
 		this.user = user;
 	}

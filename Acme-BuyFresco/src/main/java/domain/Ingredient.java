@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.URL;
@@ -15,8 +16,8 @@ import org.hibernate.validator.constraints.URL;
 public class Ingredient extends DomainEntity{
 	
 	//Attributes --------------------------------------------------------------------------------
-	public String name, description, picture, metricUnit;
-	public Boolean deleted;
+	private String name, description, picture, metricUnit;
+	private boolean deleted;
 
 	
 	//Constructor -------------------------------------------------------------------------------
@@ -33,8 +34,6 @@ public class Ingredient extends DomainEntity{
 	public String getName() {
 		return name;
 	}
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -43,96 +42,77 @@ public class Ingredient extends DomainEntity{
 	public String getDescription() {
 		return description;
 	}
-
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	@URL
+	@NotBlank
 	public String getPicture() {
 		return picture;
 	}
-
-
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
 
-
+	
+	@NotBlank
 	public String getMetricUnit() {
 		return metricUnit;
 	}
-
-
 	public void setMetricUnit(String metricUnit) {
 		this.metricUnit = metricUnit;
 	}
 
 
-	public Boolean getDeleted() {
+	public boolean getDeleted() {
 		return deleted;
 	}
-
-
-	public void setDeleted(Boolean deleted) {
+	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
 	
 	//Relationships -----------------------------------------------------------------------------
 
-	public Collection<Menu> menus;
-	public Collection<Quantity> quantities;
-	public Collection<Allergen> substitute;
-	public Collection<Allergen> ingredients;
+	private Collection<Menu> menus;
+	private Collection<Quantity> quantities;
+	private Collection<Allergen> substitute;
+	private Collection<Allergen> ingredients;
 
+	@Valid
 	@ManyToMany
 	public Collection<Menu> getMenus() {
 		return menus;
 	}
-
-
-
 	public void setMenus(Collection<Menu> menus) {
 		this.menus = menus;
 	}
 
-
+	@Valid
 	@ManyToMany
 	public Collection<Quantity> getQuantities() {
 		return quantities;
 	}
-
-
-
 	public void setQuantities(Collection<Quantity> quantities) {
 		this.quantities = quantities;
 	}
 
-
+	@Valid
 	@ManyToMany(mappedBy = "replaceables")
 	public Collection<Allergen> getSubstitute() {
 		return substitute;
 	}
-
-
-
 	public void setSubstitute(Collection<Allergen> substitute) {
 		this.substitute = substitute;
 	}
 
-
+	@Valid
 	@ManyToMany(mappedBy = "allergens")
 	public Collection<Allergen> getIngredients() {
 		return ingredients;
 	}
-
-
-
 	public void setIngredients(Collection<Allergen> ingredients) {
 		this.ingredients = ingredients;
 	}
-	
-	
 	
 }

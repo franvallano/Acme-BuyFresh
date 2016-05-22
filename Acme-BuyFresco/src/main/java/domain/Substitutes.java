@@ -4,6 +4,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -13,8 +14,8 @@ public class Substitutes extends DomainEntity{
 	
 	//Attributes --------------------------------------------------------------------------------
 	
-	public String name, metricUnit, recipeName;
-	public Integer quantity;
+	private String name, metricUnit, recipeName;
+	private Integer quantity;
 
 	
 	//Constructor -------------------------------------------------------------------------------
@@ -31,18 +32,14 @@ public class Substitutes extends DomainEntity{
 	public String getName() {
 		return name;
 	}
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
+	@NotBlank
 	public String getMetricUnit() {
 		return metricUnit;
 	}
-
-
 	public void setMetricUnit(String metricUnit) {
 		this.metricUnit = metricUnit;
 	}
@@ -51,8 +48,6 @@ public class Substitutes extends DomainEntity{
 	public String getRecipeName() {
 		return recipeName;
 	}
-
-
 	public void setRecipeName(String recipeName) {
 		this.recipeName = recipeName;
 	}
@@ -61,8 +56,6 @@ public class Substitutes extends DomainEntity{
 	public Integer getQuantity() {
 		return quantity;
 	}
-
-
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
@@ -70,18 +63,16 @@ public class Substitutes extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 	
-	public Order order;
+	private Order order;
 
+	@Valid
 	@ManyToOne(optional = false)
 	public Order getOrder() {
 		return order;
 	}
-
-
 	public void setOrder(Order order) {
 		this.order = order;
 	}
-	
 	
 
 }

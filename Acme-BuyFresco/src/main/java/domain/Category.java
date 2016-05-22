@@ -5,6 +5,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -29,7 +30,6 @@ public class Category extends DomainEntity{
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -37,15 +37,14 @@ public class Category extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 
-	public Collection<Allergen> allergens;
+	private Collection<Allergen> allergens;
 
 
+	@Valid
 	@OneToMany(mappedBy = "category")
 	public Collection<Allergen> getAllergens() {
 		return allergens;
 	}
-
-
 	public void setAllergens(Collection<Allergen> allergens) {
 		this.allergens = allergens;
 	}
