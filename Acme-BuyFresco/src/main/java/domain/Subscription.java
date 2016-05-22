@@ -8,21 +8,24 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Range;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Subscription extends DomainEntity{
 	
 	//Attributes --------------------------------------------------------------------------------
-	public Date creationMoment, finishMoment;
-	public Integer people;
-	public Double price;
-	public Boolean renewal;
+	private Date creationMoment, finishMoment;
+	private Double price;
+	private boolean renewal;
 
 	
 	//Constructor -------------------------------------------------------------------------------
@@ -38,34 +41,24 @@ public class Subscription extends DomainEntity{
 	//Getters and setter ------------------------------------------------------------------------
 	
 	@Past
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCreationMoment() {
 		return creationMoment;
 	}
-
-
 	public void setCreationMoment(Date creationMoment) {
 		this.creationMoment = creationMoment;
 	}
 
-
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getFinishMoment() {
 		return finishMoment;
 	}
-
-
 	public void setFinishMoment(Date finishMoment) {
 		this.finishMoment = finishMoment;
 	}
 
-
-	public Integer getPeople() {
-		return people;
-	}
-
-
-	public void setPeople(Integer people) {
-		this.people = people;
-	}
 
 	@NotNull
 	@Range(min = 0, max = 4)
@@ -73,48 +66,41 @@ public class Subscription extends DomainEntity{
 	public Double getPrice() {
 		return price;
 	}
-
-
 	public void setPrice(Double price) {
 		this.price = price;
 	}
 
 
-	public Boolean getRenewal() {
+	public boolean getRenewal() {
 		return renewal;
 	}
-
-
-	public void setRenewal(Boolean renewal) {
+	public void setRenewal(boolean renewal) {
 		this.renewal = renewal;
 	}
 	
 	
 	//Relationships -----------------------------------------------------------------------------
 
-	public User user;
-	public Order order;
+	private User user;
+	private Collection<Order> orders;
 
-
+	@Valid
 	@ManyToOne(optional = false)
 	public User getUser() {
 		return user;
 	}
-
 	public void setUser(User user) {
 		this.user = user;
 	}
 
-	@ManyToOne(optional = false)
-	public Order getOrder() {
-		return order;
+	@Valid
+	@OneToMany(mappedBy="subscription")
+	public Collection<Order> getOrders() {
+		return orders;
 	}
-	
-	public void setOrder(Order order) {
-		this.order = order;
+	public void setOrders(Collection<Order> orders) {
+		this.orders = orders;
 	}
-	
-	
 	
 
 }

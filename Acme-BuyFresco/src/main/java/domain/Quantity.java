@@ -6,13 +6,15 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Quantity extends DomainEntity{
 	
 	//Attributes --------------------------------------------------------------------------------
-	public int value;
+	private int value;
 	
 	//Constructor -------------------------------------------------------------------------------
 
@@ -22,51 +24,38 @@ public class Quantity extends DomainEntity{
 	}
 
 
-	
 	//Getters and setter ------------------------------------------------------------------------
 	
+	@Min(0)
 	public int getValue() {
 		return value;
 	}
-
 	public void setValue(int value) {
 		this.value = value;
 	}
 	
 	//Relationships -----------------------------------------------------------------------------
 	
-	public Collection<Recipe> recipes;
-	public Collection<Ingredient> ingredients;
+	private Collection<Recipe> recipes;
+	private Collection<Ingredient> ingredients;
 
-	@ManyToMany(mappedBy = "quantities" )
+	@Valid
+	@ManyToMany
 	public Collection<Recipe> getRecipes() {
 		return recipes;
 	}
-
-
 	public void setRecipes(Collection<Recipe> recipes) {
 		this.recipes = recipes;
 	}
 
+	@Valid
 	@ManyToMany(mappedBy = "quantities")
 	public Collection<Ingredient> getIngredients() {
 		return ingredients;
 	}
-
-
 	public void setIngredients(Collection<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 
-
-	
-	
-	//Attributes --------------------------------------------------------------------------------
-	
-	//Constructor -------------------------------------------------------------------------------
-	
-	//Getters and setter ------------------------------------------------------------------------
-	
-	//Relationships -----------------------------------------------------------------------------
 
 }

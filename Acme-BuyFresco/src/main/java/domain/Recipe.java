@@ -6,6 +6,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -14,8 +16,8 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Recipe extends DomainEntity{
 	
 	//Attributes --------------------------------------------------------------------------------
-	public String name, elaboration;
-	public Integer time;
+	private String name, elaboration;
+	private Integer time;
 
 	
 	//Constructor -------------------------------------------------------------------------------
@@ -29,8 +31,6 @@ public class Recipe extends DomainEntity{
 	public String getName() {
 		return name;
 	}
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -39,18 +39,15 @@ public class Recipe extends DomainEntity{
 	public String getElaboration() {
 		return elaboration;
 	}
-
-
 	public void setElaboration(String elaboration) {
 		this.elaboration = elaboration;
 	}
 
 
+	@Min(0)
 	public Integer getTime() {
 		return time;
 	}
-
-
 	public void setTime(Integer time) {
 		this.time = time;
 	}
@@ -59,33 +56,33 @@ public class Recipe extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 
-	public Collection<Menu> menus;
-	public Collection<Quantity> quantities;
-	public Collection<Allergen> allergens;
+	private Collection<Menu> menus;
+	private Collection<Quantity> quantities;
+	private Collection<Allergen> allergens;
 
-
-	@ManyToMany()
+	@Valid
+	@ManyToMany
 	public Collection<Menu> getMenus() {
 		return menus;
 	}
-	
 	public void setMenus(Collection<Menu> menus) {
 		this.menus = menus;
 	}
 
+	@Valid
+	@ManyToMany(mappedBy = "recipes")
 	public Collection<Quantity> getQuantities() {
 		return quantities;
 	}
-
 	public void setQuantities(Collection<Quantity> quantities) {
 		this.quantities = quantities;
 	}
 
+	@Valid
 	@ManyToMany(mappedBy = "recipes")
 	public Collection<Allergen> getAllergens() {
 		return allergens;
 	}
-
 	public void setAllergens(Collection<Allergen> allergens) {
 		this.allergens = allergens;
 	}
