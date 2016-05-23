@@ -17,8 +17,8 @@
 
 	<!-- Artifact identification and properties -->
 
-	<groupId>Acme-BuyFresco</groupId>
-	<artifactId>Acme-BuyFresco</artifactId>
+	<groupId>Acme-BuyFresh</groupId>
+	<artifactId>Acme-BuyFresh</artifactId>
 	<version>1.0</version>
 	<packaging>war</packaging>
 	
@@ -28,9 +28,9 @@
 
 	<!-- Indexing information -->
 
-	<name>Acme-BuyFresco</name>
+	<name>Acme-BuyFresh</name>
 	<url>http://www.acme.com</url>
-	<description>This is  Acme-BuyFresco project 1.0.</description>
+	<description>This is  Acme-BuyFresh project 1.0.</description>
 	
 	<!-- Build commands -->
 

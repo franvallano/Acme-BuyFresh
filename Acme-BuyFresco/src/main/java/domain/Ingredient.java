@@ -76,8 +76,8 @@ public class Ingredient extends DomainEntity{
 
 	private Collection<Menu> menus;
 	private Collection<Quantity> quantities;
-	private Collection<Allergen> substitute;
-	private Collection<Allergen> ingredients;
+	private Collection<Allergen> allergens;
+	private Collection<Allergen> replaceables;
 
 	@Valid
 	@ManyToMany
@@ -98,21 +98,21 @@ public class Ingredient extends DomainEntity{
 	}
 
 	@Valid
-	@ManyToMany(mappedBy = "replaceables")
-	public Collection<Allergen> getSubstitute() {
-		return substitute;
+	@ManyToMany
+	public Collection<Allergen> getAllergens() {
+		return allergens;
 	}
-	public void setSubstitute(Collection<Allergen> substitute) {
-		this.substitute = substitute;
+	public void setAllergens(Collection<Allergen> allergens) {
+		this.allergens = allergens;
 	}
 
 	@Valid
-	@ManyToMany(mappedBy = "allergens")
-	public Collection<Allergen> getIngredients() {
-		return ingredients;
+	@ManyToMany
+	public Collection<Allergen> getReplaceables() {
+		return replaceables;
 	}
-	public void setIngredients(Collection<Allergen> ingredients) {
-		this.ingredients = ingredients;
+	public void setReplaceables(Collection<Allergen> replaceables) {
+		this.replaceables = replaceables;
 	}
 	
 }
