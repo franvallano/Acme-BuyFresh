@@ -34,14 +34,14 @@ public class Clerk extends Actor{
 	
 	//Relationships -----------------------------------------------------------------------------
 	
-	private Collection<Order> orders;
+	private Collection<SalesOrder> orders;
 
 	@Valid
 	@OneToMany(mappedBy = "clerk")
-	public Collection<Order> getOrders() {
+	public Collection<SalesOrder> getOrders() {
 		return orders;
 	}
-	public void setOrders(Collection<Order> orders) {
+	public void setOrders(Collection<SalesOrder> orders) {
 		this.orders = orders;
 	}
 	

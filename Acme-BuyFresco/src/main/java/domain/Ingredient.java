@@ -5,6 +5,8 @@ import java.util.Collection;
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.Valid;
 
@@ -99,6 +101,7 @@ public class Ingredient extends DomainEntity{
 
 	@Valid
 	@ManyToMany
+	@JoinTable(name="allergens", joinColumns=@JoinColumn(name="allergen_id"), inverseJoinColumns=@JoinColumn(name="ingredient_id")) 
 	public Collection<Allergen> getAllergens() {
 		return allergens;
 	}
@@ -108,6 +111,7 @@ public class Ingredient extends DomainEntity{
 
 	@Valid
 	@ManyToMany
+	@JoinTable(name="replaceables", joinColumns=@JoinColumn(name="allergen_id"), inverseJoinColumns=@JoinColumn(name="ingredient_id"))
 	public Collection<Allergen> getReplaceables() {
 		return replaceables;
 	}

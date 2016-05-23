@@ -63,14 +63,14 @@ public class Substitutes extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 	
-	private Order order;
+	private SalesOrder order;
 
 	@Valid
 	@ManyToOne(optional = false)
-	public Order getOrder() {
+	public SalesOrder getOrder() {
 		return order;
 	}
-	public void setOrder(Order order) {
+	public void setOrder(SalesOrder order) {
 		this.order = order;
 	}
 	

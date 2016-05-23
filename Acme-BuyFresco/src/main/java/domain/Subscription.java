@@ -61,7 +61,6 @@ public class Subscription extends DomainEntity{
 
 
 	@NotNull
-	@Range(min = 0, max = 4)
 	@Digits(integer = 2, fraction = 2)
 	public Double getPrice() {
 		return price;
@@ -82,7 +81,7 @@ public class Subscription extends DomainEntity{
 	//Relationships -----------------------------------------------------------------------------
 
 	private User user;
-	private Collection<Order> orders;
+	private Collection<SalesOrder> orders;
 
 	@Valid
 	@ManyToOne(optional = false)
@@ -95,10 +94,10 @@ public class Subscription extends DomainEntity{
 
 	@Valid
 	@OneToMany(mappedBy="subscription")
-	public Collection<Order> getOrders() {
+	public Collection<SalesOrder> getOrders() {
 		return orders;
 	}
-	public void setOrders(Collection<Order> orders) {
+	public void setOrders(Collection<SalesOrder> orders) {
 		this.orders = orders;
 	}
 	

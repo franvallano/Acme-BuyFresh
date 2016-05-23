@@ -80,23 +80,438 @@
 	
 	<!-- CREDITCARDS -->
 	
-	<bean id="creditCard1" class="domain.CreditCard">
+	<bean id="creditCard1" class="datatypes.CreditCard">
 		<property name="holderName" value="Jaime" />
 		<property name="brandName" value="Visa" />
 		<property name="number" value="5228926684479919" />
 		<property name="expirationMonth" value="11" />
 		<property name="expirationYear" value="2016" />
-		<property name="CVV" value="455" />
+		<property name="cvv" value="455" />
 	</bean>
 
-	<bean id="creditCard2" class="domain.CreditCard">
+	<bean id="creditCard2" class="datatypes.CreditCard">
 		<property name="holderName" value="Francisco" />
 		<property name="brandName" value="MasterCard" />
 		<property name="number" value="5134980181517930" />
 		<property name="expirationMonth" value="8" />
 		<property name="expirationYear" value="2019" />
-		<property name="CVV" value="500" />
+		<property name="cvv" value="500" />
 	</bean>
+	
+	
+	<!-- MENU -->
+	
+	<bean id="menu1" class="domain.Menu">
+		<property name="name" value="Menu para 2 personas"/>
+		<property name="type" value="Sin lactosa"/>
+		<property name="creationMoment" value="04/12/2016 23:20"/>
+		<property name="duration" value="30"/>
+		<property name="people" value="2"/>
+		<property name="deleted" value="false"/>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe1"/>
+			</list>		
+		</property>
+		<property name="orders">
+			<list>
+				<ref bean="order1"/>
+			</list>		
+		</property>
+		<property name="ingredients">
+			<list>
+				<ref bean="ingredient1"/>
+				<ref bean="ingredient2"/>
+				<ref bean="ingredient3"/>
+				<ref bean="ingredient4"/>
+			</list>		
+		</property>	
+	</bean>
+	
+	
+	<bean id="menu2" class="domain.Menu">
+		<property name="name" value="Menu Individual"/>
+		<property name="type" value="Celiaco"/>
+		<property name="creationMoment" value="05/12/2016 21:50"/>
+		<property name="duration" value="40"/>
+		<property name="people" value="1"/>
+		<property name="deleted" value="false"/>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe2"/>
+			</list>		
+		</property>
+		<property name="orders">
+			<list>
+				<ref bean="order2"/>
+			</list>		
+		</property>
+		<property name="ingredients">
+			<list>
+				<ref bean="ingredient5"/>
+				<ref bean="ingredient6"/>
+				<ref bean="ingredient7"/>
+			</list>		
+		</property>	
+	</bean>
+	
+	
+	
+	<!-- RECIPES -->
+	
+	<bean id="recipe1" class="domain.Recipe">
+		<property name="name" value="Colacao"/>
+		<property name="elaboration" value="Elaboracion colacao"/>
+		<property name="time" value="5"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu1"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity1"/>
+				<ref bean="quantity2"/>
+				<ref bean="quantity3"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				<ref bean="allergen1"/>
+			</list>		
+		</property>	
+	</bean>
+	
+	
+	<bean id="recipe2" class="domain.Recipe">
+		<property name="name" value="Sandwich"/>
+		<property name="elaboration" value="Elaboracion de sandwich."/>
+		<property name="time" value="3"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu2"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity2"/>
+				<ref bean="quantity4"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				<ref bean="allergen2"/>
+			</list>		
+		</property>	
+	</bean>
+	
+	
+	
+	<!-- ALLERGEN -->
+	
+	<bean id="allergen2" class="domain.Allergen">
+		<property name="name" value="Lactosa"/>
+		<property name="substitutes">
+			<list>
+				<ref bean="ingredient2"/>
+			</list>		
+		</property>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe1"/>
+			</list>		
+		</property>
+		<property name="users">
+			<list>
+				<ref bean="user1" />
+			</list>		
+		</property>
+	</bean>
+	
+	
+	<bean id="allergen1" class="domain.Allergen">
+		<property name="name" value="Lactosa"/>
+		<property name="ingredients">
+			<list>
+				<ref bean="ingredient1"/>
+			</list>		
+		</property>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe1"/>
+			</list>		
+		</property>
+		<property name="users">
+			<list>
+				<ref bean="user1" />
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="allergen3" class="domain.Allergen">
+		<property name="name" value="Gluten"/>
+		<property name="substitutes">
+			<list>
+				<ref bean="ingredient6"/>
+			</list>		
+		</property>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe2"/>
+			</list>		
+		</property>
+		<property name="users">
+			<list>
+				<ref bean="user2" />
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="allergen4" class="domain.Allergen">
+		<property name="name" value="Gluten"/>
+		<property name="ingredients">
+			<list>
+				<ref bean="ingredient5"/>
+			</list>		
+		</property>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe2"/>
+			</list>		
+		</property>
+		<property name="users">
+			<list>
+				<ref bean="user2" />
+			</list>		
+		</property>
+	</bean>
+	
+	
+	<!-- QUANTITY -->	
+	
+	<bean id="quantity1" class="domain.Quantity">
+		<property name="value" value="2"/>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe1"/>
+			</list>		
+		</property>
+		<property name="ingredients">
+			<list>
+				<ref bean="ingredient1"/>
+				<ref bean="ingredient2"/>
+			</list>		
+		</property>	
+	</bean>
+	
+	
+	<bean id="quantity2" class="domain.Quantity">
+		<property name="value" value="500"/>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe1"/>
+				<ref bean="recipe2"/>
+			</list>		
+		</property>
+		<property name="ingredients">
+			<list>
+				<ref bean="ingredient3"/>
+				<ref bean="ingredient5"/>
+				<ref bean="ingredient6"/>
+			</list>		
+		</property>	
+	</bean>
+	
+	<bean id="quantity3" class="domain.Quantity">
+		<property name="value" value="200"/>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe1"/>
+			</list>		
+		</property>
+		<property name="ingredients">
+			<list>
+				<ref bean="ingredient4"/>
+			</list>		
+		</property>	
+	</bean>
+	
+	<bean id="quantity4" class="domain.Quantity">
+		<property name="value" value="1200"/>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe2"/>
+			</list>		
+		</property>
+		<property name="ingredients">
+			<list>
+				<ref bean="ingredient7"/>
+			</list>		
+		</property>	
+	</bean>	
+	
+	<!-- INGREDIENT -->
+	
+	<bean id="ingredient1" class="domain.Ingredient">
+		<property name="name" value="Leche"/>
+		<property name="description" value="Leche."/>
+		<property name="picture" value="http://tuscalorias.com/wp-content/uploads/2015/01/cu%C3%A1ntas-calor%C3%ADas-tiene-la-leche.jpg"/>
+		<property name="metricUnit" value="Litros"/>
+		<property name="deleted" value="false"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu1"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity1"/>
+			</list>		
+		</property>
+		<!-- <property name="replaceables">
+			<list>
+				<ref bean="allergen1"/>
+			</list>		
+		</property> -->
+		<property name="allergens">
+			<list>
+				<ref bean="allergen1"/>
+			</list>		
+		</property>	
+	</bean>
+	
+	
+	<bean id="ingredient2" class="domain.Ingredient">
+		<property name="name" value="Leche sin lactosa"/>
+		<property name="description" value="Leche sin lactosa"/>
+		<property name="picture" value="http://i50.twenga.com/gastronomia/leche-entera/covap.-leche-entera-sin-tp_7108592301529532985vb.jpg"/>
+		<property name="metricUnit" value="Litros"/>
+		<property name="deleted" value="false"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu1"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity1"/>
+			</list>		
+		</property>
+		<property name="replaceables">
+			<list>
+				<ref bean="allergen2"/>
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient3" class="domain.Ingredient">
+		<property name="name" value="Cacao en polvo"/>
+		<property name="description" value="Cacao en polvo"/>
+		<property name="picture" value="http://farm5.static.flickr.com/4107/4968229351_ca835eb7f0_z.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu1"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity2"/>
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient4" class="domain.Ingredient">
+		<property name="name" value="Azucar"/>
+		<property name="description" value="Azucar"/>
+		<property name="picture" value="http://thumbs.dreamstime.com/t/one-brown-sugar-lump-front-lots-white-cubes-backlit-31499881.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu1"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity3"/>
+			</list>		
+		</property>
+	</bean>
+	
+	
+	<bean id="ingredient5" class="domain.Ingredient">
+		<property name="name" value="Pan"/>
+		<property name="description" value="Pan de centeno"/>
+		<property name="picture" value="http://globedia.com/imagenes/noticias/2011/2/18/pan-centeno-comino_2_595941.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu2"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity2"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				<ref bean="allergen4"/>
+			</list>		
+		</property>
+	</bean>
+	
+	
+	<bean id="ingredient6" class="domain.Ingredient">
+		<property name="name" value="Pan sin gluten"/>
+		<property name="description" value="Pan sin gluten"/>
+		<property name="picture" value="http://www.biolandia.es/2365-5105-large/pan-con-integral-bio-sin-gluten.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu2"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity2"/>
+			</list>		
+		</property>
+		<property name="replaceables">
+			<list>
+				<ref bean="allergen3"/>
+			</list>		
+		</property>
+		<!-- <property name="allergens">
+			<list>
+				<ref bean="allergen2"/>
+			</list>		
+		</property> -->
+	</bean>
+	
+	<bean id="ingredient7" class="domain.Ingredient">
+		<property name="name" value="Chorizo"/>
+		<property name="description" value="Embutido"/>
+		<property name="picture" value="http://www.sabor-artesano.com/imagen/elaboracion-chorizo/chorizo.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu2"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity4"/>
+			</list>		
+		</property>
+	</bean>
+	
+	
 	
 	<!-- USERS -->
 	
@@ -104,10 +519,11 @@
 		<property name="name" value="User1"/>
 		<property name="surname" value="User1 Surname"/>
 		<property name="phone" value="666222111"/>
+		<property name="address" value="C/ Reina, nº2"/>
 		<property name="email" value="user1@gmail.com"/>
 		<property name="userAccount" ref="userAccount4"/>
 		<property name="creditCard" ref="creditCard1"/>	
-		<property name="deleted" ref="false"/>	
+		<property name="deleted" value="false"/>	
 		<property name="subcriptions">
 			<list>
 				<ref bean="subscription1" />
@@ -128,12 +544,13 @@
 	
 	<bean id="user2" class="domain.User">
 		<property name="name" value="User2"/>
+		<property name="address" value="C/ Vicente, nº20"/>
 		<property name="surname" value="User2 Surname"/>
 		<property name="phone" value="63355111"/>
 		<property name="email" value="user2@gmail.com"/>
 		<property name="userAccount" ref="userAccount5"/>
 		<property name="creditCard" ref="creditCard2"/>	
-		<property name="deleted" ref="false"/>	
+		<property name="deleted" value="false"/>	
 		<property name="subcriptions">
 			<list>
 				<ref bean="subscription2" />
@@ -191,60 +608,12 @@
 		<property name="userAccount" ref="userAccount3"/>	
 	</bean>
 	
-	<!-- ALLERGEN -->
 	
-	<bean id="allergen1" class="domain.Allergen">
-		<property name="name" value="Lactosa"/>
-		<property name="substitutes">
-			<list>
-				<ref bean="ingredient2"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient1"/>
-			</list>		
-		</property>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe1"/>
-			</list>		
-		</property>
-		<property name="users">
-			<list>
-				<ref bean="user1" />
-			</list>		
-		</property>
-	</bean>
-	
-	<bean id="allergen2" class="domain.Allergen">
-		<property name="name" value="Gluten"/>
-		<property name="substitutes">
-			<list>
-				<ref bean="ingredient6"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient5"/>
-			</list>		
-		</property>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe2"/>
-			</list>		
-		</property>
-		<property name="users">
-			<list>
-				<ref bean="user2" />
-			</list>		
-		</property>
-	</bean>
 	
 	<!-- ASSESSMENTS -->
 	
 	<bean id="assessment1" class="domain.Assessment">
-		<property name="moment" value="2016/02/10 10:00"/>
+		<property name="moment" value="02/10/2016 10:00"/>
 		<property name="rating" value="3"/>
 		<property name="text" value="oadksncsoienf"/>
 		<property name="deleted" value="true"/>
@@ -253,7 +622,7 @@
 	
 	
 	<bean id="assessment2" class="domain.Assessment">
-		<property name="moment" value="2016/03/11 12:50"/>
+		<property name="moment" value="03/11/2016 12:50"/>
 		<property name="rating" value="5"/>
 		<property name="text" value="Fantastico! estoy muy contento con BuyFresh!"/>
 		<property name="deleted" value="false"/>
@@ -261,389 +630,11 @@
 	</bean>
 	
 	
-	<!-- INGREDIENT -->
-	
-	<bean id="ingredient1" class="domain.Ingredient">
-		<property name="name" value="Leche"/>
-		<property name="description" value="Leche de vaca."/>
-		<property name="picture" value="http://tuscalorias.com/wp-content/uploads/2015/01/cu%C3%A1ntas-calor%C3%ADas-tiene-la-leche.jpg"/>
-		<property name="metricUnit" value="Litros"/>
-		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu1"/>
-			</list>		
-		</property>
-		<property name="quantities">
-			<list>
-				<ref bean="quantity1"/>
-			</list>		
-		</property>
-		<!-- <property name="replaceables">
-			<list>
-				<ref bean="ingredient2"/>
-			</list>		
-		</property> -->
-		<property name="allergens">
-			<list>
-				<ref bean="allergen2"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	
-	<bean id="ingredient2" class="domain.Ingredient">
-		<property name="name" value="Leche sin lactosa"/>
-		<property name="description" value="Leche sin lactosa"/>
-		<property name="picture" value="http://i50.twenga.com/gastronomia/leche-entera/covap.-leche-entera-sin-tp_7108592301529532985vb.jpg"/>
-		<property name="metricUnit" value="Litros"/>
-		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu1"/>
-			</list>		
-		</property>
-		<property name="quantities">
-			<list>
-				<ref bean="quantity1"/>
-			</list>		
-		</property>
-<!-- 		<property name="replaceables">
-			<list>
-			</list>		
-		</property> -->
-		<property name="allergens">
-			<list>
-				<ref bean="allergen2"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	<bean id="ingredient3" class="domain.Ingredient">
-		<property name="name" value="Cacao en polvo"/>
-		<property name="description" value="Cacao en polvo"/>
-		<property name="picture" value="http://farm5.static.flickr.com/4107/4968229351_ca835eb7f0_z.jpg"/>
-		<property name="metricUnit" value="Gramos"/>
-		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu1"/>
-			</list>		
-		</property>
-		<property name="quantities">
-			<list>
-				<ref bean="quantity2"/>
-			</list>		
-		</property>
-	</bean>
-	
-	<bean id="ingredient4" class="domain.Ingredient">
-		<property name="name" value="Azucar"/>
-		<property name="description" value="Azucar"/>
-		<property name="picture" value="http://thumbs.dreamstime.com/t/one-brown-sugar-lump-front-lots-white-cubes-backlit-31499881.jpg"/>
-		<property name="metricUnit" value="Gramos"/>
-		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu1"/>
-			</list>		
-		</property>
-		<property name="quantities">
-			<list>
-				<ref bean="quantity3"/>
-			</list>		
-		</property>
-	</bean>
-	
-	
-	<bean id="ingredient5" class="domain.Ingredient">
-		<property name="name" value="Pan"/>
-		<property name="description" value="Pan de centeno"/>
-		<property name="picture" value="http://globedia.com/imagenes/noticias/2011/2/18/pan-centeno-comino_2_595941.jpg"/>
-		<property name="metricUnit" value="Gramos"/>
-		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu2"/>
-			</list>		
-		</property>
-		<property name="quantities">
-			<list>
-				<ref bean="quantity2"/>
-			</list>		
-		</property>
-		<!-- <property name="replaceables">
-			<list>
-				<ref bean="ingredient6"/>
-			</list>		
-		</property> -->
-		<property name="allergens">
-			<list>
-				<ref bean="allergen2"/>
-			</list>		
-		</property>
-	</bean>
-	
-	
-	<bean id="ingredient6" class="domain.Ingredient">
-		<property name="name" value="Pan sin gluten"/>
-		<property name="description" value="Pan sin gluten"/>
-		<property name="picture" value="http://www.biolandia.es/2365-5105-large/pan-con-integral-bio-sin-gluten.jpg"/>
-		<property name="metricUnit" value="Gramos"/>
-		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu2"/>
-			</list>		
-		</property>
-		<property name="quantities">
-			<list>
-				<ref bean="quantity2"/>
-			</list>		
-		</property>
-		<!-- <property name="replaceables">
-			<list>
-			</list>		
-		</property> -->
-		<property name="allergens">
-			<list>
-				<ref bean="allergen2"/>
-			</list>		
-		</property>
-	</bean>
-	
-	<bean id="ingredient7" class="domain.Ingredient">
-		<property name="name" value="Chorizo"/>
-		<property name="description" value="Embutido"/>
-		<property name="picture" value="http://www.sabor-artesano.com/imagen/elaboracion-chorizo/chorizo.jpg"/>
-		<property name="metricUnit" value="Gramos"/>
-		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu2"/>
-			</list>		
-		</property>
-		<property name="quantities">
-			<list>
-				<ref bean="quantity4"/>
-			</list>		
-		</property>
-	</bean>
-	
-	
-	<!-- QUANTITY -->	
-	
-	<bean id="quantity1" class="domain.Quantity">
-		<property name="value" value="2"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe1"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient1"/>
-				<ref bean="ingredient2"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	
-	<bean id="quantity2" class="domain.Quantity">
-		<property name="value" value="500"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe1"/>
-				<ref bean="recipe2"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient3"/>
-				<ref bean="ingredient5"/>
-				<ref bean="ingredient6"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	<bean id="quantity3" class="domain.Quantity">
-		<property name="value" value="0.2"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe1"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient4"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	<bean id="quantity4" class="domain.Quantity">
-		<property name="value" value="1200"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe2"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient7"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	
-	
-	<!-- MENU -->
-	
-	<bean id="menu1" class="domain.Menu">
-		<property name="name" value="Menu para 2 personas"/>
-		<property name="type" value="Sin lactosa"/>
-		<property name="creationMoment" value="2016/04/12 23:20"/>
-		<property name="duration" value="30"/>
-		<property name="people" value="2"/>
-		<property name="deleted" value="false"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe1"/>
-			</list>		
-		</property>
-		<property name="orders">
-			<list>
-				<ref bean="order1"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient1"/>
-				<ref bean="ingredient2"/>
-				<ref bean="ingredient3"/>
-				<ref bean="ingredient4"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	
-	<bean id="menu2" class="domain.Menu">
-		<property name="name" value="Menu Individual"/>
-		<property name="type" value="Celiaco"/>
-		<property name="creationMoment" value="2016/05/12 21:50"/>
-		<property name="duration" value="40"/>
-		<property name="people" value="1"/>
-		<property name="deleted" value="false"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe2"/>
-			</list>		
-		</property>
-		<property name="orders">
-			<list>
-				<ref bean="order2"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient5"/>
-				<ref bean="ingredient6"/>
-				<ref bean="ingredient7"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	
-	<!-- ORDER -->
-	
-	<bean id="order1" class="domain.Order">
-		<property name="address" value="C/ Reina, nº2"/>
-		<property name="shippingDate" value="2016/05/13 13:54"/>
-		<property name="arrivalDate" value="2016/05/14 10:50"/>
-		<property name="notes" value="Enviar por la mañana."/>
-		<property name="menu" ref="menu1"/>
-		<property name="subscription" ref="subscription1"/>
-		<property name="substitutes">
-			<list>
-				<ref bean="substitute1"/>
-			</list>		
-		</property>
-		<property name="clerk" ref="clerk1"/>	
-	</bean>
-	
-	
-	<bean id="order2" class="domain.Order">
-		<property name="address" value="C/ Vicente, nº20"/>
-		<property name="shippingDate" value="2016/05/21 13:54"/>
-		<property name="arrivalDate" value="2016/05/23 16:50"/>
-		<property name="notes" value="Enviar por la tarde."/>
-		<property name="menu" ref="menu2"/>
-		<property name="subscription" ref="subscription2"/>
-		<property name="substitutes">
-			<list>
-				<ref bean="substitute2"/>
-			</list>		
-		</property>
-		<property name="clerk" ref="clerk1"/>	
-	</bean>
-	
-	
-	
-	
-	<!-- RECIPES -->
-	
-	<bean id="recipe1" class="domain.Recipe">
-		<property name="name" value="Colacao"/>
-		<property name="elaboration" value="Elaboracion colacao"/>
-		<property name="time" value="5 min."/>
-		<property name="menus">
-			<list>
-				<ref bean="menu1"/>
-			</list>		
-		</property>
-		<property name="quantities">
-			<list>
-				<ref bean="quantity1"/>
-				<ref bean="quantity2"/>
-				<ref bean="quantity3"/>
-			</list>		
-		</property>
-		<property name="allergens">
-			<list>
-				<ref bean="allergen1"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	
-	<bean id="recipe2" class="domain.Recipe">
-		<property name="name" value="Sandwich"/>
-		<property name="elaboration" value="Elaboracion de sandwich."/>
-		<property name="time" value="3 min."/>
-		<property name="menus">
-			<list>
-				<ref bean="menu2"/>
-			</list>		
-		</property>
-		<property name="quantities">
-			<list>
-				<ref bean="quantity2"/>
-				<ref bean="quantity4"/>
-			</list>		
-		</property>
-		<property name="allergens">
-			<list>
-				<ref bean="allergen2"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	
 	<!-- SUBSCRIPTION -->
 	
-	
 	<bean id="subscription1" class="domain.Subscription">
-		<property name="creationMoment" value="2016/05/20 13:54"/>
-		<property name="finishMoment" value="2016/05/27 13:54"/>
+		<property name="creationMoment" value="05/20/2016 13:54"/>
+		<property name="finishMoment" value="05/27/2016 13:54"/>
 		<property name="price" value="45.50"/>
 		<property name="renewal" value="true"/>
 		<property name="user" ref="user1"/>
@@ -656,8 +647,8 @@
 	
 	
 	<bean id="subscription2" class="domain.Subscription">
-		<property name="creationMoment" value="2016/05/20 10:34"/>
-		<property name="finishMoment" value="2016/05/27 10:34"/>
+		<property name="creationMoment" value="05/20/2016 10:34"/>
+		<property name="finishMoment" value="05/27/2016 10:34"/>
 		<property name="price" value="24.99"/>
 		<property name="renewal" value="false"/>
 		<property name="user" ref="user2"/>
@@ -669,9 +660,43 @@
 	</bean>
 	
 	
+	<!-- SALESORDER -->
+	
+	<bean id="order1" class="domain.SalesOrder">
+		<property name="address" value="C/ Reina, nº2"/>
+		<property name="shippingDate" value="05/13/2016 13:54"/>
+		<property name="arrivalDate" value="05/14/2016 10:50"/>
+		<property name="notes" value="Enviar por la mañana."/>
+		<property name="menu" ref="menu1"/>
+		<property name="subscription" ref="subscription1"/>
+		<property name="substitutes">
+			<list>
+				<ref bean="substitute1"/>
+			</list>		
+		</property>
+		<property name="clerk" ref="clerk1"/>	
+	</bean>
+	
+	
+	<bean id="order2" class="domain.SalesOrder">
+		<property name="address" value="C/ Vicente, nº20"/>
+<!-- 		<property name="shippingDate" value="21/05/2016 13:54"/>
+		<property name="arrivalDate" value="23/05/2016 16:50"/> -->
+		<property name="notes" value="Enviar por la tarde."/>
+		<property name="menu" ref="menu2"/>
+		<property name="subscription" ref="subscription2"/>
+		<property name="substitutes">
+			<list>
+				<ref bean="substitute2"/>
+			</list>		
+		</property>
+		<!-- <property name="clerk" ref="clerk1"/> -->	
+	</bean>
+	
+	
 	<!-- SUBSTITUTES -->
 	
-	<bean id="substitutes1" class="domain.Substitutes">
+	<bean id="substitute1" class="domain.Substitutes">
 		<property name="name" value="Leche sin lactosa"/>
 		<property name="metricUnit" value="Litros"/>
 		<property name="recipeName" value="Colacao"/>
@@ -680,7 +705,7 @@
 	</bean>
 	
 	
-	<bean id="substitutes2" class="domain.Substitutes">
+	<bean id="substitute2" class="domain.Substitutes">
 		<property name="name" value="Pan sin gluten"/>
 		<property name="metricUnit" value="Gramos"/>
 		<property name="recipeName" value="Sandwich"/>
