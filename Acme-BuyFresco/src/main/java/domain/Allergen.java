@@ -6,7 +6,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -40,28 +39,27 @@ public class Allergen extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 	
-	private Collection<Ingredient> replaceables;
-	private Collection<Ingredient> allergens;
+	private Collection<Ingredient> substitutes;
+	private Collection<Ingredient> ingredients;
 	private Collection<Recipe> recipes;
-	private Category category;
 	private Collection<User> users;
 
 	@Valid
 	@ManyToMany
-	public Collection<Ingredient> getReplaceables() {
-		return replaceables;
+	public Collection<Ingredient> getSubtitutes() {
+		return substitutes;
 	}
-	public void setReplaceables(Collection<Ingredient> replaceables) {
-		this.replaceables = replaceables;
+	public void setSubtitutes(Collection<Ingredient> substitutes) {
+		this.substitutes = substitutes;
 	}
 	
 	@Valid
 	@ManyToMany
-	public Collection<Ingredient> getAllergens() {
-		return allergens;
+	public Collection<Ingredient> getIngredients() {
+		return ingredients;
 	}
-	public void setAllergens(Collection<Ingredient> allergens) {
-		this.allergens = allergens;
+	public void setIngredients(Collection<Ingredient> ingredients) {
+		this.ingredients = ingredients;
 	}
 	
 	@Valid
@@ -73,14 +71,6 @@ public class Allergen extends DomainEntity{
 		this.recipes = recipes;
 	}
 
-	@Valid
-	@ManyToOne(optional = false)
-	public Category getCategory() {
-		return category;
-	}
-	public void setCategory(Category category) {
-		this.category = category;
-	}
 
 	@Valid
 	@ManyToMany(mappedBy = "allergens")
