@@ -11,40 +11,40 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import repositories.OrderRepository;
-import domain.Order;
+import repositories.SalesOrderRepository;
+import domain.SalesOrder;
 
 @Service
 @Transactional
-public class OrderService {
+public class SalesOrderService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private OrderRepository orderRepository;
+	private SalesOrderRepository orderRepository;
 
 	// Ancillary services -----------------------------------------------------
 
 	// Constructor ------------------------------------------------------------
-	public OrderService(){
+	public SalesOrderService(){
 		super();
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-	public Order create(){
-		Order newbye;
+	public SalesOrder create(){
+		SalesOrder newbye;
 		
-		newbye = new Order();
+		newbye = new SalesOrder();
 		
 		return newbye;
 	}
 
-	public void save(Order entity){
+	public void save(SalesOrder entity){
 		Assert.notNull(entity);
 		
 		this.orderRepository.save(entity);
 	}
 
-	public void delete(Order entity){
+	public void delete(SalesOrder entity){
 		Assert.isTrue(entity.getId()!=0);
 		Assert.isTrue(this.orderRepository.exists(entity.getId()));
 		
@@ -53,18 +53,18 @@ public class OrderService {
 		Assert.isTrue(!this.orderRepository.exists(entity.getId()));
 	}
 
-	public Order findOne(int id){
+	public SalesOrder findOne(int id){
 		Assert.isTrue(id != 0);
 		
-		Order res;
+		SalesOrder res;
 		
 		res = this.orderRepository.findOne(id);
 		
 		return res;
 	}
 
-	public Collection<Order> findAll(){
-		Collection<Order> res;
+	public Collection<SalesOrder> findAll(){
+		Collection<SalesOrder> res;
 		
 		res = orderRepository.findAll();
 		

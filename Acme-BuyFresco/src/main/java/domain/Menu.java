@@ -91,7 +91,7 @@ public class Menu extends DomainEntity{
 	//Relationships -----------------------------------------------------------------------------
 
 	private Collection<Recipe> recipes;
-	private Collection<Order> orders;
+	private Collection<SalesOrder> orders;
 	private Collection<Ingredient> ingredients;
 
 	@Valid
@@ -105,10 +105,10 @@ public class Menu extends DomainEntity{
 	
 	@Valid
 	@OneToMany(mappedBy = "menu")
-	public Collection<Order> getOrders() {
+	public Collection<SalesOrder> getOrders() {
 		return orders;
 	}
-	public void setOrders(Collection<Order> orders) {
+	public void setOrders(Collection<SalesOrder> orders) {
 		this.orders = orders;
 	}
 

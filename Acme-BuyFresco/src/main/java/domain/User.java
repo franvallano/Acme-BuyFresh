@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -61,7 +62,7 @@ public class User extends Actor{
 	private Collection<Allergen> allergens;
 
 	@Valid
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
 	public Collection<Assessment> getAssessments() {
 		return assessments;
 	}
@@ -79,7 +80,7 @@ public class User extends Actor{
 	}
 
 	@Valid
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	public Collection<Allergen> getAllergens() {
 		return allergens;
 	}
