@@ -4,7 +4,10 @@
 */
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Menu;
@@ -12,5 +15,9 @@ import domain.Menu;
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Integer>{
 	
-
+	@Query("select m from Menu m where m.orders.size >=ALL (select m1.orders.size from Menu m1)")
+	Collection<Menu> getMenusInMoreOrders();
+	
+	@Query("select m from Menu m where m.orders.size <ALL (select m1.orders.size from Menu m1)")
+	Collection<Menu> getMenusInLessOrders();
 }

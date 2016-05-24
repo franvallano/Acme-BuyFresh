@@ -132,6 +132,31 @@ public class ClerkService {
 		return result;
 	}
 	
+	public Collection<Clerk> getClerksWithMoreOrders(){
+		Collection<Clerk> clerks;
+		
+		clerks = clerkRepository.getClerksWithMoreOrders();
+		
+		return clerks;
+	}
+	
+	public Collection<Clerk> getClerksWithLessOrders(){
+		Collection<Clerk> clerks;
+		
+		clerks = clerkRepository.getClerksWithLessOrders();
+		
+		return clerks;
+	}
+	
+	public Collection<Clerk> getClerkWithOrdersSentLastMonth(){
+		Collection<Clerk> clerks;
+		
+		clerks = clerkRepository.getClerkWithOrdersSentLastMonth();
+		
+		return clerks;
+		
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 	public Clerk reconstruct(ClerkForm clerkForm) {

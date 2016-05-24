@@ -5,14 +5,23 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SalesOrderRepository;
+import domain.Allergen;
+import domain.Ingredient;
+import domain.Menu;
+import domain.Quantity;
+import domain.Recipe;
 import domain.SalesOrder;
+import domain.Substitutes;
 import domain.User;
 
 @Service
@@ -27,6 +36,12 @@ public class SalesOrderService {
 
 	@Autowired
 	private MenuService menuService;
+	
+	@Autowired
+	private SubstitutesService substitutesService;
+	
+	@Autowired
+	private IngredientService ingredientService;
 	
 	@Autowired
 	private UserService userService;
@@ -52,6 +67,16 @@ public class SalesOrderService {
 	public void save(SalesOrder entity){
 		Assert.notNull(entity);
 		
+		//userService.findByPrincipal();
+		this.orderRepository.save(entity);
+		
+	}
+	
+	public void saveUser(SalesOrder entity){
+		Assert.notNull(entity);
+		
+		User u = userService.findByPrincipal();
+		entity.setSubstitutes(getSubstitutesByUserMenu(u, entity.getMenu()));
 		this.orderRepository.save(entity);
 	}
 
@@ -100,6 +125,65 @@ public class SalesOrderService {
 		return orders;
 	}
 	
+	public Collection<SalesOrder> findOrdersByUser(int userId){
+		Collection<SalesOrder> orders;
+		
+		orders = orderRepository.findOrdersByUser(userId);
+		
+		return orders;
+	}
+	
+	public Integer getNumberOfSentOrders(){
+		Integer number = orderRepository.getNumberOfSentOrders();
+		
+		return number;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
-
+	public Collection<Substitutes> getSubstitutesByUserMenu(User u, Menu menu){
+		Collection<Substitutes> substitutes = new ArrayList<>();
+		List<Object[]> ingredient_recipe_allergen = ingredientService.getAllergenIngredientsByUserPerMenu(menu.getId(), u.getId());
+		
+		for(Object[] o: ingredient_recipe_allergen){
+			Ingredient i = (Ingredient)o[0];			
+			Recipe r = (Recipe) o[1];
+			Allergen a = (Allergen) o[2];
+			List<Ingredient> ing = new ArrayList<>(a.getSubstitutes());
+			Ingredient ing_substitute = ing.get(0);
+			Quantity q = (Quantity)o[3];
+			substitutes.add(substitutesService.create(ing_substitute.getName(), ing_substitute.getMetricUnit(), q.getValue(), r.getName()));
+			
+		}
+		
+		return substitutes;
+	
+	}
+	/*public Collection<Substitutes> getSubstitutesByUserMenu(User u, Menu menu){
+		Collection<Substitutes> substitutes;
+		List<Allergen> allergen = new ArrayList<>(u.getAllergens());
+		List<Recipe> recipes = new ArrayList<>(menu.getRecipes());
+		
+		for(int i = 0; i<recipes.size(); i++){
+			
+			for(Allergen a: allergen){
+				Recipe recipe_allergen = recipes.get(i);
+				//recipe_allergen.getQuantities().
+				if(recipes.get(i).getAllergens().contains(a)){
+					
+					List<Ingredient> ing = new ArrayList<>(a.getSubstitutes());
+					
+					//substitutes.add(substitutesService.create(ing.get(0).getName(), ing.get(0).getMetricUnit(), quantity, recipes.get(i).getName()));
+				}
+			}
+			
+		}
+		/*for(Allergen a : u.getAllergens()){
+			List<Ingredient> s = new ArrayList<>(a.getSubstitutes());
+			Ingredient ing = s.get(0);
+			//substitutes.add(substitutesService.create(ing.getName(), ing.getMetricUnit(), quantity, recipeName));
+		}
+		
+		return substitutes;
+		
+	}*/
 }

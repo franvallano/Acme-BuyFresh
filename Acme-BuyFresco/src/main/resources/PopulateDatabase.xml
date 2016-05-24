@@ -621,6 +621,7 @@
 		<property name="notes" value="Enviar por la mañana."/>
 		<property name="menu" ref="menu1"/>
 		<property name="subscription" ref="subscription1"/>
+		<property name="sent" value="true"/>
 		<property name="substitutes">
 			<list>
 				<ref bean="substitute1"/>
@@ -637,6 +638,7 @@
 		<property name="notes" value="Enviar por la tarde."/>
 		<property name="menu" ref="menu2"/>
 		<property name="subscription" ref="subscription2"/>
+		<property name="sent" value="false"/>
 		<property name="substitutes">
 			<list>
 				<ref bean="substitute2"/>

@@ -32,13 +32,27 @@ public class SubstitutesService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
+
+	public Substitutes create(String name, String metricUnit, Integer quantity, String recipeName){
+
+		Substitutes newbye;
+		
+		newbye = new Substitutes();
+		newbye.setName(name);
+		newbye.setMetricUnit(metricUnit);
+		newbye.setQuantity(quantity);
+		newbye.setRecipeName(recipeName);
+
+		
+		return newbye;
+	}
+	
 	public Substitutes create(SalesOrder order){
 		Substitutes newbye;
 		
 		newbye = new Substitutes();
-		
 		newbye.setOrder(order);
-		
+
 		return newbye;
 	}
 

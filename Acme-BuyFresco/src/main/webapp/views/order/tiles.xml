@@ -25,6 +25,11 @@
 		<put-attribute name="title" value="List my orders" />
 		<put-attribute name="body" value="/views/order/list.jsp" />
 	</definition>
+	
+	<definition name="order/details" extends="master.page">	
+		<put-attribute name="title" value="Details order" />
+		<put-attribute name="body" value="/views/order/details.jsp" />
+	</definition>
 
 	
 </tiles-definitions>
