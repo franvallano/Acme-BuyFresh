@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import repositories.SalesOrderRepository;
 import domain.SalesOrder;
+import domain.User;
 
 @Service
 @Transactional
@@ -24,6 +25,14 @@ public class SalesOrderService {
 
 	// Ancillary services -----------------------------------------------------
 
+	@Autowired
+	private MenuService menuService;
+	
+	@Autowired
+	private UserService userService;
+	
+	
+	
 	// Constructor ------------------------------------------------------------
 	public SalesOrderService(){
 		super();
@@ -32,8 +41,10 @@ public class SalesOrderService {
 	// Simple CRUD methods ----------------------------------------------------
 	public SalesOrder create(){
 		SalesOrder newbye;
-		
+		User u = userService.findByPrincipal();
 		newbye = new SalesOrder();
+		
+		newbye.setAddress(u.getAddress());
 		
 		return newbye;
 	}
@@ -73,6 +84,22 @@ public class SalesOrderService {
 
 	// Other business methods -------------------------------------------------
 
+	public Collection<SalesOrder> findOrdersWithoutClerk(){
+		Collection<SalesOrder> orders;
+		
+		orders = orderRepository.findOrdersWithoutClerk();
+		
+		return orders;
+	}
+	
+	public Collection<SalesOrder> findOrdersByClerk(int clerkId){
+		Collection<SalesOrder> orders;
+		
+		orders = orderRepository.findOrdersByClerk(clerkId);
+		
+		return orders;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

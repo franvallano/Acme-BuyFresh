@@ -12,7 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ClerkRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Clerk;
+import domain.User;
 
 @Service
 @Transactional
@@ -73,6 +76,18 @@ public class ClerkService {
 
 	// Other business methods -------------------------------------------------
 
+	public Clerk findByPrincipal() {
+	 	Clerk clerk;
+	 	UserAccount userAccount;
+	 	
+	 	userAccount = LoginService.getPrincipal();
+	 	clerk = clerkRepository.findByPrincipal(userAccount.getId());
+	 	
+	 	Assert.notNull(clerk);
+	 	
+	 	return clerk;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

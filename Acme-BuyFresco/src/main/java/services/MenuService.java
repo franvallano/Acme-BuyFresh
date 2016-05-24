@@ -6,6 +6,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ import org.springframework.util.Assert;
 
 import repositories.MenuRepository;
 import domain.Menu;
+
 
 @Service
 @Transactional
@@ -23,7 +26,9 @@ public class MenuService {
 	private MenuRepository menuRepository;
 
 	// Ancillary services -----------------------------------------------------
-
+	
+	AdministratorService administratorService;
+	
 	// Constructor ------------------------------------------------------------
 	public MenuService(){
 		super();
@@ -31,9 +36,19 @@ public class MenuService {
 
 	// Simple CRUD methods ----------------------------------------------------
 	public Menu create(){
+		
 		Menu newbye;
+		Date creation_moment;
+		Boolean deleted = false;
+		long milliseconds;
+
+		milliseconds = System.currentTimeMillis() - 100;
+		creation_moment = new Date(milliseconds);
 		
 		newbye = new Menu();
+		
+		newbye.setCreationMoment(creation_moment);
+		newbye.setDeleted(deleted);
 		
 		return newbye;
 	}
@@ -48,9 +63,9 @@ public class MenuService {
 		Assert.isTrue(entity.getId()!=0);
 		Assert.isTrue(this.menuRepository.exists(entity.getId()));
 		
-		this.menuRepository.delete( entity );
-		
-		Assert.isTrue(!this.menuRepository.exists(entity.getId()));
+		entity.setDeleted(true);
+		save(entity);
+
 	}
 
 	public Menu findOne(int id){
@@ -73,6 +88,12 @@ public class MenuService {
 
 	// Other business methods -------------------------------------------------
 
+	public Menu findNextWeek(){
+		Menu menu = create();
+		
+		return menu;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

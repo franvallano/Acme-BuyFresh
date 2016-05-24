@@ -32,7 +32,7 @@
 
 	<bean id="userAccount2" class="security.UserAccount">
 		<property name="username" value="clerk1" />
-		<property name="password" value="clerk1" />
+		<property name="password" value="72121c039f48bb6241c94332cadc945e" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -44,7 +44,7 @@
 
 	<bean id="userAccount3" class="security.UserAccount">
 		<property name="username" value="clerk2" />
-		<property name="password" value="clerk2" />
+		<property name="password" value="331c8a338939ee7853c1e66182673242" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -56,7 +56,7 @@
 	
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="user1" />
-		<property name="password" value="user1" />
+		<property name="password" value="24c9e15e52afc47c225b757e7bee1f9d" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -68,7 +68,7 @@
 	
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="user2" />
-		<property name="password" value="user2" />
+		<property name="password" value="7e58d63b60197ceb55a1c487989a3720" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
@@ -104,7 +104,8 @@
 	<bean id="menu1" class="domain.Menu">
 		<property name="name" value="Menu para 2 personas"/>
 		<property name="type" value="Sin lactosa"/>
-		<property name="creationMoment" value="04/12/2016 23:20"/>
+		<property name="creationMoment" value="04/05/2016 23:20"/>
+		<property name="startingMoment" value="05/23/2016 09:00"/>
 		<property name="duration" value="30"/>
 		<property name="people" value="2"/>
 		<property name="deleted" value="false"/>
@@ -118,21 +119,14 @@
 				<ref bean="order1"/>
 			</list>		
 		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient1"/>
-				<ref bean="ingredient2"/>
-				<ref bean="ingredient3"/>
-				<ref bean="ingredient4"/>
-			</list>		
-		</property>	
 	</bean>
 	
 	
 	<bean id="menu2" class="domain.Menu">
 		<property name="name" value="Menu Individual"/>
 		<property name="type" value="Celiaco"/>
-		<property name="creationMoment" value="05/12/2016 21:50"/>
+		<property name="creationMoment" value="05/06/2016 21:50"/>
+		<property name="startingMoment" value="06/23/2016 09:00"/>
 		<property name="duration" value="40"/>
 		<property name="people" value="1"/>
 		<property name="deleted" value="false"/>
@@ -146,13 +140,6 @@
 				<ref bean="order2"/>
 			</list>		
 		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient5"/>
-				<ref bean="ingredient6"/>
-				<ref bean="ingredient7"/>
-			</list>		
-		</property>	
 	</bean>
 	
 	
@@ -358,11 +345,6 @@
 		<property name="picture" value="http://tuscalorias.com/wp-content/uploads/2015/01/cu%C3%A1ntas-calor%C3%ADas-tiene-la-leche.jpg"/>
 		<property name="metricUnit" value="Litros"/>
 		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu1"/>
-			</list>		
-		</property>
 		<property name="quantities">
 			<list>
 				<ref bean="quantity1"/>
@@ -387,11 +369,6 @@
 		<property name="picture" value="http://i50.twenga.com/gastronomia/leche-entera/covap.-leche-entera-sin-tp_7108592301529532985vb.jpg"/>
 		<property name="metricUnit" value="Litros"/>
 		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu1"/>
-			</list>		
-		</property>
 		<property name="quantities">
 			<list>
 				<ref bean="quantity1"/>
@@ -410,11 +387,6 @@
 		<property name="picture" value="http://farm5.static.flickr.com/4107/4968229351_ca835eb7f0_z.jpg"/>
 		<property name="metricUnit" value="Gramos"/>
 		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu1"/>
-			</list>		
-		</property>
 		<property name="quantities">
 			<list>
 				<ref bean="quantity2"/>
@@ -428,11 +400,6 @@
 		<property name="picture" value="http://thumbs.dreamstime.com/t/one-brown-sugar-lump-front-lots-white-cubes-backlit-31499881.jpg"/>
 		<property name="metricUnit" value="Gramos"/>
 		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu1"/>
-			</list>		
-		</property>
 		<property name="quantities">
 			<list>
 				<ref bean="quantity3"/>
@@ -447,11 +414,6 @@
 		<property name="picture" value="http://globedia.com/imagenes/noticias/2011/2/18/pan-centeno-comino_2_595941.jpg"/>
 		<property name="metricUnit" value="Gramos"/>
 		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu2"/>
-			</list>		
-		</property>
 		<property name="quantities">
 			<list>
 				<ref bean="quantity2"/>
@@ -471,11 +433,6 @@
 		<property name="picture" value="http://www.biolandia.es/2365-5105-large/pan-con-integral-bio-sin-gluten.jpg"/>
 		<property name="metricUnit" value="Gramos"/>
 		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu2"/>
-			</list>		
-		</property>
 		<property name="quantities">
 			<list>
 				<ref bean="quantity2"/>
@@ -499,11 +456,6 @@
 		<property name="picture" value="http://www.sabor-artesano.com/imagen/elaboracion-chorizo/chorizo.jpg"/>
 		<property name="metricUnit" value="Gramos"/>
 		<property name="deleted" value="false"/>
-		<property name="menus">
-			<list>
-				<ref bean="menu2"/>
-			</list>		
-		</property>
 		<property name="quantities">
 			<list>
 				<ref bean="quantity4"/>

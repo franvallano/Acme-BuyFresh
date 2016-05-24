@@ -4,13 +4,23 @@
 */
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.SalesOrder;
+import domain.User;
 
 @Repository
 public interface SalesOrderRepository extends JpaRepository<SalesOrder, Integer>{
+	
+	@Query("select o from SalesOrder o where o.clerk = null")
+	Collection<SalesOrder> findOrdersWithoutClerk();
+	
+	@Query("select o from SalesOrder o where o.clerk.id = ?1")
+	Collection<SalesOrder> findOrdersByClerk(int clerkId);
 	
 
 }

@@ -6,12 +6,15 @@
 package services;
 
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
+import security.LoginService;
+import security.UserAccount;
 import domain.Administrator;
 
 @Service
@@ -73,6 +76,18 @@ public class AdministratorService {
 
 	// Other business methods -------------------------------------------------
 
+	public Administrator findByPrincipal() {
+	 	Administrator administrator;
+	 	UserAccount userAccount;
+	 	
+	 	userAccount = LoginService.getPrincipal();
+	 	administrator = administratorRepository.findByPrincipal(userAccount.getId());
+	 	
+	 	Assert.notNull(administrator);
+	 	
+	 	return administrator;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

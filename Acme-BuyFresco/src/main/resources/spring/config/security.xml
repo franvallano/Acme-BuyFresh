@@ -41,6 +41,14 @@
 		<security:intercept-url pattern="/security/loginFailure.do" access="permitAll" /> 
 
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
+		
+		<!-- MENUS -->
+		
+		<security:intercept-url pattern="/menu/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/menu/nextWeek" access="permitAll" /> 
+		
+		<!-- ORDERS -->
+		<security:intercept-url pattern="/order/clerk/**" access="hasRole('CLERK')" /> 
 
 		<!-- TERMS -->
 		<security:intercept-url pattern="/law/**" access="permitAll" />

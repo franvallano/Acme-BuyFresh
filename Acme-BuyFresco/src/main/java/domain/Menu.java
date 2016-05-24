@@ -23,7 +23,7 @@ public class Menu extends DomainEntity{
 	//Attributes --------------------------------------------------------------------------------
 	
 	private String name, type;
-	private Date creationMoment;
+	private Date creationMoment, startingMoment;
 	private Integer duration, people;
 	private boolean deleted;
 
@@ -62,6 +62,15 @@ public class Menu extends DomainEntity{
 		this.creationMoment = creationMoment;
 	}
 
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
+	public Date getStartingMoment() {
+		return startingMoment;
+	}
+
+	public void setStartingMoment(Date startingMoment) {
+		this.startingMoment = startingMoment;
+	}
 
 	@Min(0)
 	public Integer getDuration() {
@@ -92,7 +101,6 @@ public class Menu extends DomainEntity{
 
 	private Collection<Recipe> recipes;
 	private Collection<SalesOrder> orders;
-	private Collection<Ingredient> ingredients;
 
 	@Valid
 	@ManyToMany(mappedBy = "menus")
@@ -110,15 +118,6 @@ public class Menu extends DomainEntity{
 	}
 	public void setOrders(Collection<SalesOrder> orders) {
 		this.orders = orders;
-	}
-
-	@Valid
-	@ManyToMany(mappedBy = "menus")
-	public Collection<Ingredient> getIngredients() {
-		return ingredients;
-	}
-	public void setIngredients(Collection<Ingredient> ingredients) {
-		this.ingredients = ingredients;
 	}
 	
 	
