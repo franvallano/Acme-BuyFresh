@@ -24,6 +24,8 @@
 		
 		<value>/views/terms/tiles.xml</value>
 		<value>/views/cookies/tiles.xml</value>
+		<value>/views/menu/tiles.xml</value>
+		<value>/views/order/tiles.xml</value>
 	</util:list>
 
 </beans>

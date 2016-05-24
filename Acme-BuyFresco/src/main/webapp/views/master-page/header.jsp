@@ -20,7 +20,7 @@
 <div>
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
-		<security:authorize access="hasRole('ADMIN')">
+		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -28,14 +28,29 @@
 					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
 				</ul>
 			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.menu" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="menu/administrator/list.do"><spring:message code="master.page.menu.list" /></a></li>
+					<li><a href="menu/administrator/create.do"><spring:message code="master.page.menu.create" /></a></li>					
+				</ul>
+			</li>
 		</security:authorize>
 		
-		<security:authorize access="hasRole('CUSTOMER')">
+		<security:authorize access="hasRole('CLERK')">
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
 					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+				</ul>
+			</li>
+			
+			<li><a class="fNiv"><spring:message	code="master.page.order" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="order/clerk/listWithoutClerk.do"><spring:message code="master.page.order.listWithoutClerk" /></a></li>
+					<li><a href="order/clerk/myOrders.do"><spring:message code="master.page.order.myOrders" /></a></li>					
 				</ul>
 			</li>
 		</security:authorize>

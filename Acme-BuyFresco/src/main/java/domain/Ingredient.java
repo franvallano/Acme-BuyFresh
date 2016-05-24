@@ -76,19 +76,10 @@ public class Ingredient extends DomainEntity{
 	
 	//Relationships -----------------------------------------------------------------------------
 
-	private Collection<Menu> menus;
 	private Collection<Quantity> quantities;
 	private Collection<Allergen> allergens;
 	private Collection<Allergen> replaceables;
 
-	@Valid
-	@ManyToMany
-	public Collection<Menu> getMenus() {
-		return menus;
-	}
-	public void setMenus(Collection<Menu> menus) {
-		this.menus = menus;
-	}
 
 	@Valid
 	@ManyToMany

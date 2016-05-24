@@ -28,6 +28,9 @@
 		
 		<value>/views/terms/messages</value>
 		<value>/views/cookies/messages</value>
+		
+		<value>/views/menu/messages</value>
+		<value>/views/order/messages</value>
 	</util:list>
 
 </beans>

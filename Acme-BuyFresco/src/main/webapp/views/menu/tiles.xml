@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+      
+<tiles-definitions>
+
+	<definition name="menu/create" extends="master.page">	
+		<put-attribute name="title" value="Create menu" />
+		<put-attribute name="body" value="/views/menu/create.jsp" />
+	</definition>
+	
+	<definition name="menu/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit menu" />
+		<put-attribute name="body" value="/views/menu/edit.jsp" />
+	</definition>
+	
+	<definition name="menu/list" extends="master.page">	
+		<put-attribute name="title" value="List menus" />
+		<put-attribute name="body" value="/views/menu/list.jsp" />
+	</definition>
+	
+	<definition name="menu/nextWeek" extends="master.page">	
+		<put-attribute name="title" value="Menu next week" />
+		<put-attribute name="body" value="/views/menu/menuNextWeek.jsp" />
+	</definition>
+	
+</tiles-definitions>
