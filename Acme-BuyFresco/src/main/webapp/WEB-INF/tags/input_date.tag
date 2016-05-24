@@ -33,10 +33,10 @@
 
 <%-- Definition --%>
 
-<div>
+<div>	
 	<form:label path="${path}">
 		<spring:message code="${code}" />:
 	</form:label>	
-	<form:input path="${path}" readonly="${readonly}" />	
+	<form:input type="text" path="${path}" />	
 	<form:errors path="${path}" cssClass="error" />
 </div>	

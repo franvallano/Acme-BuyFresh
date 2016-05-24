@@ -5,14 +5,22 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ActorRepository;
+import security.Authority;
+import security.LoginService;
+import security.UserAccount;
 import domain.Actor;
+import forms.PasswordForm;
+import forms.ProfileForm;
 
 @Service
 @Transactional
@@ -65,7 +73,113 @@ public class ActorService {
 	}
 
 	// Other business methods -------------------------------------------------
+	private boolean checkRole(String role) {
+		boolean result;
+		Collection<Authority> authorities;
+		
+		result = false;
+		authorities = LoginService.getPrincipal().getAuthorities();
+		for(Authority a : authorities){
+			result= result || a.getAuthority().equals(role);
+		}
+		
+		return result;
+	}
+	
+	public boolean isAdministrator() {
+		boolean result;
+		
+		result = checkRole(Authority.ADMINISTRATOR);
+				
+		return result;
+	}
+	
+	public boolean isUser() {
+		boolean result;
+		
+		result = checkRole(Authority.USER);
+				
+		return result;
+	}
+	
+	public boolean isAuditor() {
+		boolean result;
+		
+		result = checkRole(Authority.CLERK);
+				
+		return result;
+	}
+	
+	
+	public void saveProfile(Actor actor){
+		Assert.notNull(actor);
+	
+		actorRepository.save(actor);
+	}
+	
+	public Actor findByPrincipal() {
+	 	Actor result;
+	 	UserAccount userAccount;
+	 	
+	 	userAccount = LoginService.getPrincipal();
+	 	result = actorRepository.findByPrincipal(userAccount.getId());
+	 	
+	 	Assert.notNull(result);
+	 	
+	 	return result;
+	 }
+	
+	
+	public Actor reconstructProfile(ProfileForm profileForm) {
+		Assert.notNull(profileForm);
+		Actor actor;
+		Calendar calendar = Calendar.getInstance();
+		
+		actor = findByPrincipal();
+		
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		
+		actor.getUserAccount().setUsername(profileForm.getUsername());
+		actor.setName(profileForm.getName());
+		actor.setSurname(profileForm.getSurname());
+		actor.setPhone(profileForm.getPhone());
+		
+		return actor;
+	}
+	
+	
+	public ProfileForm desreconstructProfile(Actor actor) {
+		Assert.notNull(actor);
+		ProfileForm profileForm;
+		
+		profileForm = new ProfileForm();
+		
+		profileForm.setUsername(actor.getUserAccount().getUsername());
+		profileForm.setName(actor.getName());
+		profileForm.setSurname(actor.getSurname());
+		profileForm.setPhone(actor.getPhone());
+		
+		return profileForm;
+	}
+	
 
-	// Ancillary methods ------------------------------------------------------
+	
+	public Actor reconstructPassword(PasswordForm passwordForm) {
+		Assert.notNull(passwordForm);
+		Assert.isTrue(passwordForm.getNewPassword().equals(passwordForm.getRepeatNewPassword()));
+		Assert.isTrue(!passwordForm.getNewPassword().equals("") && !passwordForm.getRepeatNewPassword().equals(""));
+		Assert.isTrue(passwordForm.getNewPassword().length() >= 5 && passwordForm.getRepeatNewPassword().length() >= 5);
+		Actor actor;
+		Md5PasswordEncoder encoder;
 
+		actor = findByPrincipal();
+		
+		encoder = new Md5PasswordEncoder();
+		
+		Assert.isTrue(actor.getUserAccount().getPassword().equals(encoder.encodePassword(passwordForm.getActualPassword(), null)));
+		
+		actor.getUserAccount().setPassword(encoder.encodePassword(passwordForm.getNewPassword(), null));
+		
+		return actor;
+	}
 }

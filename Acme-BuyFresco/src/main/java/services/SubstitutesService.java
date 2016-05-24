@@ -6,12 +6,14 @@
 package services;
 
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.SubstitutesRepository;
+import domain.SalesOrder;
 import domain.Substitutes;
 
 @Service
@@ -30,10 +32,12 @@ public class SubstitutesService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-	public Substitutes create(){
+	public Substitutes create(SalesOrder order){
 		Substitutes newbye;
 		
 		newbye = new Substitutes();
+		
+		newbye.setOrder(order);
 		
 		return newbye;
 	}
@@ -42,15 +46,6 @@ public class SubstitutesService {
 		Assert.notNull(entity);
 		
 		this.substitutesRepository.save(entity);
-	}
-
-	public void delete(Substitutes entity){
-		Assert.isTrue(entity.getId()!=0);
-		Assert.isTrue(this.substitutesRepository.exists(entity.getId()));
-		
-		this.substitutesRepository.delete( entity );
-		
-		Assert.isTrue(!this.substitutesRepository.exists(entity.getId()));
 	}
 
 	public Substitutes findOne(int id){
