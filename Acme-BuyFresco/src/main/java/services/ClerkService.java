@@ -5,17 +5,23 @@
 
 package services;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ClerkRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Clerk;
-import domain.User;
+import domain.SalesOrder;
+import forms.ClerkForm;
 
 @Service
 @Transactional
@@ -35,12 +41,33 @@ public class ClerkService {
 	// Simple CRUD methods ----------------------------------------------------
 	public Clerk create(){
 		Clerk newbye;
+		Collection<SalesOrder>sales = new ArrayList<SalesOrder>();
 		
 		newbye = new Clerk();
+		
+		newbye.setOrders(sales);
+		newbye.setDeleted(false);
+		newbye.setUserAccount(this.createUserAccount());
 		
 		return newbye;
 	}
 
+	public void save(Clerk clerk, String rPass){
+		String pass;
+		Md5PasswordEncoder encoder;
+		encoder = new Md5PasswordEncoder();
+		
+		Assert.notNull(clerk);
+		Assert.isTrue(clerk.getUserAccount().getPassword().equals(rPass));
+		
+		pass = clerk.getUserAccount().getPassword();
+		pass = encoder.encodePassword(pass, null);
+		clerk.getUserAccount().setPassword(pass);
+		
+		clerkRepository.save(clerk);
+	}
+	
+	
 	public void save(Clerk entity){
 		Assert.notNull(entity);
 		
@@ -51,9 +78,9 @@ public class ClerkService {
 		Assert.isTrue(entity.getId()!=0);
 		Assert.isTrue(this.clerkRepository.exists(entity.getId()));
 		
-		this.clerkRepository.delete( entity );
+		entity.setDeleted(true);
 		
-		Assert.isTrue(!this.clerkRepository.exists(entity.getId()));
+		this.save(entity);
 	}
 
 	public Clerk findOne(int id){
@@ -88,6 +115,73 @@ public class ClerkService {
 	 	return clerk;
 	}
 	
+	public UserAccount createUserAccount() {
+		UserAccount result;
+		Collection<Authority> authorities;
+		Authority authority;
+		
+		authority = new Authority();
+		authority.setAuthority(Authority.CLERK);
+		
+		authorities = new ArrayList<Authority>();
+		authorities.add(authority);
+		
+		result = new UserAccount();
+		result.setAuthorities(authorities);
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
+	public Clerk reconstruct(ClerkForm clerkForm) {
+		Assert.notNull(clerkForm);
+		Clerk clerk;
+		Calendar calendar = Calendar.getInstance();
+		
+		clerk = create();
+
+		calendar.setTimeInMillis(System.currentTimeMillis());
+		
+		clerk.getUserAccount().setUsername(clerkForm.getUsername());
+		clerk.getUserAccount().setPassword(clerkForm.getPassword());
+		
+		clerk.setName(clerkForm.getName());
+		clerk.setSurname(clerkForm.getSurname());
+		clerk.setEmail(clerkForm.getEmail());
+		clerk.setPhone(clerkForm.getPhone());
+		
+		return clerk;
+	}
+	
+	
+	public ClerkForm desreconstruct(Clerk clerk) {
+		Assert.notNull(clerk);
+		ClerkForm clerkForm;
+		
+		clerkForm = new ClerkForm();
+		
+		clerkForm.setUsername(clerk.getUserAccount().getUsername());
+		clerkForm.setPassword(clerk.getUserAccount().getPassword());
+		clerkForm.setRepeatedPass(clerk.getUserAccount().getPassword());
+		clerkForm.setName(clerk.getName());
+		clerkForm.setSurname(clerk.getSurname());
+		clerkForm.setEmail(clerk.getEmail());
+		clerkForm.setPhone(clerk.getPhone());
+		
+		return clerkForm;
+	}
+	
+	
+	public boolean rPassword(ClerkForm clerkForm) {
+		boolean result;
+		String pass;
+		String rpass;
+		
+		pass = clerkForm.getPassword();
+		rpass = clerkForm.getRepeatedPass();
+		result = pass.equals(rpass);
+		
+		return result;
+	}
 }

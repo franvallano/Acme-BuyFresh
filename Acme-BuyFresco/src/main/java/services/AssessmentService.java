@@ -6,6 +6,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ import org.springframework.util.Assert;
 
 import repositories.AssessmentRepository;
 import domain.Assessment;
+import domain.User;
 
 @Service
 @Transactional
@@ -23,7 +26,12 @@ public class AssessmentService {
 	private AssessmentRepository assessmentRepository;
 
 	// Ancillary services -----------------------------------------------------
-
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private AdministratorService administratorService;
+	
 	// Constructor ------------------------------------------------------------
 	public AssessmentService(){
 		super();
@@ -32,8 +40,17 @@ public class AssessmentService {
 	// Simple CRUD methods ----------------------------------------------------
 	public Assessment create(){
 		Assessment newbye;
+		Date date;
+		User u;
+
+		u = userService.findByPrincipal();
+		date = new Date(System.currentTimeMillis()-1);
 		
 		newbye = new Assessment();
+		
+		newbye.setMoment(date);
+		newbye.setDeleted(false);
+		newbye.setUser(u);
 		
 		return newbye;
 	}
@@ -45,12 +62,15 @@ public class AssessmentService {
 	}
 
 	public void delete(Assessment entity){
+		
+		administratorService.findByPrincipal();
+		
 		Assert.isTrue(entity.getId()!=0);
 		Assert.isTrue(this.assessmentRepository.exists(entity.getId()));
 		
-		this.assessmentRepository.delete( entity );
+		entity.setDeleted(true);
 		
-		Assert.isTrue(!this.assessmentRepository.exists(entity.getId()));
+		this.save(entity);
 	}
 
 	public Assessment findOne(int id){

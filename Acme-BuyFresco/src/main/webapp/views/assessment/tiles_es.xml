@@ -1,0 +1,17 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="assessment/create" extends="master.page">	
+		<put-attribute name="title" value="Valorar" />
+		<put-attribute name="body" value="/views/assessment/create.jsp" />
+	</definition>
+	
+	<definition name="assessment/list" extends="master.page">	
+		<put-attribute name="title" value="Valoraciones" />
+		<put-attribute name="body" value="/views/assessment/list.jsp" />
+	</definition>
+	
+</tiles-definitions>
