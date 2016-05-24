@@ -124,6 +124,12 @@ public class UserService {
 	 	return user;
 	}
 	
+	public Integer getNumberOfUser(){
+		Integer number = userRepository.getNumberOfUser();
+		
+		return number;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 	public UserAccount createUserAccount() {

@@ -64,6 +64,7 @@
 		
 		<!-- ORDERS -->
 		<security:intercept-url pattern="/order/clerk/**" access="hasRole('CLERK')" /> 
+		<security:intercept-url pattern="/order/user/**" access="hasRole('USER')" />
 
 		<!-- TERMS -->
 		<security:intercept-url pattern="/law/**" access="permitAll" />

@@ -31,8 +31,8 @@
 	
 	<acme:submit code="menu.save" name="update" />&nbsp;
 		
-	
-	<acme:cancel url="menu/administrator/list.do" code="menu.cancel"/>
+	<acme:back code="menu.cancel"/>
+
 	<br />
 
 </form:form>

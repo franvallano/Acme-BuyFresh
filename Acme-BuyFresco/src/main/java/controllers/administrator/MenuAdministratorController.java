@@ -79,6 +79,9 @@ public class MenuAdministratorController extends AbstractController {
 
 		if (binding.hasErrors()) {
 			result = createModelAndView(menu, "menu.commit.error");
+			Collection<Recipe> recipes;
+			recipes = recipeService.findAll();
+			result.addObject("recipes", recipes);
 		} else {
 			try {
 				menuService.save(menu);				
@@ -116,6 +119,9 @@ public class MenuAdministratorController extends AbstractController {
 		
 		if (binding.hasErrors()) {
 			result = editModelAndView(menu, "menu.commit.error");
+			Collection<Recipe> recipes;
+			recipes = recipeService.findAll();
+			result.addObject("recipes", recipes);
 		} else {
 			try {
 				menuService.save(menu);				

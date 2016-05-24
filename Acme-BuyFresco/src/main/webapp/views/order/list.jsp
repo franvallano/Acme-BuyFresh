@@ -8,6 +8,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+
 <jstl:if test="${edit}">
 		<jstl:choose>
 		<jstl:when test="${sizecero}">
@@ -17,10 +18,18 @@
 				<acme:column code="order.shippingDate" property="shippingDate"/>
 				<acme:column code="order.arrivalDate" property="arrivalDate"/>	
 				<acme:column code="order.notes" property="notes"/>	
-	
-				<acme:column_ref code="order.edit" ref="order/clerk/edit.do?orderId=${order.id}"/>
-	
-					
+				<acme:column code="order.sent" property="sent"/>
+				
+				<security:authorize access="hasRole('CLERK')">
+					<acme:column_ref_condition code="order.edit" ref="order/clerk/edit.do?orderId=${order.id}" condition="${order.sent == false }"/>
+				</security:authorize>
+				
+				<security:authorize access="hasRole('USER')">
+					<acme:column_ref code="order.details" ref="order/user/details.do?orderId=${order.id}"/>
+				
+					<acme:column_ref_condition code="order.edit" ref="order/user/edit.do?orderId=${order.id}" condition="${order.sent == false }"/>
+				</security:authorize>
+				
 			</display:table>
 		</jstl:when>
 		
@@ -39,6 +48,7 @@
 				<acme:column code="order.shippingDate" property="shippingDate"/>
 				<acme:column code="order.arrivalDate" property="arrivalDate"/>	
 				<acme:column code="order.notes" property="notes"/>	
+				<acme:column code="order.sent" property="sent"/>
 				<acme:column_ref code="order.assign" ref="order/clerk/assign.do?orderId=${order.id}"/>
 		
 			</display:table>

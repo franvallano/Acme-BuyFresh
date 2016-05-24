@@ -16,4 +16,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("select a from User a where a.userAccount.id = ?1")
 	User findByPrincipal(int userAccountId);
+	
+	@Query("select count(u) from User u")
+	Integer getNumberOfUser();
 }

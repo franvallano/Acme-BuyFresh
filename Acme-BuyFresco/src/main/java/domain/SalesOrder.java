@@ -24,6 +24,7 @@ public class SalesOrder extends DomainEntity{
 	private String address;
 	private Date shippingDate, arrivalDate;
 	private String notes;
+	private Boolean sent;
 
 	
 	//Constructor -------------------------------------------------------------------------------
@@ -70,6 +71,15 @@ public class SalesOrder extends DomainEntity{
 	}
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+	
+	public Boolean getSent() {
+		return sent;
+	}
+
+
+	public void setSent(Boolean sent) {
+		this.sent = sent;
 	}
 	
 	//Relationships -----------------------------------------------------------------------------

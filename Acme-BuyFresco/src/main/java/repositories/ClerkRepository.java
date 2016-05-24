@@ -4,16 +4,26 @@
 */
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Clerk;
-import domain.User;
 
 @Repository
 public interface ClerkRepository extends JpaRepository<Clerk, Integer>{
 	
 	@Query("select a from Clerk a where a.userAccount.id = ?1")
 	Clerk findByPrincipal(int userAccountId);
+	
+	@Query("select c from Clerk c where c.orders.size >=ALL(select c1.orders.size from Clerk c1)")
+	Collection<Clerk> getClerksWithMoreOrders();
+	
+	@Query("select c from Clerk c where c.orders.size < ALL(select c1.orders.size from Clerk c1)")
+	Collection<Clerk> getClerksWithLessOrders();
+	
+	@Query("select distinct c from Clerk c join c.orders corder where datediff(CURRENT_DATE, corder.arrivalDate)<30")
+	Collection<Clerk> getClerkWithOrdersSentLastMonth();
 }

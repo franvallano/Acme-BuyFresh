@@ -4,7 +4,11 @@
 */
 package repositories;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Ingredient;
@@ -12,5 +16,11 @@ import domain.Ingredient;
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, Integer>{
 	
-
+	@Query("select i from Ingredient i join i.quantities iq join iq.recipes iqr join iqr.menus iqrm where iqrm.id = ?1")
+	Collection<Ingredient> getIngredientsByMenu(int menuId);
+	
+	//Con esta query obtienes los alergenos de un usuario, los ingredientes y las cantidades correspondientes a las recetas de un menu dado.
+	@Query("select i, iqr, ialler, iq from Ingredient i join i.quantities iq join iq.recipes iqr join iqr.menus iqrm join i.allergens ialler where iqrm.id = ?1 and ialler.id = (select alle from Allergen alle join alle.users alleuser where alleuser.id = ?2)")
+	List<Object[]> getAllergenIngredientsByUserPerMenu(int menuId, int userId);
+	
 }

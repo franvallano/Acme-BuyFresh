@@ -94,6 +94,22 @@ public class MenuService {
 		return menu;
 	}
 	
+	public Collection<Menu> getMenusInMoreOrders(){
+		Collection<Menu> menus;
+		
+		menus = menuRepository.getMenusInMoreOrders();
+		
+		return menus;
+	}
+	
+	public Collection<Menu> getMenusInLessOrders(){
+		Collection<Menu> menus;
+		
+		menus = menuRepository.getMenusInLessOrders();
+		
+		return menus;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }
