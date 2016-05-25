@@ -86,8 +86,8 @@ public class RegisterUserController extends AbstractController{
 		ModelAndView result;
 		
 		result = new ModelAndView("register/register");
-		result.addObject("userFormModel", userForm);
-		result.addObject("userForm", "userForm");
+		result.addObject("userForm", userForm);
+		result.addObject("userFormModel", "userForm");
 		result.addObject("message", message);
 		result.addObject("url", "register/user/register.do");
 
