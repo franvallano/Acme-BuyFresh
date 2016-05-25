@@ -93,6 +93,14 @@ public class AssessmentService {
 
 	// Other business methods -------------------------------------------------
 
+	public Collection<Assessment> findAllWithoutDeleted(){
+		Collection<Assessment> res;
+		
+		res = assessmentRepository.findAllWithoutDelete();
+		
+		return res;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

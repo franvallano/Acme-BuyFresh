@@ -17,7 +17,7 @@
 	
 	<acme:column code="assessment.rating" property="rating"/>
 	
-	<acme:column code="assessment.text" property="creationMoment"/>
+	<acme:column code="assessment.text" property="text"/>
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">	
 		<acme:column_ref code="assessment.delete" ref="assessment/user/delete.do?assessmentId=${row.id}"/>
