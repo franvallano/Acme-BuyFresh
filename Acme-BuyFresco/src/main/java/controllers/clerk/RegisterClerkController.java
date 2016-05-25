@@ -102,7 +102,7 @@ public class RegisterClerkController extends AbstractController{
 
 		result = new ModelAndView("register/register");
 		result.addObject("clerkForm", clerkForm);
-		result.addObject("userForm", "clerkForm");
+		result.addObject("userFormModel", "clerkForm");
 		result.addObject("message", message);
 		
 		return result;

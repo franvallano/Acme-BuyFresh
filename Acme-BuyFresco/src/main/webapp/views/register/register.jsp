@@ -40,7 +40,7 @@
 		
 </script>
 
-<form:form action="${url}" modelAttribute="${userForm}" class="form-horizontal">
+<form:form action="${url}" modelAttribute="${userFormModel}" class="form-horizontal">
 
 	<security:authorize access="hasRole('ADMINISTRATOR')">
 		<acme:textbox code="register.username" path="username"/>
@@ -148,7 +148,7 @@
 					<acme:textbox code="register.expirationyear" path="creditCard.expirationYear"/>
 					<br/>
 					
-					<acme:textbox code="register.cvvcode" path="creditCard.CVV"/>
+					<acme:textbox code="register.cvvcode" path="creditCard.cvv"/>
 					<br/>
 				</div>
 			</fieldset>
