@@ -86,9 +86,7 @@ public class RegisterUserController extends AbstractController{
 		ModelAndView result;
 		
 		result = new ModelAndView("register/register");
-		result.addObject("userForm", userForm);
-		// Se añade esta linea de abajo porque el modelAttribute es una variable y no una cadena,
-		// si fuese modelAttribute="userForm" con la linea de arriba seria suficiente
+		result.addObject("userFormModel", userForm);
 		result.addObject("userForm", "userForm");
 		result.addObject("message", message);
 		result.addObject("url", "register/user/register.do");

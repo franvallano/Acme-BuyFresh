@@ -84,7 +84,7 @@
 						<acme:textbox code="actor.expirationyear" path="creditCard.expirationYear"/>
 						<br/>
 						
-						<acme:textbox code="actor.cvvcode" path="creditCard.CVV"/>
+						<acme:textbox code="actor.cvvcode" path="creditCard.cvv"/>
 						<br/>
 						
 					</fieldset>

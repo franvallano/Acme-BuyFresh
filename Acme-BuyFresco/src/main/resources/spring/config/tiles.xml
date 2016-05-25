@@ -17,15 +17,15 @@
 		<value>/views/misc/tiles.xml</value>		
 		<value>/views/security/tiles.xml</value>
 		<value>/views/welcome/tiles.xml</value>
-		
-
-
-		<value>/views/actor/tiles.xml</value>
-		
+				
 		<value>/views/terms/tiles.xml</value>
 		<value>/views/cookies/tiles.xml</value>
 		<value>/views/menu/tiles.xml</value>
 		<value>/views/order/tiles.xml</value>
+		<value>/views/profile/tiles.xml</value>
+		<value>/views/subscription/tiles.xml</value>
+		<value>/views/register/tiles.xml</value>
+		<value>/views/assessment/tiles.xml</value>
 	</util:list>
 
 </beans>

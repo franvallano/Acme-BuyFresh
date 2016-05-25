@@ -21,13 +21,6 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMINISTRATOR')">
-			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>					
-				</ul>
-			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.menu" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -35,17 +28,23 @@
 					<li><a href="menu/administrator/create.do"><spring:message code="master.page.menu.create" /></a></li>					
 				</ul>
 			</li>
+			<li><a class="fNiv" href="assessment/list.do"><spring:message code="master.page.assessmentList" /></a></li>
+			<li><a class="fNiv" href="clerk/register.do"><spring:message code="master.page.registerClerk" /></a></li>
+			<li>
+				<a class="dropdown-toggle" data-toggle="dropdown" href=""> 
+					<spring:message code="master.page.profile" /> 
+			        (<security:authentication property="principal.username" />)<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li class="arrow"></li>	
+					<li><a href="profile/actor/edit.do"><spring:message code="master.page.viewProfile" /></a></li>
+					<li><a href="profile/actor/changePassword.do"><spring:message code="master.page.changePassword" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CLERK')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
-				</ul>
-			</li>
-			
+					
 			<li><a class="fNiv"><spring:message	code="master.page.order" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -53,43 +52,59 @@
 					<li><a href="order/clerk/myOrders.do"><spring:message code="master.page.order.myOrders" /></a></li>					
 				</ul>
 			</li>
+			<li>
+				<a class="dropdown-toggle" data-toggle="dropdown" href=""> 
+					<spring:message code="master.page.profile" /> 
+			        (<security:authentication property="principal.username" />)<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li class="arrow"></li>	
+					<li><a href="profile/actor/edit.do"><spring:message code="master.page.viewProfile" /></a></li>
+					<li><a href="profile/actor/changePassword.do"><spring:message code="master.page.changePassword" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('USER')">
-			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.subscriptions" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>					
+					<li><a href="subscription/user/list.do"><spring:message code="master.page.subscriptionList" /></a></li>					
 				</ul>
 			</li>
-			
+			<li><a class="fNiv"><spring:message	code="master.page.assessments" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="assessment/user/list.do"><spring:message code="master.page.myAssessments" /></a></li>					
+				</ul>
+			</li>			
 			<li><a class="fNiv"><spring:message	code="master.page.order" /></a>
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="order/user/myOrders.do"><spring:message code="master.page.order.myOrders" /></a></li>					
 				</ul>
 			</li>
+			<li>
+				<a class="dropdown-toggle" data-toggle="dropdown" href=""> 
+					<spring:message code="master.page.profile" /> 
+			        (<security:authentication property="principal.username" />)<span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li class="arrow"></li>	
+					<li><a href="profile/user/edit.do"><spring:message code="master.page.viewProfile" /></a></li>
+					<li><a href="profile/user/changePassword.do"><spring:message code="master.page.changePassword" /></a></li>
+				</ul>
+			</li>
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="register/user/register.do"><spring:message code="master.page.register" /></a></li>
+			<li><a class="fNiv" href="assessment/list.do"><spring:message code="master.page.assessmentList" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
-			<li>
-				<a class="fNiv"> 
-					<spring:message code="master.page.profile" /> 
-			        (<security:authentication property="principal.username" />)
-				</a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>					
-					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
-				</ul>
-			</li>
+			<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 		</security:authorize>
 	</ul>
 </div>
