@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.validation.Valid;
@@ -41,7 +40,7 @@ public class Allergen extends DomainEntity{
 	//Relationships -----------------------------------------------------------------------------
 	
 	private Collection<Ingredient> substitutes;
-	private Collection<Ingredient> ingredients;
+	private Collection<Ingredient> allergenIngredients;
 	private Collection<Recipe> recipes;
 	private Collection<User> users;
 
@@ -56,11 +55,11 @@ public class Allergen extends DomainEntity{
 	
 	
 	@ManyToMany(mappedBy="replaceables")
-	public Collection<Ingredient> getIngredients() {
-		return ingredients;
+	public Collection<Ingredient> getAllergenIngredients() {
+		return allergenIngredients;
 	}
-	public void setIngredients(Collection<Ingredient> ingredients) {
-		this.ingredients = ingredients;
+	public void setAllergenIngredients(Collection<Ingredient> ingredients) {
+		this.allergenIngredients = ingredients;
 	}
 	
 	@Valid

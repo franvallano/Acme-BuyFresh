@@ -19,8 +19,6 @@
 	
 	<acme:column code="subscription.creationMoment" property="creationMoment"/>
 	
-	<acme:column code="subscription.renewal" property="renewal"/>
-	
 	<security:authorize access="hasRole('ADMINISTRATOR')">	
 		<acme:column_ref code="subscription.renewal" ref="subscription/user/renewal.do?subscriptionId=${row.id}"/>
 	</security:authorize>

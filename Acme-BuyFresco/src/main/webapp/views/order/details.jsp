@@ -43,6 +43,14 @@
 		
 	</display:table>
 
+
+	<jstl:if test="${order.arrivalDate != null}">
+		
+		<h2><acme:textURL URL="assessment/user/create.do" code="assess"/></h2>
+	
+	</jstl:if>
+
+
 	<br>
 	<acme:back code="order.back" />
 	

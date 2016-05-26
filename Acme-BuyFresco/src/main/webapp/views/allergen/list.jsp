@@ -10,18 +10,21 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="acme" tagdir="/WEB-INF/tags" %>
 
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<acme:textURL URL="allergen/administrator/create.do" code="allergen.create"/>
+</security:authorize>
 
-<display:table name="assessments" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
+<display:table name="allergens" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
-	<acme:column code="assessment.moment" property="moment"/>
+	<acme:column code="allergen.name" property="name"/>
 	
-	<acme:column code="assessment.rating" property="rating"/>
+	<acme:column code="substitutes" property="substitutes"/>
 	
-	<acme:column code="assessment.text" property="text"/>
+	<acme:column code="ingredients" property="allergenIngredients"/>
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">	
-		<acme:column_ref code="assessment.delete" ref="assessment/administrator/delete.do?assessmentId=${row.id}"/>
+		<acme:column_ref code="allergen.edit" ref="allergen/administrator/edit.do?allergenId=${row.id}"/>
 	</security:authorize>
 </display:table>
 
-<acme:back code="assessment.back" />
+<acme:back code="allergen.back" />

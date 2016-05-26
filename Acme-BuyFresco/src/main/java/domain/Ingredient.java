@@ -92,7 +92,7 @@ public class Ingredient extends DomainEntity{
 
 	@Valid
 	@ManyToMany
-	@JoinTable(name="allergens", joinColumns=@JoinColumn(name="allergen_id"), inverseJoinColumns=@JoinColumn(name="ingredient_id")) 
+	@JoinTable(name="ingredients_allergens", joinColumns=@JoinColumn(name="allergen_id"), inverseJoinColumns=@JoinColumn(name="ingredient_id")) 
 	public Collection<Allergen> getAllergens() {
 		return allergens;
 	}
@@ -102,7 +102,7 @@ public class Ingredient extends DomainEntity{
 
 	@Valid
 	@ManyToMany
-	@JoinTable(name="replaceables", joinColumns=@JoinColumn(name="allergen_id"), inverseJoinColumns=@JoinColumn(name="ingredient_id"))
+	@JoinTable(name="ingredients_replaceables", joinColumns=@JoinColumn(name="allergen_id"), inverseJoinColumns=@JoinColumn(name="ingredient_id"))
 	public Collection<Allergen> getReplaceables() {
 		return replaceables;
 	}

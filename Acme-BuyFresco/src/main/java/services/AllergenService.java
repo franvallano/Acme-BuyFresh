@@ -5,7 +5,10 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +16,9 @@ import org.springframework.util.Assert;
 
 import repositories.AllergenRepository;
 import domain.Allergen;
+import domain.Ingredient;
+import domain.Recipe;
+import domain.User;
 
 @Service
 @Transactional
@@ -24,6 +30,15 @@ public class AllergenService {
 
 	// Ancillary services -----------------------------------------------------
 
+	@Autowired
+	private AdministratorService administratorService;
+	
+	@Autowired
+	private RecipeService recipeService;
+	
+	@Autowired
+	private IngredientService ingredientService;
+	
 	// Constructor ------------------------------------------------------------
 	public AllergenService(){
 		super();
@@ -33,7 +48,19 @@ public class AllergenService {
 	public Allergen create(){
 		Allergen newbye;
 		
+		administratorService.findByPrincipal();
+		
+		Collection<User>users = new ArrayList<User>();
+		Collection<Ingredient>substitutes = new HashSet<Ingredient>();
+		Collection<Ingredient>ingredients = new HashSet<Ingredient>();
+		Collection<Recipe>recipes = new HashSet<Recipe>();
+		
 		newbye = new Allergen();
+		
+		newbye.setAllergenIngredients(ingredients);
+		newbye.setRecipes(recipes);
+		newbye.setSubstitutes(substitutes);
+		newbye.setUsers(users);
 		
 		return newbye;
 	}
@@ -41,17 +68,30 @@ public class AllergenService {
 	public void save(Allergen entity){
 		Assert.notNull(entity);
 		
+		Collection<Ingredient>ingredients = entity.getAllergenIngredients();
+		Collection<Recipe>ing = new ArrayList<Recipe>() ;
+		
+		if(!ingredients.isEmpty()){
+			for(Ingredient i : ingredients){
+				ing = recipeService.getRecipesByIngredients(i.getName());
+				
+				entity.setRecipes(ing);
+			}
+		}
+		
 		this.allergenRepository.save(entity);
 	}
+	
 
 	public void delete(Allergen entity){
 		Assert.isTrue(entity.getId()!=0);
 		Assert.isTrue(this.allergenRepository.exists(entity.getId()));
 		
-		this.allergenRepository.delete( entity );
+		this.allergenRepository.delete(entity);
 		
 		Assert.isTrue(!this.allergenRepository.exists(entity.getId()));
 	}
+	
 
 	public Allergen findOne(int id){
 		Assert.isTrue(id != 0);
@@ -73,6 +113,17 @@ public class AllergenService {
 
 	// Other business methods -------------------------------------------------
 
+	public Allergen findAllergenByName(String allergenName){
+		
+		Allergen res;
+		
+		res = this.allergenRepository.findAllergenByName(allergenName);
+		
+		return res;
+		
+	}
+	
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

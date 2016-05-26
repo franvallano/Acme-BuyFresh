@@ -54,7 +54,6 @@ public class SubscriptionService {
 		newbye.setUser(user);
 		newbye.setCreationMoment(date);
 		newbye.setFinishMoment(finishDate);
-		newbye.setRenewal(false);
 		
 		return newbye;
 	}
@@ -85,13 +84,6 @@ public class SubscriptionService {
 
 	// Other business methods -------------------------------------------------
 
-	public void renewal(Subscription entity){
-		Assert.notNull(entity);
-		
-		entity.setRenewal(true);
-		
-		this.save(entity);
-	}
 	
 	// Ancillary methods ------------------------------------------------------
 

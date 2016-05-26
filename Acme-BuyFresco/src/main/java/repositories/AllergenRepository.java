@@ -5,6 +5,7 @@
 package repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Allergen;
@@ -12,5 +13,6 @@ import domain.Allergen;
 @Repository
 public interface AllergenRepository extends JpaRepository<Allergen, Integer>{
 	
-
+	@Query("select a from Allergen a where a.name = ?1")
+	Allergen findAllergenByName(String allergenName);
 }
