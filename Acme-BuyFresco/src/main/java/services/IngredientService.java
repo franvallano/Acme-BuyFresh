@@ -92,6 +92,15 @@ public class IngredientService {
 		return ingredients;
 	}
 	
+	public Collection<Ingredient> findAllWithoutDelete(){
+		Collection<Ingredient> ingredients;
+		
+		ingredients = ingredientRepository.findAllWithoutDelete();
+		
+		return ingredients;
+	}
+	
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

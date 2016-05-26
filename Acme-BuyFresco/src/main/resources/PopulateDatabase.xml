@@ -164,7 +164,7 @@
 		</property>
 		<property name="allergens">
 			<list>
-				<ref bean="allergen1"/>
+				<ref bean="allergen2"/>
 			</list>		
 		</property>	
 	</bean>
@@ -198,6 +198,11 @@
 	
 	<bean id="allergen2" class="domain.Allergen">
 		<property name="name" value="Lactosa"/>
+		<property name="allergenIngredients">
+			<list>
+				<ref bean="ingredient1"/>
+			</list>		
+		</property>
 		<property name="substitutes">
 			<list>
 				<ref bean="ingredient2"/>
@@ -216,9 +221,9 @@
 	</bean>
 	
 	
-	<bean id="allergen1" class="domain.Allergen">
+	<!-- <bean id="allergen1" class="domain.Allergen">
 		<property name="name" value="Lactosa"/>
-		<property name="ingredients">
+		<property name="allergenIngredients">
 			<list>
 				<ref bean="ingredient1"/>
 			</list>		
@@ -233,9 +238,9 @@
 				<ref bean="user1" />
 			</list>		
 		</property>
-	</bean>
+	</bean> -->
 	
-	<bean id="allergen3" class="domain.Allergen">
+	<!-- <bean id="allergen3" class="domain.Allergen">
 		<property name="name" value="Gluten"/>
 		<property name="substitutes">
 			<list>
@@ -252,11 +257,16 @@
 				<ref bean="user2" />
 			</list>		
 		</property>
-	</bean>
+	</bean> -->
 	
 	<bean id="allergen4" class="domain.Allergen">
 		<property name="name" value="Gluten"/>
-		<property name="ingredients">
+		<property name="substitutes">
+			<list>
+				<ref bean="ingredient6"/>
+			</list>		
+		</property>
+		<property name="allergenIngredients">
 			<list>
 				<ref bean="ingredient5"/>
 			</list>		
@@ -357,7 +367,7 @@
 		</property> -->
 		<property name="allergens">
 			<list>
-				<ref bean="allergen1"/>
+				<ref bean="allergen2"/>
 			</list>		
 		</property>	
 	</bean>
@@ -440,7 +450,7 @@
 		</property>
 		<property name="replaceables">
 			<list>
-				<ref bean="allergen3"/>
+				<ref bean="allergen4"/>
 			</list>		
 		</property>
 		<!-- <property name="allergens">
@@ -510,7 +520,7 @@
 		</property>
 		<property name="allergens">
 			<list>
-				<ref bean="allergen1" />
+				<ref bean="allergen2" />
 			</list>
 		</property>
 		<property name="assessments">
@@ -588,7 +598,6 @@
 		<property name="creationMoment" value="05/20/2016 13:54"/>
 		<property name="finishMoment" value="05/27/2016 13:54"/>
 		<property name="price" value="45.50"/>
-		<property name="renewal" value="true"/>
 		<property name="user" ref="user1"/>
 		<property name="orders">
 			<list>	
@@ -602,7 +611,6 @@
 		<property name="creationMoment" value="05/20/2016 10:34"/>
 		<property name="finishMoment" value="05/27/2016 10:34"/>
 		<property name="price" value="24.99"/>
-		<property name="renewal" value="false"/>
 		<property name="user" ref="user2"/>
 		<property name="orders">
 			<list>	

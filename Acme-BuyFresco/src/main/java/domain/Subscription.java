@@ -15,7 +15,6 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
-import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -25,8 +24,6 @@ public class Subscription extends DomainEntity{
 	//Attributes --------------------------------------------------------------------------------
 	private Date creationMoment, finishMoment;
 	private Double price;
-	private boolean renewal;
-
 	
 	//Constructor -------------------------------------------------------------------------------
 	
@@ -69,13 +66,6 @@ public class Subscription extends DomainEntity{
 		this.price = price;
 	}
 
-
-	public boolean getRenewal() {
-		return renewal;
-	}
-	public void setRenewal(boolean renewal) {
-		this.renewal = renewal;
-	}
 	
 	
 	//Relationships -----------------------------------------------------------------------------

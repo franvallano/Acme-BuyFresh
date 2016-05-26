@@ -6,6 +6,7 @@
 package services;
 
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,6 +74,15 @@ public class RecipeService {
 
 	// Other business methods -------------------------------------------------
 
+	
+	public Collection<Recipe> getRecipesByIngredients(String nameIngredient){
+		Collection<Recipe> res;
+		
+		res = recipeRepository.getRecipesByIngredients(nameIngredient);
+		
+		return res;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

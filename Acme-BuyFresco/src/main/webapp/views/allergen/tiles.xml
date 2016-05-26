@@ -1,0 +1,17 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+	
+	<definition name="allergen/edit" extends="master.page">	
+		<put-attribute name="title" value="Allergen" />
+		<put-attribute name="body" value="/views/allergen/edit.jsp" />
+	</definition>
+	
+	<definition name="allergen/list" extends="master.page">	
+		<put-attribute name="title" value="Allergens" />
+		<put-attribute name="body" value="/views/allergen/list.jsp" />
+	</definition>
+	
+</tiles-definitions>

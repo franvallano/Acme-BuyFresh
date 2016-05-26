@@ -11,7 +11,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.SalesOrder;
-import domain.User;
 
 @Repository
 public interface SalesOrderRepository extends JpaRepository<SalesOrder, Integer>{
