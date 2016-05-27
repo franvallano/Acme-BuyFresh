@@ -4,7 +4,9 @@
 */
 package repositories;
 
+
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +22,7 @@ public interface MenuRepository extends JpaRepository<Menu, Integer>{
 	
 	@Query("select m from Menu m where m.orders.size <ALL (select m1.orders.size from Menu m1)")
 	Collection<Menu> getMenusInLessOrders();
+	
+	@Query("select m from Menu m where CURRENT_DATE >= m.startingMoment and CURRENT_DATE <= m.finishMoment")
+	Collection<Menu> getActiveMenus();
 }

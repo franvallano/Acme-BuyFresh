@@ -112,6 +112,25 @@ public class SalesOrderClerkController extends AbstractController {
 		return result;
 	}
 	
+	//Sent --------------------------------------------------------------------
+	
+	@RequestMapping(value = "/sent", method = RequestMethod.GET)
+	public ModelAndView sent(@RequestParam int orderId) {
+		ModelAndView result;
+		SalesOrder order = salesOrderService.findOne(orderId);
+		order.setSent(true);
+		try {
+			salesOrderService.save(order);
+			result = new ModelAndView("redirect:/order/clerk/myOrders.do");
+		} catch (Exception e) {
+			result = editModelAndView(order, "order.commit.error");
+		}
+
+		
+		
+		return result;
+	}
+	
 	// Creation ---------------------------------------------------------------
 	/*
 	@RequestMapping(value = "/create", method = RequestMethod.GET)

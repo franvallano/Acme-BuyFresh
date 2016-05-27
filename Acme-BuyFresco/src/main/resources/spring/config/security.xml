@@ -51,13 +51,14 @@
 		<security:intercept-url pattern="/register/user/register.do" access="isAnonymous()" /> 
 		<security:intercept-url pattern="/clerk/register.do" access="hasRole('ADMINISTRATOR')" /> 
 			
-			
 		<!-- SUBSCRIPTION -->
 		<security:intercept-url pattern="/subscription/user/**" access="hasRole('USER')" /> 
 		
 		<!-- MENUS -->
+		<security:intercept-url pattern="/menu/**" access="permitAll" /> 
+		<security:intercept-url pattern="/menu/user/**" access="permitAll" /> 
 		<security:intercept-url pattern="/menu/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
-		<security:intercept-url pattern="/menu/nextWeek" access="permitAll" /> 
+
 		
 		<!-- ASSESSMENTS -->
 		<security:intercept-url pattern="/assessment/**" access="permitAll" />

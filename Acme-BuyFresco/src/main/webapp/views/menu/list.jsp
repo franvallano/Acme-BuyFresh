@@ -13,14 +13,21 @@
 		<acme:column code="menu.name" property="name"/>	
 		<acme:column code="menu.creationMoment" property="creationMoment"/>
 		<acme:column code="menu.startingMoment" property="startingMoment"/>	
-		<acme:column code="menu.duration" property="duration"/>	
+		<acme:column code="menu.finishMoment" property="finishMoment"/>	
 		<acme:column code="menu.people" property="people"/>	
 		<acme:column code="menu.type" property="type"/>	
-		<acme:column code="menu.deleted" property="deleted"/>	
-		<acme:column code="menu.creationMoment" property="creationMoment"/>
+		<acme:column code="menu.price" property="price"/>
+		<security:authorize access="hasRole('ADMINISTRATOR')">
+			<acme:column code="menu.deleted" property="deleted"/>	
+			<acme:column code="menu.creationMoment" property="creationMoment"/>
+		</security:authorize>
+		<security:authorize access="hasRole('USER')">
+			<acme:column_ref code="menu.subscrive" ref="order/user/create.do?menuId=${menu.id}"/>
+		</security:authorize>
 		<acme:column_ref code="menu.recipes" ref="recipe/administrator/list.do?menuId=${menu.id}"/>
-		<acme:column_ref code="menu.edit" ref="menu/administrator/edit.do?menuId=${menu.id}"/>
-		<acme:column_ref_ConfirmDelete code="menu.delete" codeConfirm="menu.confirm.delete" ref="menu/administrator/delete.do?menuId=${menu.id}"/>
-	
+		<security:authorize access="hasRole('ADMINISTRATOR')">
+			<acme:column_ref code="menu.edit" ref="menu/administrator/edit.do?menuId=${menu.id}"/>
+			<acme:column_ref_ConfirmDelete code="menu.delete" codeConfirm="menu.confirm.delete" ref="menu/administrator/delete.do?menuId=${menu.id}"/>
+		</security:authorize>
 		
 	</display:table>

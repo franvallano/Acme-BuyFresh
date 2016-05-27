@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,6 +26,7 @@ public class SalesOrder extends DomainEntity{
 	private String address;
 	private Date shippingDate, arrivalDate;
 	private String notes;
+	private Double totalPrice;
 	private Boolean sent;
 
 	
@@ -82,6 +85,15 @@ public class SalesOrder extends DomainEntity{
 		this.sent = sent;
 	}
 	
+	@NotNull
+	@Digits(integer = 2, fraction = 2)
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
 	//Relationships -----------------------------------------------------------------------------
 
 	private Menu menu;
@@ -108,7 +120,7 @@ public class SalesOrder extends DomainEntity{
 	}
 
 	@Valid
-	@ManyToOne
+	@ManyToOne(optional = false)
 	public Subscription getSubscription() {
 		return subscription;
 	}

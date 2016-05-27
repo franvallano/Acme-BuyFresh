@@ -106,7 +106,8 @@
 		<property name="type" value="Sin lactosa"/>
 		<property name="creationMoment" value="04/05/2016 23:20"/>
 		<property name="startingMoment" value="05/23/2016 09:00"/>
-		<property name="duration" value="30"/>
+		<property name="finishMoment" value="06/23/2016 9:00"/>
+		<property name="price" value="45.50"/>
 		<property name="people" value="2"/>
 		<property name="deleted" value="false"/>
 		<property name="recipes">
@@ -127,7 +128,8 @@
 		<property name="type" value="Celiaco"/>
 		<property name="creationMoment" value="05/06/2016 21:50"/>
 		<property name="startingMoment" value="06/23/2016 09:00"/>
-		<property name="duration" value="40"/>
+		<property name="finishMoment" value="07/23/2016 09:40"/>
+		<property name="price" value="25.50"/>
 		<property name="people" value="1"/>
 		<property name="deleted" value="false"/>
 		<property name="recipes">
@@ -597,7 +599,6 @@
 	<bean id="subscription1" class="domain.Subscription">
 		<property name="creationMoment" value="05/20/2016 13:54"/>
 		<property name="finishMoment" value="05/27/2016 13:54"/>
-		<property name="price" value="45.50"/>
 		<property name="user" ref="user1"/>
 		<property name="orders">
 			<list>	
@@ -610,7 +611,6 @@
 	<bean id="subscription2" class="domain.Subscription">
 		<property name="creationMoment" value="05/20/2016 10:34"/>
 		<property name="finishMoment" value="05/27/2016 10:34"/>
-		<property name="price" value="24.99"/>
 		<property name="user" ref="user2"/>
 		<property name="orders">
 			<list>	
@@ -627,6 +627,7 @@
 		<property name="shippingDate" value="05/13/2016 13:54"/>
 		<property name="arrivalDate" value="05/14/2016 10:50"/>
 		<property name="notes" value="Enviar por la mañana."/>
+		<property name="totalPrice" value="45.50"/>
 		<property name="menu" ref="menu1"/>
 		<property name="subscription" ref="subscription1"/>
 		<property name="sent" value="true"/>
@@ -644,6 +645,7 @@
 <!-- 		<property name="shippingDate" value="21/05/2016 13:54"/>
 		<property name="arrivalDate" value="23/05/2016 16:50"/> -->
 		<property name="notes" value="Enviar por la tarde."/>
+		<property name="totalPrice" value="25.50"/>
 		<property name="menu" ref="menu2"/>
 		<property name="subscription" ref="subscription2"/>
 		<property name="sent" value="false"/>

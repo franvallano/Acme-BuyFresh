@@ -21,20 +21,21 @@
 	<acme:labelDetails code="order.arrivalDate" value="${order.arrivalDate}"/>
 	<acme:labelDetails code="order.notes" value="${order.notes}"/>
 	<acme:labelDetails code="order.sent" value="${order.sent}"/>
+	<acme:labelDetails code="order.totalPrice" value="${order.totalPrice}"/>
 	
 	<br>
 	
 	<h2><spring:message code="order.menu"/></h2>
 		
 		<acme:labelDetails code="order.menu.name" value="${menu.name}"/>	
-		<acme:labelDetails code="order.menu.duration" value="${menu.duration}"/>	
+		<acme:labelDetails code="order.menu.finishMoment" value="${menu.finishMoment}"/>	
 		<acme:labelDetails code="order.menu.people" value="${menu.people}"/>	
 		<acme:labelDetails code="order.menu.type" value="${menu.type}"/>	
 		
 	<br>
 	
 	<h2><spring:message code="order.substitutes"/></h2>
-	<display:table name="substitutes" id="substitutes" pagesize="5" requestURI="${requestURI}" class="displaytag">
+	<display:table name="substitute" id="substitute" pagesize="5" requestURI="${requestURI}" class="displaytag">
 		
 		<acme:column code="order.substitutes.name" property="name"/>	
 		<acme:column code="order.substitutes.metricUnit" property="metricUnit"/>

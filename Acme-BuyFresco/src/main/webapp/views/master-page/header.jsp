@@ -91,6 +91,12 @@
 					<li><a href="order/user/myOrders.do"><spring:message code="master.page.order.myOrders" /></a></li>					
 				</ul>
 			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.menu" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="menu/user/activeMenus.do"><spring:message code="master.page.menu.activeMenu" /></a></li>					
+				</ul>
+			</li>
 			<li>
 				<a class="dropdown-toggle" data-toggle="dropdown" href=""> 
 					<spring:message code="master.page.profile" /> 
@@ -105,6 +111,7 @@
 		</security:authorize>
 		
 		<security:authorize access="isAnonymous()">
+			<li><a class="fNiv" href="menu/activeMenus.do"><spring:message code="master.page.menu.activeMenu" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 			<li><a class="fNiv" href="register/user/register.do"><spring:message code="master.page.register" /></a></li>
 			<li><a class="fNiv" href="assessment/list.do"><spring:message code="master.page.assessmentList" /></a></li>

@@ -19,9 +19,12 @@
 				<acme:column code="order.arrivalDate" property="arrivalDate"/>	
 				<acme:column code="order.notes" property="notes"/>	
 				<acme:column code="order.sent" property="sent"/>
+				<acme:column code="order.totalPrice" property="totalPrice"/>
 				
 				<security:authorize access="hasRole('CLERK')">
 					<acme:column_ref_condition code="order.edit" ref="order/clerk/edit.do?orderId=${order.id}" condition="${order.sent == false }"/>
+					<acme:column_ref_condition code="order.sent" ref="order/clerk/sent.do?orderId=${order.id}" condition="${order.sent == false }"/>
+_
 				</security:authorize>
 				
 				<security:authorize access="hasRole('USER')">
