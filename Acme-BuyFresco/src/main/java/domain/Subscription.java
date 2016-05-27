@@ -23,7 +23,6 @@ public class Subscription extends DomainEntity{
 	
 	//Attributes --------------------------------------------------------------------------------
 	private Date creationMoment, finishMoment;
-	private Double price;
 	
 	//Constructor -------------------------------------------------------------------------------
 	
@@ -37,7 +36,7 @@ public class Subscription extends DomainEntity{
 	
 	//Getters and setter ------------------------------------------------------------------------
 	
-	@Past
+	//@Past
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCreationMoment() {
@@ -56,17 +55,6 @@ public class Subscription extends DomainEntity{
 		this.finishMoment = finishMoment;
 	}
 
-
-	@NotNull
-	@Digits(integer = 2, fraction = 2)
-	public Double getPrice() {
-		return price;
-	}
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
-	
 	
 	//Relationships -----------------------------------------------------------------------------
 

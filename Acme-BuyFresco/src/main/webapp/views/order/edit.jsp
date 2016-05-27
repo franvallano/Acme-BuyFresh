@@ -18,12 +18,12 @@
 		<form:hidden path="menu"/>
 		<form:hidden path="address"/>
 		<form:hidden path="notes"/>
+		<form:hidden path="totalPrice"/>
+		<form:hidden path="sent"/>
+		<form:hidden path="shippingDate"/>
 		
-		<acme:textbox code="order.shippingDate" path="shippingDate" />
-		<br />
 		<acme:textbox code="order.arrivalDate" path="arrivalDate" />
 		<br />
-		<acme:textbox code="order.sent" path="sent" />
 		
 	</security:authorize>
 	
@@ -32,10 +32,9 @@
 		<form:hidden path="version" />
 		<form:hidden path="substitutes"/>
 		<form:hidden path="subscription"/>
-		<form:hidden path="clerk"/>
-		<form:hidden path="shippingDate"/>
-		<form:hidden path="arrivalDate"/>
 		<form:hidden path="sent"/>
+		<form:hidden path="totalPrice"/>
+		<form:hidden path="shippingDate"/>
 		
 		<acme:textbox code="order.address" path="address"/>
 		<br />

@@ -58,10 +58,11 @@ public class SubscriptionService {
 		return newbye;
 	}
 
-	public void save(Subscription entity){
+	public Subscription save(Subscription entity){
 		Assert.notNull(entity);
-		
-		this.subscriptionRepository.save(entity);
+		Subscription sub;
+		sub = this.subscriptionRepository.save(entity);
+		return sub;
 	}
 
 	public Subscription findOne(int id){

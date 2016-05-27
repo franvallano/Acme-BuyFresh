@@ -88,10 +88,12 @@ public class MenuService {
 
 	// Other business methods -------------------------------------------------
 
-	public Menu findNextWeek(){
-		Menu menu = create();
+	public Collection<Menu> findActiveMenus(){
+		Collection<Menu> menus;
 		
-		return menu;
+		menus = menuRepository.getActiveMenus();
+		
+		return menus;
 	}
 	
 	public Collection<Menu> getMenusInMoreOrders(){

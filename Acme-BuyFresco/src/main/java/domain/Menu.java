@@ -10,7 +10,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -23,8 +25,9 @@ public class Menu extends DomainEntity{
 	//Attributes --------------------------------------------------------------------------------
 	
 	private String name, type;
-	private Date creationMoment, startingMoment;
-	private Integer duration, people;
+	private Date creationMoment, startingMoment, finishMoment;
+	private Integer people;
+	private Double price;
 	private boolean deleted;
 
 	
@@ -71,14 +74,6 @@ public class Menu extends DomainEntity{
 	public void setStartingMoment(Date startingMoment) {
 		this.startingMoment = startingMoment;
 	}
-
-	@Min(0)
-	public Integer getDuration() {
-		return duration;
-	}
-	public void setDuration(Integer duration) {
-		this.duration = duration;
-	}
 	
 	//Es un campo opcional que se escribe al ser una o varias recetas alteradas por los alergenos.
 	public String getType() {
@@ -97,7 +92,25 @@ public class Menu extends DomainEntity{
 	}
 	
 	
+	public Date getFinishMoment() {
+		return finishMoment;
+	}
+
+	public void setFinishMoment(Date finishMoment) {
+		this.finishMoment = finishMoment;
+	}
+
+	@NotNull
+	@Digits(integer = 2, fraction = 2)
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+	
 	//Relationships -----------------------------------------------------------------------------
+
 
 	private Collection<Recipe> recipes;
 	private Collection<SalesOrder> orders;

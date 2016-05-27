@@ -16,11 +16,15 @@ import org.springframework.web.servlet.ModelAndView;
 import services.MenuService;
 import services.RecipeService;
 import services.SalesOrderService;
+import services.SubscriptionService;
+import services.SubstitutesService;
 import services.UserService;
 import controllers.AbstractController;
 import domain.Menu;
 import domain.Recipe;
 import domain.SalesOrder;
+import domain.Subscription;
+import domain.Substitutes;
 import domain.User;
 
 @Controller
@@ -39,7 +43,13 @@ public class SalesOrderUserController extends AbstractController {
 	private MenuService menuService;
 	
 	@Autowired
+	private SubscriptionService subscriptionService;
+	
+	@Autowired
 	private RecipeService recipeService;
+	
+	@Autowired
+	private SubstitutesService substitutesService;
 	
 	// Constructors -----------------------------------------------------------
 
@@ -115,42 +125,54 @@ public class SalesOrderUserController extends AbstractController {
 	}*/
 	
 	// Creation ---------------------------------------------------------------
-	/*
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(int menuId) {
 		ModelAndView result;
+		SalesOrder order;
 		Menu menu;
-		Collection<Recipe> recipes;
-		recipes = recipeService.findAll();
-		menu = salesOrderService.create();
+
 		
-		result = createModelAndView(menu);
-		result.addObject("recipes", recipes);
+		menu = menuService.findOne(menuId);
+		order = salesOrderService.create();
+		order.setMenu(menu);
+		order.setTotalPrice(menu.getPrice());
+
+		result = createModelAndView(order);
+		//result.addObject("recipes", recipes);
 		
 		return result;
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Menu menu, BindingResult binding) {
+	public ModelAndView save(@Valid SalesOrder order, BindingResult binding) {
 		ModelAndView result;
-
+		
+		Subscription s;
+		
+		s = subscriptionService.create();
+		User u = userService.findByPrincipal();
 		if (binding.hasErrors()) {
-			result = createModelAndView(menu, "menu.commit.error");
+			result = createModelAndView(order, "order.commit.error");
 		} else {
 			try {
-				salesOrderService.save(menu);				
-				result = new ModelAndView("redirect:/menu/administrator/list.do");
+				
+				Subscription sub = subscriptionService.save(s);
+				order.setSubscription(sub);
+				order = salesOrderService.save(order);	
+				for(Substitutes substitute: salesOrderService.getSubstitutesByUserMenu(u, order.getMenu())){
+					substitute.setOrder(order);
+					substitutesService.save(substitute);	
+				}
+				result = new ModelAndView("redirect:/order/user/myOrders.do");
 			} catch (Throwable oops) {
-				result = createModelAndView(menu, "menu.commit.error");
-				Collection<Recipe> recipes;
-				recipes = recipeService.findAll();
-				result.addObject("recipes", recipes);
+				System.out.println(oops.toString());
+				result = createModelAndView(order, "order.commit.error");
 			}
 		}
 		
 		return result;
 	}
-	*/
+	
 	// Edit ---------------------------------------------------------------
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -169,6 +191,7 @@ public class SalesOrderUserController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
 	public ModelAndView edit(@Valid SalesOrder order, BindingResult binding) {
 		ModelAndView result;
+		User u = userService.findByPrincipal();
 		
 		if (binding.hasErrors()) {
 			result = editModelAndView(order, "order.commit.error");
@@ -177,7 +200,12 @@ public class SalesOrderUserController extends AbstractController {
 			result.addObject("menus",menus);
 		} else {
 			try {
-				salesOrderService.saveUser(order);				
+				order.setTotalPrice(order.getMenu().getPrice());
+				order = salesOrderService.save(order);	
+				for(Substitutes substitute: salesOrderService.getSubstitutesByUserMenu(u, order.getMenu())){
+					substitute.setOrder(order);
+					substitutesService.save(substitute);	
+				}				
 				result = new ModelAndView("redirect:/order/user/myOrders.do");
 			} catch (Throwable oops) {
 				result = editModelAndView(order, "order.commit.error");
@@ -205,23 +233,23 @@ public class SalesOrderUserController extends AbstractController {
 			
 	
 	// Ancillary methods ------------------------------------------------------	
-	
-	public ModelAndView createModelAndView(Menu menu){
-		return createModelAndView(menu, null);
+	*/
+	public ModelAndView createModelAndView(SalesOrder salesOrder){
+		return createModelAndView(salesOrder, null);
 	}
 	
-	public ModelAndView createModelAndView(Menu menu, String message){
+	public ModelAndView createModelAndView(SalesOrder salesOrder, String message){
 		ModelAndView res;
 		
-		res = new ModelAndView("menu/create");
-		res.addObject("menu", menu);
+		res = new ModelAndView("order/create");
+		res.addObject("order", salesOrder);
 		res.addObject("message", message);
-		res.addObject("requestURI", "menu/administrator/create.do");	
+		res.addObject("requestURI", "order/user/create.do");	
 
 		return res;
 	}
 	
-	*/
+	
 	public ModelAndView editModelAndView(SalesOrder order){
 		return editModelAndView(order, null);
 	}

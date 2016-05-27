@@ -20,11 +20,13 @@
 	<br />
 		<acme:textbox code="menu.startingMoment" path="startingMoment" />
 	<br />
-		<acme:textbox code="menu.duration" path="duration" />
+		<acme:textbox code="menu.finishMoment" path="finishMoment" />
 	<br />
 		<acme:textbox code="menu.people" path="people" />
 	<br />
 		<acme:textbox code="menu.type" path="type" />
+	<br />
+		<acme:textbox code="menu.price" path="price" />
 	<br />
 	
 	<acme:select items="${recipes}" itemLabel="name" multiple ="true" code="menu.recipes" path="recipes"/>
