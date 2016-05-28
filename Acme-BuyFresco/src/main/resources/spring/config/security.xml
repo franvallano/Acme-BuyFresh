@@ -54,6 +54,10 @@
 		<!-- SUBSCRIPTION -->
 		<security:intercept-url pattern="/subscription/user/**" access="hasRole('USER')" /> 
 		
+		<!-- ALLERGENS -->
+		<security:intercept-url pattern="/allergen/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
+		<security:intercept-url pattern="/allergen/user/**" access="hasRole('USER')" /> 
+		
 		<!-- MENUS -->
 		<security:intercept-url pattern="/menu/**" access="permitAll" /> 
 		<security:intercept-url pattern="/menu/user/**" access="permitAll" /> 
@@ -63,6 +67,7 @@
 		<!-- ASSESSMENTS -->
 		<security:intercept-url pattern="/assessment/**" access="permitAll" />
 		<security:intercept-url pattern="/assessment/user/**" access="hasRole('USER')" />
+		<security:intercept-url pattern="/assessment/administrator/**" access="hasRole('ADMINISTRATOR')" />
 		
 		<!-- INGEDIENTS -->
 		

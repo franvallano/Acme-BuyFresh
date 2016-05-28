@@ -23,4 +23,7 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	@Query("select a from User a where a.subcriptions.size >= ALL(select a1.subcriptions.size from User a1)")
 	Collection<User> userMoreSubscriptions();
+	
+	@Query("select a from User a where a.assessments.size >= ALL(select a1.assessments.size from User a1)")
+	Collection<User> userMoreAssessments();
 }
