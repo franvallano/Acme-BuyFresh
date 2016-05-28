@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -35,6 +36,36 @@ public class Allergen extends DomainEntity{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Transient
+	public String getSubstitutesFormated(){
+		String result = "";
+		int i = 0;
+		for(Ingredient b : substitutes){
+			if(i < substitutes.size()){
+				result = result + b.getName() + ", " ; 
+				i++;
+			}else{
+				result = result + b.getName();
+			}
+		}
+		return result;
+	}
+	
+	@Transient
+	public String getIngredientsFormated(){
+		String result = "";
+		int i = 0;
+		for(Ingredient b : allergenIngredients){
+			if(i < allergenIngredients.size()){
+				result = result + b.getName() + ", " ; 
+				i++;
+			}else{
+				result = result + b.getName();
+			}
+		}
+		return result;
 	}
 	
 	//Relationships -----------------------------------------------------------------------------

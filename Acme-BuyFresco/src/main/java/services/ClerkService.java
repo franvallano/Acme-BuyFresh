@@ -33,6 +33,9 @@ public class ClerkService {
 
 	// Ancillary services -----------------------------------------------------
 
+	@Autowired
+	private AdministratorService administratorService;
+	
 	// Constructor ------------------------------------------------------------
 	public ClerkService(){
 		super();
@@ -97,6 +100,14 @@ public class ClerkService {
 		Collection<Clerk> res;
 		
 		res = clerkRepository.findAll();
+		
+		return res;
+	}
+	
+	public Clerk findByUserName(String userName){
+		Clerk res;
+		
+		res = clerkRepository.findByUserName(userName);
 		
 		return res;
 	}
@@ -209,4 +220,25 @@ public class ClerkService {
 		
 		return result;
 	}
+	
+	public void deactivate(Clerk clerk){
+		Assert.notNull(clerk);
+		
+		administratorService.findByPrincipal();
+		
+		clerk.setDeleted(false);;
+		
+		this.save(clerk);
+	}
+	
+	public void activate(Clerk clerk){
+		Assert.notNull(clerk);
+		
+		administratorService.findByPrincipal();
+		
+		clerk.setDeleted(true);
+		
+		this.save(clerk);
+	}
+	
 }

@@ -12,6 +12,7 @@ package security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,6 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import services.ClerkService;
+import domain.Clerk;
+
 @Service
 @Transactional
 public class LoginService implements UserDetailsService {
@@ -29,6 +33,9 @@ public class LoginService implements UserDetailsService {
 
 	@Autowired
 	UserAccountRepository userRepository;
+	
+	@Autowired
+	private ClerkService clerkService;
 	
 	// Business methods -------------------------------------------------------
 
@@ -43,9 +50,18 @@ public class LoginService implements UserDetailsService {
 		// WARNING: The following sentences prevent lazy initialisation problems!
 		Assert.notNull(result.getAuthorities());
 		result.getAuthorities().size();
-
+		
+		for(GrantedAuthority au:result.getAuthorities()){
+			
+			if(au.getAuthority().contains("CLERK")){
+				Clerk c = clerkService.findByUserName(result.getUsername());
+				Assert.isTrue(c.getDeleted());
+				break;
+			}
+		}
 		return result;
 	}
+	
 
 	public static UserAccount getPrincipal() {
 		UserAccount result;

@@ -14,17 +14,13 @@
 	<acme:textURL URL="allergen/administrator/create.do" code="allergen.create"/>
 </security:authorize>
 
-<security:authorize access="hasRole('USER')">
-	<acme:textURL URL="allergen/user/select.do" code="allergen.select"/>
-</security:authorize>
-
 <display:table name="allergens" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
 	<acme:column code="allergen.name" property="name"/>
 	
-	<acme:column code="substitutes" property="substitutes"/>
+	<acme:column code="substitutes" property="substitutesFormated"/>
 	
-	<acme:column code="ingredients" property="allergenIngredients"/>
+	<acme:column code="ingredients" property="ingredientsFormated"/>
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">	
 		<acme:column_ref code="allergen.edit" ref="allergen/administrator/edit.do?allergenId=${row.id}"/>

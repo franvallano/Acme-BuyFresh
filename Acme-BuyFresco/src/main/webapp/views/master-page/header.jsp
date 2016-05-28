@@ -43,7 +43,12 @@
 					<li><a href="recipe/administrator/create.do"><spring:message code="master.page.recipe.create" /></a></li>					
 				</ul>
 			</li>
-
+			<li><a class="fNiv"><spring:message	code="master.page.clerks" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="clerk/administrator/listClerks.do"><spring:message code="master.page.clerk.list" /></a></li>					
+				</ul>
+			</li>
 			<li><a class="fNiv"><spring:message	code="master.page.allergens" /></a>
 				<ul>
 					<li class="arrow"></li>

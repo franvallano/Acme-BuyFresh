@@ -88,4 +88,11 @@ public class SubscriptionService {
 	
 	// Ancillary methods ------------------------------------------------------
 
+	public Double findAvgRating(){
+		return subscriptionRepository.findAvgRating();
+	}
+	
+	public Integer NumOfSubscriptionsActives(){
+		return subscriptionRepository.NumOfSubscriptionsActives();
+	}
 }

@@ -130,6 +130,22 @@ public class UserService {
 		return number;
 	}
 	
+	public Collection<User> userMoreAssessments(){
+		Collection<User> res;
+		
+		res = userRepository.UserMoreAssessments();
+		
+		return res;
+	}
+	
+	public Collection<User> userMoreSubscriptions(){
+		Collection<User> res;
+		
+		res = userRepository.UserMoreSubscriptions();
+		
+		return res;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 	public UserAccount createUserAccount() {

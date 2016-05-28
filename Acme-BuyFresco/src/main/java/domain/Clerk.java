@@ -23,7 +23,7 @@ public class Clerk extends Actor{
 	//Getters and setter ------------------------------------------------------------------------
 	private boolean deleted;
 	
-	public boolean isDeleted() {
+	public boolean getDeleted() {
 		return deleted;
 	}
 	public void setDeleted(boolean deleted) {

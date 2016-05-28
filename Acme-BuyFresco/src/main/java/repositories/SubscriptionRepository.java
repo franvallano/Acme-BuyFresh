@@ -14,6 +14,9 @@ import domain.Subscription;
 public interface SubscriptionRepository extends JpaRepository<Subscription, Integer>{
 	
 
-	@Query("select count(u) from Subscription u where u.finishMoment > CURRENT_DATE")
+	@Query("select count(u) from Subscription u where u.finishMoment >= CURRENT_DATE")
 	Integer NumOfSubscriptionsActives();
+	
+	@Query("select AVG(s.rating) from Assessment s")
+	Double findAvgRating();
 }
