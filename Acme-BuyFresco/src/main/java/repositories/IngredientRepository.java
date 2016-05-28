@@ -28,4 +28,6 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
 	@Query("select i from Ingredient i where i.deleted = false")
 	Collection<Ingredient> findAllWithoutDelete();
 	
+	@Query("select i from Ingredient i join i.quantities q where q.recipe.id = ?1")
+	Collection<Ingredient> findIngredientsByRecipeId(int recipeId);
 }

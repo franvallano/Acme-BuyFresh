@@ -19,6 +19,7 @@ import domain.Allergen;
 import domain.Ingredient;
 import domain.Menu;
 import domain.Quantity;
+import domain.Recipe;
 
 @Service
 @Transactional
@@ -70,11 +71,12 @@ public class IngredientService {
 
 	public void delete(Ingredient entity){
 		Assert.isTrue(entity.getId()!=0);
-		Assert.isTrue(this.ingredientRepository.exists(entity.getId()));
+		Assert.isTrue(!entity.getDeleted());
+		boolean deleted = true;
 		
-		this.ingredientRepository.delete( entity );
+		entity.setDeleted(deleted);
 		
-		Assert.isTrue(!this.ingredientRepository.exists(entity.getId()));
+		this.ingredientRepository.save(entity);
 	}
 
 	public Ingredient findOne(int id){
@@ -126,4 +128,26 @@ public class IngredientService {
 	
 	// Ancillary methods ------------------------------------------------------
 
+	public Collection<Ingredient> findNoIngredients(Recipe recipe){
+		Collection<Ingredient> result = new ArrayList<Ingredient>();
+		Collection<Ingredient> all;
+		Collection<Ingredient> filtrado;
+		
+		all = ingredientRepository.findAllWithoutDelete();
+		filtrado = ingredientRepository.findIngredientsByRecipeId(recipe.getId());
+		
+		result.addAll(all);
+		result.removeAll(filtrado);
+		
+		return result;
+	}
+	
+	public Collection<Ingredient> findIngredientByRecipe(int recipeId){
+		Collection<Ingredient> result;
+		
+		result = ingredientRepository.findIngredientsByRecipeId(recipeId);
+				
+		return result;
+	}
+	
 }

@@ -69,7 +69,8 @@ public class RecipeAdministratorController extends AbstractController {
 		ModelAndView result;
 		Collection<Ingredient> ingredients;
 		
-		ingredients = ingredientService.findAll();
+		ingredients = ingredientService.findAllWithoutDelete();
+		
 		
 		result = new ModelAndView("recipe/listIngredients");
 		result.addObject("requestURI", "recipe/administrator/listIngredients.do");
@@ -85,15 +86,18 @@ public class RecipeAdministratorController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
-	public ModelAndView details(@RequestParam int ingredientId) {
+	public ModelAndView details(@RequestParam int recipeId) {
 		ModelAndView result;
-		Ingredient ingredient;
+		Recipe recipe;
+		Collection<Ingredient> ingredients;
 		
-		ingredient = ingredientService.findOne(ingredientId);
-		Collection<Allergen> allergens = allergenService.findAllergensByIngredientId(ingredientId); 
-		result = new ModelAndView("ingredient/details");
-		result.addObject("ingredient", ingredient);
-		result.addObject("allergens", allergens);
+		recipe = recipeService.findOne(recipeId);
+		ingredients = ingredientService.findIngredientByRecipe(recipeId);
+		result = new ModelAndView("recipe/details");
+		result.addObject("recipe", recipe);
+		result.addObject("ingredients", ingredients);
+		
+		
 		
 		return result;
 	}
@@ -235,6 +239,22 @@ public class RecipeAdministratorController extends AbstractController {
 			}
 		}
 
+		return result;
+	}
+	
+	@RequestMapping(value="/delete", method = RequestMethod.GET)
+	public ModelAndView cancel(@RequestParam int ingredientId){
+		ModelAndView result;
+		Ingredient ingredient;
+		try{
+			ingredient = ingredientService.findOne(ingredientId);
+			ingredientService.delete(ingredient);
+			result = new ModelAndView("redirect:list.do");
+		}catch(Throwable oops){
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageError","ingredient.commit.error");
+		}
+		
 		return result;
 	}
 	
