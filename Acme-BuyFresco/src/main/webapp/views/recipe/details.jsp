@@ -20,15 +20,19 @@
 	<acme:labelDetails code="recipe.time" value="${recipe.time}"/>	
 	
 	
+	
+	
 	<h2><spring:message code="recipe.ingredients"/></h2>
 	<display:table name="ingredients" pagesize="5" class="displaytag" requestURI="${requestURI}" id="ingredient">
-		<acme:column code="ingredient.name" property="name"/>
-		<acme:column code="ingredient.metricUnit" property="metricUnit"/>
+		<acme:column code="ingredient.name" property="[0].name"/>
+		<acme:column code="quantity.value" property="[1]"/>
+		<acme:column code="ingredient.metricUnit" property="[0].metricUnit"/>
+		
 	</display:table>
 	
 		
 
-	<acme:back code="recipe.back" />
+	<acme:back code="recipe.back"/>
 	
 	
 	

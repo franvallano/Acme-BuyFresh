@@ -30,4 +30,7 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
 	
 	@Query("select i from Ingredient i join i.quantities q where q.recipe.id = ?1")
 	Collection<Ingredient> findIngredientsByRecipeId(int recipeId);
+	
+	@Query("select i,q.value from Ingredient i join i.quantities q where q.recipe.id = ?1")
+	Collection<Object[]> findIngredientsWithQuantities(int recipeId);
 }

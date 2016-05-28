@@ -75,7 +75,7 @@ public class Ingredient extends DomainEntity{
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
-	
+		
 	
 	//Relationships -----------------------------------------------------------------------------
 

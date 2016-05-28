@@ -89,10 +89,10 @@ public class RecipeAdministratorController extends AbstractController {
 	public ModelAndView details(@RequestParam int recipeId) {
 		ModelAndView result;
 		Recipe recipe;
-		Collection<Ingredient> ingredients;
+		Collection<Object[]> ingredients;
 		
 		recipe = recipeService.findOne(recipeId);
-		ingredients = ingredientService.findIngredientByRecipe(recipeId);
+		ingredients = ingredientService.findIngredientsWithQuantities(recipeId);
 		result = new ModelAndView("recipe/details");
 		result.addObject("recipe", recipe);
 		result.addObject("ingredients", ingredients);
@@ -129,13 +129,10 @@ public class RecipeAdministratorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Recipe recipe, BindingResult bindingResult) {
 		ModelAndView result;
-		Collection<Allergen> allergens;
-		allergens = allergenService.findAll();
 
 		if (bindingResult.hasErrors()){
 			result = creationModelAndView(recipe, "recipe.commit.error");
 			System.out.println(bindingResult);
-			result.addObject("allergens", allergens);
 		}
 		else {
 			try {
@@ -147,7 +144,6 @@ public class RecipeAdministratorController extends AbstractController {
 				 
 			} catch (Throwable oops) {
 				result = creationModelAndView(recipe, "recipe.commit.error");
-				result.addObject("allergens", allergens);
 			}
 		}
 
@@ -158,18 +154,15 @@ public class RecipeAdministratorController extends AbstractController {
 
 		
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam int ingredientId) {
+	public ModelAndView edit(@RequestParam int recipeId) {
 		
 		ModelAndView result;
-		Ingredient ingredient;
-		Collection<Allergen> allergens;		
+		Recipe recipe;	
 		
-		ingredient = ingredientService.findOne(ingredientId);
-		allergens = allergenService.findAll();
+		recipe = recipeService.findOne(recipeId);
 		
-		result = editModelAndView(ingredient);
-		result.addObject("ingredient", ingredient);
-		result.addObject("allergens", allergens);
+		result = editModelAndView(recipe);
+		result.addObject("recipe", recipe);
 		result.addObject("edit", true);
 		
 		return result;
@@ -177,25 +170,22 @@ public class RecipeAdministratorController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
-	public ModelAndView update(@Valid Ingredient ingredient, BindingResult bindingResult) {
+	public ModelAndView update(@Valid Recipe recipe, BindingResult bindingResult) {
 		ModelAndView result;
-		Collection<Allergen> allergens;
-		allergens = allergenService.findAll();
 
 		if (bindingResult.hasErrors()){
-			result = editModelAndView(ingredient, "ingredient.commit.error");
+			result = editModelAndView(recipe, "recipe.commit.error");
 			System.out.println(bindingResult);
-			result.addObject("allergens", allergens);
 		}
 		else {
 			try {
-				ingredientService.save(ingredient);
-				result = new ModelAndView("redirect:/ingredient/administrator/list.do");
+				Recipe saved = recipeService.save(recipe);
+				
+				result = new ModelAndView("redirect:/recipe/administrator/listIngredients.do?recipeId=" + saved.getId());
 				
 				 
 			} catch (Throwable oops) {
-				result = editModelAndView(ingredient, "ingredient.commit.error");
-				result.addObject("allergens", allergens);
+				result = editModelAndView(recipe, "recipe.commit.error");
 			}
 		}
 
@@ -289,17 +279,17 @@ public class RecipeAdministratorController extends AbstractController {
 		return res;
 	}
 
-	public ModelAndView editModelAndView(Ingredient ingredient){
-		return editModelAndView(ingredient, null);
+	public ModelAndView editModelAndView(Recipe recipe){
+		return editModelAndView(recipe, null);
 	}
 	
-	public ModelAndView editModelAndView(Ingredient ingredient, String message){
+	public ModelAndView editModelAndView(Recipe recipe, String message){
 		ModelAndView res;
 		
-		res = new ModelAndView("ingredient/edit");
-		res.addObject("ingredient", ingredient);
+		res = new ModelAndView("recipe/edit");
+		res.addObject("recipe", recipe);
 		res.addObject("messageError", message);
-		res.addObject("requestURI", "ingredient/administrator/edit.do");
+		res.addObject("requestURI", "recipe/administrator/edit.do");
 		res.addObject("edit", true);
 		return res;
 	}

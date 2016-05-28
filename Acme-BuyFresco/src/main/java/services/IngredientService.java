@@ -150,4 +150,12 @@ public class IngredientService {
 		return result;
 	}
 	
+	public Collection<Object[]> findIngredientsWithQuantities(int recipeId){
+		Collection<Object[]> result;
+		
+		result = ingredientRepository.findIngredientsWithQuantities(recipeId);
+		
+		return result;
+	}
+	
 }
