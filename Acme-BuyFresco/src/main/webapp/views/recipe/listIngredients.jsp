@@ -27,5 +27,5 @@
 </display:table>
 
 <acme:back code="ingredient.back" /> 
-<input type="button" name="next" value="<spring:message code="recipe.next"/>" 
-		onclick="javascript: window.location.replace('recipe/administrator/details.do')"/>
+<input type="button" name="end" value="<spring:message code="recipe.end"/>" 
+		onclick="javascript: window.location.replace('recipe/administrator/list.do')"/>

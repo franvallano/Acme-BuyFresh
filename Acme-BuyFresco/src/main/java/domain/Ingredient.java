@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -74,6 +75,7 @@ public class Ingredient extends DomainEntity{
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
 	}
+	
 	
 	//Relationships -----------------------------------------------------------------------------
 
