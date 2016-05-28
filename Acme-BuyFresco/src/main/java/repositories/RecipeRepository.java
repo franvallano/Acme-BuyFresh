@@ -14,7 +14,8 @@ import domain.Recipe;
 
 @Repository
 public interface RecipeRepository extends JpaRepository<Recipe, Integer>{
-
-	@Query("select r from Recipe r join r.quantities rq join rq.ingredients rqi where rqi.name = ?1 ")
-	Collection<Recipe> getRecipesByIngredients(String nameIngredient);
+	
+	//TODO
+//	@Query("select r from Recipe r join r.quantities rq join rq.ingredients rqi where rqi.name = ?1 ")
+//	Collection<Recipe> getRecipesByIngredients(String nameIngredient);
 }
