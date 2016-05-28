@@ -13,15 +13,11 @@
 
 <display:table name="subscriptions" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
-	<acme:column code="subscription.price" property="price"/>
 	
 	<acme:column code="subscription.finishMoment" property="finishMoment"/>
 	
 	<acme:column code="subscription.creationMoment" property="creationMoment"/>
 	
-	<security:authorize access="hasRole('ADMINISTRATOR')">	
-		<acme:column_ref code="subscription.renewal" ref="subscription/user/renewal.do?subscriptionId=${row.id}"/>
-	</security:authorize>
 </display:table>
 
 <acme:back code="subscription.back" />
