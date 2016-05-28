@@ -113,6 +113,14 @@ public class AllergenService {
 
 	// Other business methods -------------------------------------------------
 
+	public Collection<Allergen> findAllergensByIngredientId(int ingredientId){
+		Collection<Allergen> result;
+		
+		result = allergenRepository.findAllergensByIngredientId(ingredientId);
+		
+		return result;
+	}
+	
 	public Allergen findAllergenByName(String allergenName){
 		
 		Allergen res;

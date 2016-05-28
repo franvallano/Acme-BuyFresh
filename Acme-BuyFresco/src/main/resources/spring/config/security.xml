@@ -64,6 +64,14 @@
 		<security:intercept-url pattern="/assessment/**" access="permitAll" />
 		<security:intercept-url pattern="/assessment/user/**" access="hasRole('USER')" />
 		
+		<!-- INGEDIENTS -->
+		
+		<security:intercept-url pattern="/ingredient/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		
+		<!-- RECIPES -->
+		
+		<security:intercept-url pattern="/recipe/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		
 		<!-- ORDERS -->
 		<security:intercept-url pattern="/order/clerk/**" access="hasRole('CLERK')" /> 
 		<security:intercept-url pattern="/order/user/**" access="hasRole('USER')" />

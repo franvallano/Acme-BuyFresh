@@ -1,0 +1,22 @@
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>
+
+<definition name="ingredient/list" extends="master.page">	
+		<put-attribute name="title" value="Ingredients" />
+		<put-attribute name="body" value="/views/ingredient/list.jsp" />
+	</definition>
+	
+	<definition name="ingredient/edit" extends="master.page">	
+		<put-attribute name="title" value="Ingredient" />
+		<put-attribute name="body" value="/views/ingredient/edit.jsp" />
+	</definition>
+	
+	<definition name="ingredient/details" extends="master.page">	
+		<put-attribute name="title" value="Details ingredient" />
+		<put-attribute name="body" value="/views/ingredient/details.jsp" />
+	</definition>
+
+</tiles-definitions>

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -82,7 +83,7 @@ public class Ingredient extends DomainEntity{
 
 
 	@Valid
-	@ManyToMany
+	@OneToMany(mappedBy="ingredient")
 	public Collection<Quantity> getQuantities() {
 		return quantities;
 	}

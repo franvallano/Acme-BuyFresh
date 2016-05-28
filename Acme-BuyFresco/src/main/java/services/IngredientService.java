@@ -5,6 +5,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,7 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.IngredientRepository;
+import domain.Allergen;
 import domain.Ingredient;
+import domain.Menu;
+import domain.Quantity;
 
 @Service
 @Transactional
@@ -26,6 +30,9 @@ public class IngredientService {
 
 	// Ancillary services -----------------------------------------------------
 
+	@Autowired
+	private AllergenService allergenService;
+	
 	// Constructor ------------------------------------------------------------
 	public IngredientService(){
 		super();
@@ -34,14 +41,29 @@ public class IngredientService {
 	// Simple CRUD methods ----------------------------------------------------
 	public Ingredient create(){
 		Ingredient newbye;
+		Collection<Quantity> quantities = new ArrayList<Quantity>();
+		Collection<Allergen> replaceables = new ArrayList<Allergen>();
+		Collection<Allergen> allergens = new ArrayList<Allergen>();
+		Boolean deleted = false;
 		
 		newbye = new Ingredient();
+		newbye.setQuantities(quantities);
+		newbye.setAllergens(allergens);
+		newbye.setReplaceables(replaceables);
+		newbye.setDeleted(deleted);
 		
 		return newbye;
 	}
 
 	public void save(Ingredient entity){
 		Assert.notNull(entity);
+		
+		for(Allergen a : entity.getAllergens()){
+			a.getAllergenIngredients().add(entity);
+			
+			allergenService.save(a);
+		}
+				
 		
 		this.ingredientRepository.save(entity);
 	}
@@ -75,22 +97,23 @@ public class IngredientService {
 
 	// Other business methods -------------------------------------------------
 
+	//TODO
+//	public Collection<Ingredient> getIngredientsByMenu(int menuId){
+//		Collection<Ingredient> ingredients;
+//		
+//		ingredients = ingredientRepository.getIngredientsByMenu(menuId);
+//		
+//		return ingredients;
+//	}
 	
-	public Collection<Ingredient> getIngredientsByMenu(int menuId){
-		Collection<Ingredient> ingredients;
-		
-		ingredients = ingredientRepository.getIngredientsByMenu(menuId);
-		
-		return ingredients;
-	}
-	
-	public List<Object[]> getAllergenIngredientsByUserPerMenu(int menuId, int userId){
-		List<Object[]> ingredients;
-		
-		ingredients = ingredientRepository.getAllergenIngredientsByUserPerMenu(menuId, userId);
-		
-		return ingredients;
-	}
+	//TODO
+//	public List<Object[]> getAllergenIngredientsByUserPerMenu(int menuId, int userId){
+//		List<Object[]> ingredients;
+//		
+//		ingredients = ingredientRepository.getAllergenIngredientsByUserPerMenu(menuId, userId);
+//		
+//		return ingredients;
+//	}
 	
 	public Collection<Ingredient> findAllWithoutDelete(){
 		Collection<Ingredient> ingredients;
