@@ -97,23 +97,23 @@ public class IngredientService {
 
 	// Other business methods -------------------------------------------------
 
-	//TODO
-//	public Collection<Ingredient> getIngredientsByMenu(int menuId){
-//		Collection<Ingredient> ingredients;
-//		
-//		ingredients = ingredientRepository.getIngredientsByMenu(menuId);
-//		
-//		return ingredients;
-//	}
 	
-	//TODO
-//	public List<Object[]> getAllergenIngredientsByUserPerMenu(int menuId, int userId){
-//		List<Object[]> ingredients;
-//		
-//		ingredients = ingredientRepository.getAllergenIngredientsByUserPerMenu(menuId, userId);
-//		
-//		return ingredients;
-//	}
+	public Collection<Ingredient> getIngredientsByMenu(int menuId){
+		Collection<Ingredient> ingredients;
+		
+		ingredients = ingredientRepository.getIngredientsByMenu(menuId);
+		
+		return ingredients;
+	}
+	
+	
+	public List<Object[]> getAllergenIngredientsByUserPerMenu(int menuId, int userId){
+		List<Object[]> ingredients;
+		
+		ingredients = ingredientRepository.getAllergenIngredientsByUserPerMenu(menuId, userId);
+		
+		return ingredients;
+	}
 	
 	public Collection<Ingredient> findAllWithoutDelete(){
 		Collection<Ingredient> ingredients;

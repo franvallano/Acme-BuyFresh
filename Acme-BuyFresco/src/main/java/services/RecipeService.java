@@ -87,14 +87,14 @@ public class RecipeService {
 
 	// Other business methods -------------------------------------------------
 
-	//TODO
-//	public Collection<Recipe> getRecipesByIngredients(String nameIngredient){
-//		Collection<Recipe> res;
-//		
-//		res = recipeRepository.getRecipesByIngredients(nameIngredient);
-//		
-//		return res;
-//	}
+	
+	public Collection<Recipe> getRecipesByIngredients(String nameIngredient){
+		Collection<Recipe> res;
+		
+		res = recipeRepository.getRecipesByIngredients(nameIngredient);
+		
+		return res;
+	}
 	// Ancillary methods ------------------------------------------------------
 
 }
