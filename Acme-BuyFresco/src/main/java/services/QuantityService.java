@@ -5,14 +5,18 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.QuantityRepository;
+import domain.Ingredient;
 import domain.Quantity;
+import domain.Recipe;
 
 @Service
 @Transactional
@@ -30,16 +34,26 @@ public class QuantityService {
 	}
 
 	// Simple CRUD methods ----------------------------------------------------
-	public Quantity create(){
+	public Quantity create(Ingredient ingredient, Recipe recipe){
 		Quantity newbye;
 		
 		newbye = new Quantity();
+		newbye.setIngredient(ingredient);
+		newbye.setRecipe(recipe);	
 		
 		return newbye;
 	}
 
 	public void save(Quantity entity){
 		Assert.notNull(entity);
+		Recipe recipe;
+		Ingredient ingredient;
+		
+		recipe = entity.getRecipe();
+		ingredient = entity.getIngredient();
+		
+		recipe.getQuantities().add(entity);
+		ingredient.getQuantities().add(entity);
 		
 		this.quantityRepository.save(entity);
 	}

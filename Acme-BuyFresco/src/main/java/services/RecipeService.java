@@ -5,6 +5,7 @@
 
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.RecipeRepository;
+import domain.Allergen;
+import domain.Ingredient;
+import domain.Menu;
+import domain.Quantity;
 import domain.Recipe;
 
 @Service
@@ -33,16 +38,24 @@ public class RecipeService {
 	// Simple CRUD methods ----------------------------------------------------
 	public Recipe create(){
 		Recipe newbye;
+		Collection<Quantity> quantities = new ArrayList<Quantity>();
+		Collection<Menu> menus = new ArrayList<Menu>();
+		Collection<Allergen> allergens = new ArrayList<Allergen>();
 		
 		newbye = new Recipe();
+		newbye.setQuantities(quantities);
+		newbye.setMenus(menus);
+		newbye.setAllergens(allergens);
 		
 		return newbye;
 	}
 
-	public void save(Recipe entity){
+	public Recipe save(Recipe entity){
 		Assert.notNull(entity);
 		
-		this.recipeRepository.save(entity);
+		Recipe result = this.recipeRepository.save(entity);
+		
+		return result;
 	}
 
 	public void delete(Recipe entity){
@@ -74,7 +87,6 @@ public class RecipeService {
 
 	// Other business methods -------------------------------------------------
 
-	
 	public Collection<Recipe> getRecipesByIngredients(String nameIngredient){
 		Collection<Recipe> res;
 		
@@ -82,7 +94,6 @@ public class RecipeService {
 		
 		return res;
 	}
-	
 	// Ancillary methods ------------------------------------------------------
 
 }

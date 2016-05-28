@@ -160,7 +160,6 @@
 		<property name="quantities">
 			<list>
 				<ref bean="quantity1"/>
-				<ref bean="quantity2"/>
 				<ref bean="quantity3"/>
 			</list>		
 		</property>
@@ -285,70 +284,6 @@
 		</property>
 	</bean>
 	
-	
-	<!-- QUANTITY -->	
-	
-	<bean id="quantity1" class="domain.Quantity">
-		<property name="value" value="2"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe1"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient1"/>
-				<ref bean="ingredient2"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	
-	<bean id="quantity2" class="domain.Quantity">
-		<property name="value" value="500"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe1"/>
-				<ref bean="recipe2"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient3"/>
-				<ref bean="ingredient5"/>
-				<ref bean="ingredient6"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	<bean id="quantity3" class="domain.Quantity">
-		<property name="value" value="200"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe1"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient4"/>
-			</list>		
-		</property>	
-	</bean>
-	
-	<bean id="quantity4" class="domain.Quantity">
-		<property name="value" value="1200"/>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe2"/>
-			</list>		
-		</property>
-		<property name="ingredients">
-			<list>
-				<ref bean="ingredient7"/>
-			</list>		
-		</property>	
-	</bean>	
-	
 	<!-- INGREDIENT -->
 	
 	<bean id="ingredient1" class="domain.Ingredient">
@@ -383,7 +318,7 @@
 		<property name="deleted" value="false"/>
 		<property name="quantities">
 			<list>
-				<ref bean="quantity1"/>
+				
 			</list>		
 		</property>
 		<property name="replaceables">
@@ -401,7 +336,7 @@
 		<property name="deleted" value="false"/>
 		<property name="quantities">
 			<list>
-				<ref bean="quantity2"/>
+			
 			</list>		
 		</property>
 	</bean>
@@ -428,7 +363,7 @@
 		<property name="deleted" value="false"/>
 		<property name="quantities">
 			<list>
-				<ref bean="quantity2"/>
+				
 			</list>		
 		</property>
 		<property name="allergens">
@@ -476,6 +411,34 @@
 	</bean>
 	
 	
+	<!-- QUANTITY -->	
+	
+	<bean id="quantity1" class="domain.Quantity">
+		<property name="value" value="2"/>
+		<property name="recipe" ref="recipe1"/>
+		<property name="ingredient" ref="ingredient1"/>
+	</bean>
+	
+	
+	<bean id="quantity2" class="domain.Quantity">
+		<property name="value" value="500"/>
+		<property name="recipe" ref="recipe2"/>
+		<property name="ingredient" ref="ingredient6"/>
+	</bean>
+	
+	<bean id="quantity3" class="domain.Quantity">
+		<property name="value" value="200"/>
+		<property name="recipe" ref="recipe1"/>
+		<property name="ingredient" ref="ingredient4"/>
+	</bean>
+	
+	<bean id="quantity4" class="domain.Quantity">
+		<property name="value" value="1200"/>
+		<property name="recipe" ref="recipe2"/>
+		<property name="ingredient" ref="ingredient7"/>
+	</bean>	
+	
+		
 	
 	<!-- USERS -->
 	

@@ -28,6 +28,22 @@
 					<li><a href="menu/administrator/create.do"><spring:message code="master.page.menu.create" /></a></li>					
 				</ul>
 			</li>
+
+			<li><a class="fNiv"><spring:message	code="master.page.ingredients" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="ingredient/administrator/list.do"><spring:message code="master.page.ingredient.list" /></a></li>
+					<li><a href="ingredient/administrator/create.do"><spring:message code="master.page.ingredient.create" /></a></li>					
+				</ul>
+			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.recipes" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="recipe/administrator/list.do"><spring:message code="master.page.recipe.list" /></a></li>
+					<li><a href="recipe/administrator/create.do"><spring:message code="master.page.recipe.create" /></a></li>					
+				</ul>
+			</li>
+
 			<li><a class="fNiv"><spring:message	code="master.page.allergens" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -35,6 +51,7 @@
 					<li><a href="allergen/administrator/create.do"><spring:message code="master.page.allergen.create" /></a></li>					
 				</ul>
 			</li>
+
 			<li><a class="fNiv" href="assessment/list.do"><spring:message code="master.page.assessmentList" /></a></li>
 			<li><a class="fNiv" href="clerk/register.do"><spring:message code="master.page.registerClerk" /></a></li>
 			<li>
