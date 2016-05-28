@@ -29,6 +29,7 @@
 		<value>/views/ingredient/tiles.xml</value>
 		<value>/views/recipe/tiles.xml</value>
 		<value>/views/allergen/tiles.xml</value>
+		<value>/views/clerk/tiles.xml</value>
 	</util:list>
 
 </beans>

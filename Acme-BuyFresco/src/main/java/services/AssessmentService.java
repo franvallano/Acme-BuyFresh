@@ -90,6 +90,14 @@ public class AssessmentService {
 		
 		return res;
 	}
+	
+	public Collection<Assessment> AssessmentsWithRatingBigger(){
+		Collection<Assessment> res;
+		
+		res = assessmentRepository.AssessmentsWithRatingBigger();
+		
+		return res;
+	}
 
 	// Other business methods -------------------------------------------------
 

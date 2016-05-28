@@ -143,6 +143,7 @@ public class ActorService {
 		actor.setName(profileForm.getName());
 		actor.setSurname(profileForm.getSurname());
 		actor.setPhone(profileForm.getPhone());
+		actor.setEmail(profileForm.getEmail());
 		
 		return actor;
 	}
@@ -158,6 +159,7 @@ public class ActorService {
 		profileForm.setName(actor.getName());
 		profileForm.setSurname(actor.getSurname());
 		profileForm.setPhone(actor.getPhone());
+		profileForm.setEmail(actor.getEmail());
 		
 		return profileForm;
 	}

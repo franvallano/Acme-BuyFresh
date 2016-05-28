@@ -111,6 +111,14 @@ public class AllergenService {
 		return res;
 	}
 
+	
+	public Collection<Allergen> allergenMoreUsers(){
+		Collection<Allergen> res;
+		
+		res = allergenRepository.allergenMoreUsers();
+		
+		return res;
+	}
 	// Other business methods -------------------------------------------------
 
 	public Collection<Allergen> findAllergensByIngredientId(int ingredientId){

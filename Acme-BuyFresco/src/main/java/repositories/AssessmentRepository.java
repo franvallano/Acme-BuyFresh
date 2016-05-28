@@ -18,4 +18,7 @@ public interface AssessmentRepository extends JpaRepository<Assessment, Integer>
 	@Query("select a from Assessment a where a.deleted = false")
 	Collection<Assessment> findAllWithoutDelete();
 	
+	@Query("select a from Assessment a where a.rating >= 2")
+	Collection<Assessment> AssessmentsWithRatingBigger();
+	
 }

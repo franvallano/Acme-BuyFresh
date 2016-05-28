@@ -58,6 +58,9 @@
 		<security:intercept-url pattern="/allergen/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
 		<security:intercept-url pattern="/allergen/user/**" access="hasRole('USER')" /> 
 		
+		<!-- CLERKS -->
+		<security:intercept-url pattern="/clerk/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		
 		<!-- MENUS -->
 		<security:intercept-url pattern="/menu/**" access="permitAll" /> 
 		<security:intercept-url pattern="/menu/user/**" access="permitAll" /> 

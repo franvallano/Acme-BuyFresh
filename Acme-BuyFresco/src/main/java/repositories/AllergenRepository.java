@@ -20,5 +20,8 @@ public interface AllergenRepository extends JpaRepository<Allergen, Integer>{
 
 	@Query("select a from Allergen a where a.name = ?1")
 	Allergen findAllergenByName(String allergenName);
+	
+	@Query("select a from Allergen a where a.users.size >= ALL(select a1.users.size from Allergen a1)")
+	Collection<Allergen> allergenMoreUsers();
 
 }

@@ -18,6 +18,9 @@ public interface ClerkRepository extends JpaRepository<Clerk, Integer>{
 	@Query("select a from Clerk a where a.userAccount.id = ?1")
 	Clerk findByPrincipal(int userAccountId);
 	
+	@Query("select a from Clerk a where a.userAccount.username = ?1")
+	Clerk findByUserName(String userName);
+	
 	@Query("select c from Clerk c where c.orders.size >=ALL(select c1.orders.size from Clerk c1)")
 	Collection<Clerk> getClerksWithMoreOrders();
 	
