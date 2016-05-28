@@ -5,6 +5,7 @@
 package repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Subscription;
@@ -13,4 +14,6 @@ import domain.Subscription;
 public interface SubscriptionRepository extends JpaRepository<Subscription, Integer>{
 	
 
+	@Query("select count(u) from Subscription u where u.finishMoment > CURRENT_DATE")
+	Integer NumOfSubscriptionsActives();
 }

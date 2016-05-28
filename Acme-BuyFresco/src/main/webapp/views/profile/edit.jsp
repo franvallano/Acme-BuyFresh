@@ -51,6 +51,16 @@
 				<br/>
 				<acme:textbox code="actor.address" path="address"/>
 				<br/>
+				
+				<h4><b><spring:message code="allergens" /></b></h4>
+				<form:select path="allergens" multiple="true">
+					<form:options items="${allergens}" itemLabel="name" itemValue="id" />
+				</form:select>
+				<form:errors cssClass="error" path="allergens" />
+				<br />
+				<br />
+				<br />
+				
 				<spring:message code="useCreditCard" />
 			
 				<jstl:choose>

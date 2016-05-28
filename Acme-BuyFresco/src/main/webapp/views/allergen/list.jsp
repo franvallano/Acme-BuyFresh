@@ -14,6 +14,10 @@
 	<acme:textURL URL="allergen/administrator/create.do" code="allergen.create"/>
 </security:authorize>
 
+<security:authorize access="hasRole('USER')">
+	<acme:textURL URL="allergen/user/select.do" code="allergen.select"/>
+</security:authorize>
+
 <display:table name="allergens" pagesize="5" class="displaytag" requestURI="${requestURI}" id="row">
 	
 	<acme:column code="allergen.name" property="name"/>

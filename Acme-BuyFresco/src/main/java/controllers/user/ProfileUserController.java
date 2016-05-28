@@ -1,5 +1,7 @@
 package controllers.user;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.AllergenService;
 import services.UserService;
 import controllers.AbstractController;
+import domain.Allergen;
 import domain.User;
 import forms.PasswordForm;
 import forms.UserProfileForm;
@@ -23,6 +27,9 @@ public class ProfileUserController extends AbstractController{
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private AllergenService allergenService;	
+	
 	public ProfileUserController(){
 		super();
 	}
@@ -32,12 +39,16 @@ public class ProfileUserController extends AbstractController{
 		ModelAndView result;
 		UserProfileForm userProfileForm;
 		User user;
+		Collection<Allergen> ls;
+		
+		ls = allergenService.findAll();
 		
 		user = userService.findByPrincipal();
 
 		userProfileForm = userService.desreconstructProfile(user);
 		
 		result = createEditModelAndView(userProfileForm);
+		result.addObject("allergens", ls);
 		
 		return result;
 	}
@@ -46,9 +57,13 @@ public class ProfileUserController extends AbstractController{
 	public ModelAndView save(@Valid UserProfileForm userProfileForm, BindingResult binding){
 		ModelAndView result;
 		User user;
+		Collection<Allergen> ls;
+		
+		ls = allergenService.findAll();
 		
 		if(binding.hasErrors()){
 			result = createEditModelAndView(userProfileForm);
+			result.addObject("allergens", ls);
 		}else{
 			try{
 				user = userService.reconstructProfile(userProfileForm);
@@ -63,6 +78,7 @@ public class ProfileUserController extends AbstractController{
 					result = createEditModelAndView(userProfileForm, "commit.error");
 				
 				result.addObject("checkBoxCreditCard", userProfileForm.isCheckBoxCreditCard());
+				result.addObject("allergens", ls);
 			}
 		}
 		
