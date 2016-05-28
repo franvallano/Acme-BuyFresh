@@ -100,6 +100,15 @@
 		
 		<acme:textbox code="register.address" path="address"/>
 		<br/>		
+
+		<h4><b><spring:message code="allergens" /></b></h4>
+		<form:select path="allergens" multiple="true">
+			<form:options items="${allergens}" itemLabel="name" itemValue="id" />
+		</form:select>
+		<form:errors cssClass="error" path="allergens" />
+		<br />
+		<br />
+		<br />
 	
 		<jstl:choose>
 			<jstl:when test="${checkBoxCreditCard == null || checkBoxCreditCard == true}">

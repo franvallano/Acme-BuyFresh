@@ -169,6 +169,8 @@ public class UserService {
 		user.getUserAccount().setUsername(userForm.getUsername());
 		user.getUserAccount().setPassword(userForm.getPassword());
 		
+		user.setAllergens(userForm.getAllergens());
+		
 		user.setName(userForm.getName());
 		user.setSurname(userForm.getSurname());
 		user.setEmail(userForm.getEmail());
@@ -201,6 +203,9 @@ public class UserService {
 		user.setName(userProfileForm.getName());
 		user.setSurname(userProfileForm.getSurname());
 		user.setEmail(userProfileForm.getEmail());
+		
+		user.setAllergens(userProfileForm.getAllergens());
+		
 		if(userProfileForm.getCreditCard() != null) {
 			Assert.isTrue(userProfileForm.getCreditCard().getExpirationYear() >= calendar.get(Calendar.YEAR));
 			
@@ -251,6 +256,8 @@ public class UserService {
 		userForm.setAddress(user.getAddress());
 		userForm.setAgree(true);
 		
+		userForm.setAllergens(user.getAllergens());
+		
 		if(user.getCreditCard() != null) {
 			userForm.setCheckBoxCreditCard(true);
 			userForm.setCreditCard(user.getCreditCard());
@@ -274,6 +281,8 @@ public class UserService {
 		userProfileForm.setEmail(user.getEmail());
 		userProfileForm.setPhone(user.getPhone());
 		userProfileForm.setAddress(user.getAddress());
+		
+		userProfileForm.setAllergens(user.getAllergens());
 		
 		if(user.getCreditCard() != null) {
 			userProfileForm.setCheckBoxCreditCard(true);

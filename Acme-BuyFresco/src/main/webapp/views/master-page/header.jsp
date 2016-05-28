@@ -101,7 +101,14 @@
 					<li class="arrow"></li>
 					<li><a href="assessment/user/list.do"><spring:message code="master.page.myAssessments" /></a></li>					
 				</ul>
-			</li>			
+			</li>
+			<li><a class="fNiv"><spring:message	code="master.page.allergens" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="allergen/user/listMy.do"><spring:message code="master.page.allergen.listMy" /></a></li>
+					<%-- <li><a href="allergen/user/list.do"><spring:message code="master.page.allergen.list" /></a></li> --%>					
+				</ul>
+			</li>		
 			<li><a class="fNiv"><spring:message	code="master.page.order" /></a>
 				<ul>
 					<li class="arrow"></li>

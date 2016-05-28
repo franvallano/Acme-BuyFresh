@@ -1,5 +1,9 @@
 package forms;
 
+import java.util.Collection;
+
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -10,6 +14,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 import org.hibernate.validator.constraints.SafeHtml.WhiteListType;
 
 import datatypes.CreditCard;
+import domain.Allergen;
 
 
 public class UserForm {
@@ -23,7 +28,18 @@ public class UserForm {
 	private String phone;
 	private String address;
 	private boolean agree;
+	private Collection<Allergen>allergens;
 	private boolean checkBoxCreditCard;
+	
+	
+	@ElementCollection
+	@Column(name="allergens")
+	public Collection<Allergen> getAllergens() {
+		return allergens;
+	}
+	public void setAllergens(Collection<Allergen> allergens) {
+		this.allergens = allergens;
+	}
 	
 	@Size(min=5, max=32)
 	@SafeHtml(whitelistType=WhiteListType.SIMPLE_TEXT)
