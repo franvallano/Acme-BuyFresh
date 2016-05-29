@@ -76,9 +76,13 @@ public class SalesOrderService {
 		Assert.notNull(entity);
 		
 		//userService.findByPrincipal();
-
-
-		 return orderRepository.save(entity);
+		
+		Actor a = actorService.findByPrincipal();
+		if(a instanceof User){
+			Assert.isTrue(!entity.getSent());
+		}
+		
+		return orderRepository.save(entity);
 		
 	}
 
