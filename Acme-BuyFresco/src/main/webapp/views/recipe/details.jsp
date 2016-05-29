@@ -27,6 +27,7 @@
 		<acme:column code="ingredient.name" property="[0].name"/>
 		<acme:column code="quantity.value" property="[1]"/>
 		<acme:column code="ingredient.metricUnit" property="[0].metricUnit"/>
+		<acme:column_ref code="ingredient.details" ref="ingredient/details.do?ingredientId=${ingredient[0].id}"/>
 		
 	</display:table>
 	

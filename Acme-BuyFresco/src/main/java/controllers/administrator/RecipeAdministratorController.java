@@ -231,23 +231,7 @@ public class RecipeAdministratorController extends AbstractController {
 
 		return result;
 	}
-	
-	@RequestMapping(value="/delete", method = RequestMethod.GET)
-	public ModelAndView cancel(@RequestParam int ingredientId){
-		ModelAndView result;
-		Ingredient ingredient;
-		try{
-			ingredient = ingredientService.findOne(ingredientId);
-			ingredientService.delete(ingredient);
-			result = new ModelAndView("redirect:list.do");
-		}catch(Throwable oops){
-			result = new ModelAndView("redirect:list.do");
-			result.addObject("messageError","ingredient.commit.error");
-		}
 		
-		return result;
-	}
-	
 	// Ancillary methods ------------------------------------------------------	
 
 	public ModelAndView creationModelAndView(Recipe recipe){

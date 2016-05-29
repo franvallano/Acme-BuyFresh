@@ -75,10 +75,15 @@
 		<!-- INGEDIENTS -->
 		
 		<security:intercept-url pattern="/ingredient/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/ingredient/list.do" access="permitAll" />
+		<security:intercept-url pattern="/ingredient/details.do" access="permitAll" />
 		
 		<!-- RECIPES -->
 		
 		<security:intercept-url pattern="/recipe/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		<security:intercept-url pattern="/recipe/list.do" access="permitAll" />
+		<security:intercept-url pattern="/recipe/details.do" access="permitAll" />
+		<security:intercept-url pattern="/recipe/listIngredients.do" access="permitAll" />
 		
 		<!-- ORDERS -->
 		<security:intercept-url pattern="/order/clerk/**" access="hasRole('CLERK')" /> 

@@ -121,15 +121,19 @@ public class IngredientAdministratorController extends AbstractController {
 	}
 
 	// Edition ----------------------------------------------------------------
-
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	
+	@RequestMapping(value="/delete", method = RequestMethod.GET)
 	public ModelAndView delete(@RequestParam int ingredientId){
 		ModelAndView result;
-		Ingredient ingredient = ingredientService.findOne(ingredientId);
-		
-		ingredientService.delete(ingredient);
-
-		result = new ModelAndView("redirect:/ingredient/administrator/list.do");
+		Ingredient ingredient;
+		try{
+			ingredient = ingredientService.findOne(ingredientId);
+			ingredientService.delete(ingredient);
+			result = new ModelAndView("redirect:list.do");
+		}catch(Throwable oops){
+			result = new ModelAndView("redirect:list.do");
+			result.addObject("messageError","ingredient.commit.error");
+		}
 		
 		return result;
 	}

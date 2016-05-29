@@ -18,4 +18,7 @@ public interface RecipeRepository extends JpaRepository<Recipe, Integer>{
 	
 	@Query("select r from Recipe r join r.quantities rq where rq.ingredient.name = ?1")
 	Collection<Recipe> getRecipesByIngredients(String nameIngredient);
+	
+	@Query("select r from Recipe r join r.menus m where m.id = ?1")
+	Collection<Recipe> findRecipesByMenuId(int menuId);
 }
