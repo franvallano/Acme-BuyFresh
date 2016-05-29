@@ -95,6 +95,14 @@ public class RecipeService {
 		
 		return res;
 	}
+	
+	public Collection<Recipe> findRecipesByMenuId(int menuId){
+		Collection<Recipe> result;
+		
+		result = recipeRepository.findRecipesByMenuId(menuId);
+		
+		return result;
+	}
 	// Ancillary methods ------------------------------------------------------
 
 }

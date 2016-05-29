@@ -20,12 +20,24 @@
 	<acme:column code="ingredient.description" property="description"/>
 	<acme:column code="ingredient.metricUnit" property="metricUnit"/>
 	
+	<acme:column_ref code="ingredient.details" ref="ingredient/details.do?ingredientId=${ingredient.id}"/>
+	
 	<security:authorize access="hasRole('ADMINISTRATOR')">	
 		<acme:column_ref code="ingredient.edit" ref="ingredient/administrator/edit.do?ingredientId=${ingredient.id}"/>
 		
-		<acme:column_ref code="ingredient.details" ref="ingredient/administrator/details.do?ingredientId=${ingredient.id}"/>
-	
-		<acme:column_ref_ConfirmDelete code="ingredient.delete" ref="ingredient/administrator/delete.do?ingredientId=${ingredient.id}" codeConfirm="ingredient.confirm.delete"/>
+		<jstl:choose>
+			<jstl:when test="${!ingredient.deleted }">
+				<display:column>
+					<acme:column_ref_ConfirmDelete code="ingredient.delete" ref="ingredient/administrator/delete.do?ingredientId=${ingredient.id}" codeConfirm="ingredient.confirm.delete"/>
+				</display:column>
+			</jstl:when>
+			<jstl:otherwise>
+				<display:column>
+					<spring:message code="ingredient.isDeleted"/>
+				</display:column>
+			</jstl:otherwise>
+		</jstl:choose>
+		
 	</security:authorize>
 </display:table>
 

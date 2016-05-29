@@ -24,7 +24,7 @@
 		<security:authorize access="hasRole('USER')">
 			<acme:column_ref code="menu.subscrive" ref="order/user/create.do?menuId=${menu.id}"/>
 		</security:authorize>
-		<acme:column_ref code="menu.recipes" ref="recipe/administrator/list.do?menuId=${menu.id}"/>
+		<acme:column_ref code="menu.recipes" ref="recipe/list.do?menuId=${menu.id}"/>
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<acme:column_ref code="menu.edit" ref="menu/administrator/edit.do?menuId=${menu.id}"/>
 			<acme:column_ref_ConfirmDelete code="menu.delete" codeConfirm="menu.confirm.delete" ref="menu/administrator/delete.do?menuId=${menu.id}"/>

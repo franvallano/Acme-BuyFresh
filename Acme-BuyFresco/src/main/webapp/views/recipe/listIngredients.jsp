@@ -17,9 +17,9 @@
 	<acme:column code="ingredient.description" property="description"/>
 	<acme:column code="ingredient.metricUnit" property="metricUnit"/>
 	
+	<acme:column_ref code="ingredient.details" ref="ingredient/details.do?ingredientId=${ingredient.id}"/>
+	
 	<security:authorize access="hasRole('ADMINISTRATOR')">	
-				
-		<acme:column_ref code="ingredient.details" ref="ingredient/administrator/details.do?ingredientId=${ingredient.id}"/>
 		
 		<acme:column_ref code="ingredient.add" ref="recipe/administrator/add.do?ingredientId=${ingredient.id}&recipeId=${recipeId}"/>
 			
@@ -27,5 +27,8 @@
 </display:table>
 
 <acme:back code="ingredient.back" /> 
-<input type="button" name="end" value="<spring:message code="recipe.end"/>" 
-		onclick="javascript: window.location.replace('recipe/administrator/list.do')"/>
+
+<security:authorize access="hasRole('ADMINISTRATOR')">
+	<input type="button" name="end" value="<spring:message code="recipe.end"/>" 
+			onclick="javascript: window.location.replace('recipe/administrator/list.do')"/>
+</security:authorize>

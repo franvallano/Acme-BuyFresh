@@ -19,7 +19,7 @@
 		<acme:column_ref code="recipe.edit" ref="recipe/administrator/edit.do?recipeId=${recipe.id}"/>
 	</security:authorize>
 		
-		<acme:column_ref code="recipe.details" ref="recipe/administrator/details.do?recipeId=${recipe.id}"/>
+	<acme:column_ref code="recipe.details" ref="recipe/details.do?recipeId=${recipe.id}"/>
 
 </display:table>
 
