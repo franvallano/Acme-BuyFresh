@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.MenuRepository;
+import domain.Actor;
+import domain.Administrator;
 import domain.Menu;
 
 
@@ -26,8 +28,13 @@ public class MenuService {
 	private MenuRepository menuRepository;
 
 	// Ancillary services -----------------------------------------------------
+	@Autowired
+	private AdministratorService administratorService;
 	
-	AdministratorService administratorService;
+	@Autowired
+	private ActorService actorService;
+	
+	
 	
 	// Constructor ------------------------------------------------------------
 	public MenuService(){
@@ -55,7 +62,7 @@ public class MenuService {
 
 	public void save(Menu entity){
 		Assert.notNull(entity);
-		
+		administratorService.findByPrincipal();
 		this.menuRepository.save(entity);
 	}
 
@@ -74,7 +81,10 @@ public class MenuService {
 		Menu res;
 		
 		res = this.menuRepository.findOne(id);
-		
+		if(res.isDeleted()){
+			Actor a = actorService.findByPrincipal();
+			Assert.isTrue(a instanceof Administrator);
+		}
 		return res;
 	}
 

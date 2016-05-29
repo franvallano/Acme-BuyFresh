@@ -23,6 +23,6 @@ public interface MenuRepository extends JpaRepository<Menu, Integer>{
 	@Query("select m from Menu m where m.orders.size <ALL (select m1.orders.size from Menu m1)")
 	Collection<Menu> getMenusInLessOrders();
 	
-	@Query("select m from Menu m where CURRENT_DATE >= m.startingMoment and CURRENT_DATE <= m.finishMoment")
+	@Query("select m from Menu m where m.deleted = false and CURRENT_DATE >= m.startingMoment and CURRENT_DATE <= m.finishMoment")
 	Collection<Menu> getActiveMenus();
 }
