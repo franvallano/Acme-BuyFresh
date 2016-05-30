@@ -110,5 +110,8 @@ public class AssessmentService {
 	}
 	
 	// Ancillary methods ------------------------------------------------------
-
+	
+	public Double findAvgRating(){
+		return assessmentRepository.findAvgRating();
+	}
 }

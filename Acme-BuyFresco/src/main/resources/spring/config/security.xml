@@ -46,6 +46,9 @@
 		<security:intercept-url pattern="/profile/user/**" access="hasRole('USER')" />  
 		<security:intercept-url pattern="/profile/actor/**" access="hasAnyRole('ADMINISTRATOR', 'CLERK')" /> 
 		
+		<!-- DASHBOARD -->
+		<security:intercept-url pattern="/dashboard/administrator/**" access="hasRole('ADMINISTRATOR')" /> 
+		
 		
 		<!-- REGISTER -->
 		<security:intercept-url pattern="/register/user/register.do" access="isAnonymous()" /> 

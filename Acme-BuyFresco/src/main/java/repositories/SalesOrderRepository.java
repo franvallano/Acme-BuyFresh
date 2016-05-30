@@ -24,6 +24,6 @@ public interface SalesOrderRepository extends JpaRepository<SalesOrder, Integer>
 	@Query("select o from SalesOrder o where o.subscription.id in (select s.id from Subscription s where s.user.id = ?1)")
 	Collection<SalesOrder> findOrdersByUser(int userId);
 	
-	@Query("select o from SalesOrder o where o.sent = true")
+	@Query("select count(o) from SalesOrder o where o.sent = true")
 	Integer getNumberOfSentOrders();
 }

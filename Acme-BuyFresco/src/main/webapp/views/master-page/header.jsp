@@ -59,6 +59,7 @@
 
 			<li><a class="fNiv" href="assessment/list.do"><spring:message code="master.page.assessmentList" /></a></li>
 			<li><a class="fNiv" href="clerk/register.do"><spring:message code="master.page.registerClerk" /></a></li>
+			<li><a class="fNiv" href="dashboard/administrator/list.do"><spring:message code="master.page.dashboard" /></a></li>
 			<li>
 				<a class="dropdown-toggle" data-toggle="dropdown" href=""> 
 					<spring:message code="master.page.profile" /> 

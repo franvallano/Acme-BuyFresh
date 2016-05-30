@@ -88,11 +88,25 @@ public class SubscriptionService {
 	
 	// Ancillary methods ------------------------------------------------------
 
-	public Double findAvgRating(){
-		return subscriptionRepository.findAvgRating();
-	}
+	
 	
 	public Integer NumOfSubscriptionsActives(){
 		return subscriptionRepository.NumOfSubscriptionsActives();
+	}
+	
+	public Collection<Subscription> SubscriptionLastMonth(){
+		Collection<Subscription> res;
+		
+		res = subscriptionRepository.SubscriptionLastMonth();
+		
+		return res;
+	}
+	
+	public Collection<Subscription> SubscriptionLastWeek(){
+		Collection<Subscription> res;
+		
+		res = subscriptionRepository.SubscriptionLastWeek();
+		
+		return res;
 	}
 }

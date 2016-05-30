@@ -21,4 +21,6 @@ public interface AssessmentRepository extends JpaRepository<Assessment, Integer>
 	@Query("select a from Assessment a where a.rating >= 2")
 	Collection<Assessment> AssessmentsWithRatingBigger();
 	
+	@Query("select AVG(s.rating) from Assessment s")
+	Double findAvgRating();
 }

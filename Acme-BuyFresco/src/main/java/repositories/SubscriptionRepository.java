@@ -4,6 +4,8 @@
 */
 package repositories;
 
+import java.util.Collection;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,9 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Inte
 	@Query("select count(u) from Subscription u where u.finishMoment >= CURRENT_DATE")
 	Integer NumOfSubscriptionsActives();
 	
-	@Query("select AVG(s.rating) from Assessment s")
-	Double findAvgRating();
+	@Query("select count(u) from Subscription u where MONTH(u.creationMoment) = MONTH(CURRENT_DATE)-1")
+	Collection<Subscription> SubscriptionLastMonth();
+	
+	@Query("select count(u) from Subscription u where WEEK(u.creationMoment) = WEEK(CURRENT_DATE)-1")
+	Collection<Subscription> SubscriptionLastWeek();
 }
