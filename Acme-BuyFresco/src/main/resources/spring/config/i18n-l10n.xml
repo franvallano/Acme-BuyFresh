@@ -35,6 +35,7 @@
 		<value>/views/recipe/messages</value>
 		<value>/views/allergen/messages</value>
 		<value>/views/clerk/messages</value>
+<value>/views/dashboard/messages</value>
 	</util:list>
 
 </beans>
