@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.IngredientRepository;
+import domain.Administrator;
 import domain.Allergen;
 import domain.Ingredient;
 import domain.Menu;
@@ -34,6 +35,9 @@ public class IngredientService {
 	@Autowired
 	private AllergenService allergenService;
 	
+	@Autowired
+	private AdministratorService administratorService;
+	
 	// Constructor ------------------------------------------------------------
 	public IngredientService(){
 		super();
@@ -42,6 +46,12 @@ public class IngredientService {
 	// Simple CRUD methods ----------------------------------------------------
 	public Ingredient create(){
 		Ingredient newbye;
+		
+		Administrator administrator;
+		
+		administrator = administratorService.findByPrincipal();
+		
+		
 		Collection<Quantity> quantities = new ArrayList<Quantity>();
 		Collection<Allergen> replaceables = new ArrayList<Allergen>();
 		Collection<Allergen> allergens = new ArrayList<Allergen>();
@@ -70,8 +80,12 @@ public class IngredientService {
 	}
 
 	public void delete(Ingredient entity){
+		Administrator administrator;
+		
+		administrator = administratorService.findByPrincipal();
 		Assert.isTrue(entity.getId()!=0);
 		Assert.isTrue(!entity.getDeleted());
+				
 		boolean deleted = true;
 		
 		entity.setDeleted(deleted);

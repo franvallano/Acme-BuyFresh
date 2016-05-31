@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.QuantityRepository;
+import domain.Administrator;
 import domain.Ingredient;
 import domain.Quantity;
 import domain.Recipe;
@@ -28,6 +29,9 @@ public class QuantityService {
 
 	// Ancillary services -----------------------------------------------------
 
+	@Autowired
+	private AdministratorService administratorService;
+	
 	// Constructor ------------------------------------------------------------
 	public QuantityService(){
 		super();
@@ -36,6 +40,9 @@ public class QuantityService {
 	// Simple CRUD methods ----------------------------------------------------
 	public Quantity create(Ingredient ingredient, Recipe recipe){
 		Quantity newbye;
+		Administrator administrator;
+		
+		administrator = administratorService.findByPrincipal();
 		
 		newbye = new Quantity();
 		newbye.setIngredient(ingredient);
