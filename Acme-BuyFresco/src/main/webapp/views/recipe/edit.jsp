@@ -12,12 +12,10 @@
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<form:form action="${requestURI}" modelAttribute="recipe">
-		<jstl:if test="${edit == true}">
 			<form:hidden path="id"/>
 			<form:hidden path="version"/>
-		</jstl:if>
-			<form:hidden path="quantities"/>
 			<form:hidden path="menus"/>
+			<form:hidden path="quantities"/>
 			<form:hidden path="allergens"/>
 		
 		<acme:textbox code="recipe.name" path="name"/>
@@ -25,13 +23,13 @@
 		<acme:textbox code="recipe.time" path="time"/>
 		<br />
 		
-<%-- 		<h2><b><spring:message code="recipe.allergens" /></b></h2>
+<%--  		<h2><b><spring:message code="recipe.allergens" /></b></h2>
 		<form:select path="allergens" multiple="true">
-			<form:options items="${allergens}" itemLabel="name" itemValue="id" />
+			<form:options items="${allergenList}" itemLabel="name" itemValue="id" />
 		</form:select>
 		<form:errors cssClass="error" path="allergens" />
 		<br />
-		<br /> --%>
+		<br />  --%>
 		
 		<jstl:choose>
 		<jstl:when test="${edit == true}">

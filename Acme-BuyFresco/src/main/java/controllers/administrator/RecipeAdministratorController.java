@@ -68,13 +68,15 @@ public class RecipeAdministratorController extends AbstractController {
 	public ModelAndView listIngredients(@RequestParam (required=false, defaultValue="0") String messageError, @RequestParam int recipeId) {
 		ModelAndView result;
 		Collection<Ingredient> ingredients;
+		Collection<Allergen> allergens;
 		
 		ingredients = ingredientService.findAllWithoutDelete();
-		
+		allergens = allergenService.findAll();		
 		
 		result = new ModelAndView("recipe/listIngredients");
 		result.addObject("requestURI", "recipe/administrator/listIngredients.do");
 		result.addObject("ingredients", ingredients);
+		result.addObject("allergens", allergens);
 		result.addObject("recipeId", recipeId);
 		
 		
@@ -90,14 +92,16 @@ public class RecipeAdministratorController extends AbstractController {
 		ModelAndView result;
 		Recipe recipe;
 		Collection<Object[]> ingredients;
+		Collection<Allergen> allergens;
 		
 		recipe = recipeService.findOne(recipeId);
 		ingredients = ingredientService.findIngredientsWithQuantities(recipeId);
+		allergens = allergenService.findAllergenByRecipeId(recipeId); 
+				
 		result = new ModelAndView("recipe/details");
 		result.addObject("recipe", recipe);
 		result.addObject("ingredients", ingredients);
-		
-		
+		result.addObject("allergens", allergens);		
 		
 		return result;
 	}
@@ -109,14 +113,14 @@ public class RecipeAdministratorController extends AbstractController {
 		
 		ModelAndView result;
 		Recipe recipe;
-		Collection<Allergen> allergens;
+		Collection<Allergen> allergenList;
 		
 		recipe = recipeService.create();
-		allergens = allergenService.findAll();
+		allergenList = allergenService.findAll();
 		
 		result = creationModelAndView(recipe);
 		result.addObject("recipe", recipe);
-		result.addObject("allergens", allergens);
+		result.addObject("allergenList", allergenList);
 		
 		if(messageError.equals("recipe.commit.error")){
 			result.addObject("messageError",messageError);
@@ -129,10 +133,13 @@ public class RecipeAdministratorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Recipe recipe, BindingResult bindingResult) {
 		ModelAndView result;
+		Collection<Allergen> allergenList;
+		allergenList = allergenService.findAll();
 
 		if (bindingResult.hasErrors()){
 			result = creationModelAndView(recipe, "recipe.commit.error");
 			System.out.println(bindingResult);
+			result.addObject("allergenList", allergenList);
 		}
 		else {
 			try {
@@ -144,6 +151,7 @@ public class RecipeAdministratorController extends AbstractController {
 				 
 			} catch (Throwable oops) {
 				result = creationModelAndView(recipe, "recipe.commit.error");
+				result.addObject("allergenList", allergenList);
 			}
 		}
 
@@ -158,11 +166,14 @@ public class RecipeAdministratorController extends AbstractController {
 		
 		ModelAndView result;
 		Recipe recipe;	
+		Collection<Allergen> allergenList;
+		allergenList = allergenService.findAll();
 		
 		recipe = recipeService.findOne(recipeId);
 		
 		result = editModelAndView(recipe);
 		result.addObject("recipe", recipe);
+		result.addObject("allergenList", allergenList);
 		result.addObject("edit", true);
 		
 		return result;
@@ -172,10 +183,13 @@ public class RecipeAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "update")
 	public ModelAndView update(@Valid Recipe recipe, BindingResult bindingResult) {
 		ModelAndView result;
+		Collection<Allergen> allergenList;
+		allergenList = allergenService.findAll();
 
 		if (bindingResult.hasErrors()){
 			result = editModelAndView(recipe, "recipe.commit.error");
 			System.out.println(bindingResult);
+			result.addObject("allergenList", allergenList);
 		}
 		else {
 			try {
@@ -186,6 +200,7 @@ public class RecipeAdministratorController extends AbstractController {
 				 
 			} catch (Throwable oops) {
 				result = editModelAndView(recipe, "recipe.commit.error");
+				result.addObject("allergenList", allergenList);
 			}
 		}
 
@@ -231,7 +246,25 @@ public class RecipeAdministratorController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/addAllergen", method = RequestMethod.GET)
+	public ModelAndView addAllergen(@RequestParam int allergenId, @RequestParam int recipeId){
+		ModelAndView result;
+		Allergen allergen = allergenService.findOne(allergenId);
+		Recipe recipe = recipeService.findOne(recipeId);
 		
+		try{
+			recipeService.addAllergen(allergen,recipe);
+			result = new ModelAndView("redirect:/recipe/administrator/listIngredients.do?recipeId=" + recipeId);
+		}catch(Throwable oops){
+			result = new ModelAndView("redirect:/recipe/administrator/listIngredients.do?recipeId=" + recipeId);
+			result.addObject("messageError","recipe.commit.error");
+		}
+				
+		return result;
+	}
+	
+	
 	// Ancillary methods ------------------------------------------------------	
 
 	public ModelAndView creationModelAndView(Recipe recipe){

@@ -26,6 +26,17 @@
 	</security:authorize>
 </display:table>
 
+<display:table name="allergens" pagesize="5" class="displaytag" requestURI="${requestURI}" id="allergen">
+	
+	<acme:column code="allergen.name" property="name"/>
+		
+	<security:authorize access="hasRole('ADMINISTRATOR')">	
+		
+		<acme:column_ref code="ingredient.add" ref="recipe/administrator/addAllergen.do?allergenId=${allergen.id}&recipeId=${recipeId}"/>
+			
+	</security:authorize>
+</display:table>
+
 <acme:back code="ingredient.back" /> 
 
 <security:authorize access="hasRole('ADMINISTRATOR')">

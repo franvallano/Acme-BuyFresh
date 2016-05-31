@@ -17,6 +17,9 @@ public interface AllergenRepository extends JpaRepository<Allergen, Integer>{
 	
 	@Query("select i.allergens from Ingredient i where i.id = ?1")
 	Collection<Allergen> findAllergensByIngredientId(int ingredientId);
+	
+	@Query("select a from Allergen a join a.recipes rec where rec.id=?1")
+	Collection<Allergen> findAllergensByRecipeId(int recipeId);
 
 	@Query("select a from Allergen a where a.name = ?1")
 	Allergen findAllergenByName(String allergenName);
