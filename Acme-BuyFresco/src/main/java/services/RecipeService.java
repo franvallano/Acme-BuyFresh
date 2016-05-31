@@ -134,4 +134,13 @@ public class RecipeService {
 		allergen.getRecipes().add(recipe);				
 	}
 	
+	public void deleteAllergen(Allergen allergen, Recipe recipe){
+									
+			recipe.getAllergens().remove(allergen);
+			recipeRepository.save(recipe);
+						
+			allergen.getRecipes().remove(recipe);	
+			allergenService.save(allergen);
+		}
+	
 }

@@ -31,9 +31,16 @@
 	<acme:column code="allergen.name" property="name"/>
 		
 	<security:authorize access="hasRole('ADMINISTRATOR')">	
-		
-		<acme:column_ref code="ingredient.add" ref="recipe/administrator/addAllergen.do?allergenId=${allergen.id}&recipeId=${recipeId}"/>
-			
+	
+		<jstl:choose>
+		<jstl:when test="${recipeAct.allergens.contains(allergen) }">
+			<acme:column_ref code="allergen.delete" ref="recipe/administrator/deleteAllergen.do?allergenId=${allergen.id}&recipeId=${recipeId}"/>
+		</jstl:when>
+		<jstl:otherwise>
+			<acme:column_ref code="ingredient.add" ref="recipe/administrator/addAllergen.do?allergenId=${allergen.id}&recipeId=${recipeId}"/>
+		</jstl:otherwise>	
+		</jstl:choose>
+				
 	</security:authorize>
 </display:table>
 

@@ -69,15 +69,18 @@ public class RecipeAdministratorController extends AbstractController {
 		ModelAndView result;
 		Collection<Ingredient> ingredients;
 		Collection<Allergen> allergens;
+		Recipe recipeAct;
 		
 		ingredients = ingredientService.findAllWithoutDelete();
-		allergens = allergenService.findAll();		
+		allergens = allergenService.findAll();
+		recipeAct = recipeService.findOne(recipeId); 
 		
 		result = new ModelAndView("recipe/listIngredients");
 		result.addObject("requestURI", "recipe/administrator/listIngredients.do");
 		result.addObject("ingredients", ingredients);
 		result.addObject("allergens", allergens);
 		result.addObject("recipeId", recipeId);
+		result.addObject("recipeAct", recipeAct);
 		
 		
 		if(messageError.equals("ingredient.commit.error")){
@@ -255,6 +258,23 @@ public class RecipeAdministratorController extends AbstractController {
 		
 		try{
 			recipeService.addAllergen(allergen,recipe);
+			result = new ModelAndView("redirect:/recipe/administrator/listIngredients.do?recipeId=" + recipeId);
+		}catch(Throwable oops){
+			result = new ModelAndView("redirect:/recipe/administrator/listIngredients.do?recipeId=" + recipeId);
+			result.addObject("messageError","recipe.commit.error");
+		}
+				
+		return result;
+	}
+	
+	@RequestMapping(value = "/deleteAllergen", method = RequestMethod.GET)
+	public ModelAndView deleteAllergen(@RequestParam int allergenId, @RequestParam int recipeId){
+		ModelAndView result;
+		Allergen allergen = allergenService.findOne(allergenId);
+		Recipe recipe = recipeService.findOne(recipeId);
+		
+		try{
+			recipeService.deleteAllergen(allergen,recipe);
 			result = new ModelAndView("redirect:/recipe/administrator/listIngredients.do?recipeId=" + recipeId);
 		}catch(Throwable oops){
 			result = new ModelAndView("redirect:/recipe/administrator/listIngredients.do?recipeId=" + recipeId);
