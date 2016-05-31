@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.RecipeRepository;
+import domain.Administrator;
 import domain.Allergen;
 import domain.Ingredient;
 import domain.Menu;
@@ -33,6 +34,9 @@ public class RecipeService {
 	@Autowired
 	private AllergenService allergenService;
 	
+	@Autowired
+	private AdministratorService administratorService;
+	
 	// Constructor ------------------------------------------------------------
 	public RecipeService(){
 		super();
@@ -41,6 +45,11 @@ public class RecipeService {
 	// Simple CRUD methods ----------------------------------------------------
 	public Recipe create(){
 		Recipe newbye;
+		
+		Administrator administrator;
+		
+		administrator = administratorService.findByPrincipal();
+		
 		Collection<Quantity> quantities = new ArrayList<Quantity>();
 		Collection<Menu> menus = new ArrayList<Menu>();
 		Collection<Allergen> allergens = new ArrayList<Allergen>();
