@@ -30,6 +30,9 @@ public class RecipeService {
 
 	// Ancillary services -----------------------------------------------------
 
+	@Autowired
+	private AllergenService allergenService;
+	
 	// Constructor ------------------------------------------------------------
 	public RecipeService(){
 		super();
@@ -105,4 +108,21 @@ public class RecipeService {
 	}
 	// Ancillary methods ------------------------------------------------------
 
+	public void addAllergen(Allergen allergen, Recipe recipe){
+		
+		
+		for(Allergen a : recipe.getAllergens()){
+			System.out.println(a.getName());
+		}
+		
+		recipe.getAllergens().add(allergen);
+		recipeRepository.save(recipe);
+		
+		for(Allergen a : recipe.getAllergens()){
+			System.out.println(a.getName());
+		}
+		
+		allergen.getRecipes().add(recipe);				
+	}
+	
 }

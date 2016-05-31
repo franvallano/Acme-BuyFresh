@@ -212,6 +212,7 @@
 		<property name="recipes">
 			<list>
 				<ref bean="recipe1"/>
+				<ref bean="recipe2"/>
 			</list>		
 		</property>
 		<property name="users">

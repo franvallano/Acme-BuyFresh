@@ -129,6 +129,14 @@ public class AllergenService {
 		return result;
 	}
 	
+	public Collection<Allergen> findAllergenByRecipeId(int recipeId){
+		Collection<Allergen> result;
+		
+		result = allergenRepository.findAllergensByRecipeId(recipeId);
+		
+		return result;
+	}
+	
 	public Allergen findAllergenByName(String allergenName){
 		
 		Allergen res;

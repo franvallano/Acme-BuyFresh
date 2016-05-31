@@ -27,11 +27,14 @@
 		<acme:column code="ingredient.name" property="[0].name"/>
 		<acme:column code="quantity.value" property="[1]"/>
 		<acme:column code="ingredient.metricUnit" property="[0].metricUnit"/>
-		<acme:column_ref code="ingredient.details" ref="ingredient/details.do?ingredientId=${ingredient[0].id}"/>
-		
+		<acme:column_ref code="ingredient.details" ref="ingredient/details.do?ingredientId=${ingredient[0].id}"/>		
 	</display:table>
+	<br />
 	
-		
+	<h2><spring:message code="recipe.allergens"/></h2>
+	<display:table name="allergens" pagesize="5" class="displaytag" requestURI="${requestURI}" id="allergen">
+		<acme:column code="allergen.name" property="name"/>		
+	</display:table>
 
 	<acme:back code="recipe.back"/>
 	

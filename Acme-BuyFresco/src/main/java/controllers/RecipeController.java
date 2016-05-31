@@ -94,14 +94,16 @@ public class RecipeController extends AbstractController {
 		ModelAndView result;
 		Recipe recipe;
 		Collection<Object[]> ingredients;
+		Collection<Allergen> allergens;
 		
 		recipe = recipeService.findOne(recipeId);
 		ingredients = ingredientService.findIngredientsWithQuantities(recipeId);
+		allergens = allergenService.findAllergenByRecipeId(recipeId); 
+				
 		result = new ModelAndView("recipe/details");
 		result.addObject("recipe", recipe);
 		result.addObject("ingredients", ingredients);
-		
-		
+		result.addObject("allergens", allergens);		
 		
 		return result;
 	}
