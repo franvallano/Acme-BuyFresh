@@ -171,7 +171,11 @@ public class ClerkService {
 	// Ancillary methods ------------------------------------------------------
 
 	public Clerk reconstruct(ClerkForm clerkForm) {
+		
+		administratorService.findByPrincipal();
 		Assert.notNull(clerkForm);
+		Assert.notNull(clerkForm.getEmail());
+		
 		Clerk clerk;
 		Calendar calendar = Calendar.getInstance();
 		

@@ -175,6 +175,7 @@ public class UserService {
 	//Metodo que recibe un objeto formulario y reconstruye un objeto de dominio
 	public User reconstruct(UserForm userForm) {
 		Assert.notNull(userForm);
+		Assert.notNull(userForm.getUsername());
 		User user;
 		Calendar calendar = Calendar.getInstance();
 		
@@ -207,6 +208,7 @@ public class UserService {
 	
 	public User reconstructProfile(UserProfileForm userProfileForm) {
 		Assert.notNull(userProfileForm);
+		Assert.notNull(userProfileForm.getAllergens());
 		User user;
 		Calendar calendar = Calendar.getInstance();
 		

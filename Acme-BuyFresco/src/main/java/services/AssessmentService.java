@@ -57,6 +57,7 @@ public class AssessmentService {
 
 	public void save(Assessment entity){
 		Assert.notNull(entity);
+		Assert.notNull(entity.getText());
 		
 		this.assessmentRepository.save(entity);
 	}

@@ -67,6 +67,7 @@ public class AllergenService {
 
 	public void save(Allergen entity){
 		Assert.notNull(entity);
+		Assert.notNull(entity.getName());
 		
 		Collection<Ingredient>ingredients = entity.getAllergenIngredients();
 		Collection<Recipe>ing = new ArrayList<Recipe>() ;
