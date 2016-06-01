@@ -91,7 +91,8 @@ public class Menu extends DomainEntity{
 		this.people = people;
 	}
 	
-	
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@Temporal(TemporalType.TIMESTAMP)
 	public Date getFinishMoment() {
 		return finishMoment;
 	}

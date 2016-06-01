@@ -13,7 +13,6 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="orders"/>
-	<form:hidden path="ingredients"/>
 	<form:hidden path="creationMoment"/>
 
 	<acme:textbox code="menu.name" path="name" />
@@ -29,7 +28,14 @@
 		<acme:textbox code="menu.price" path="price" />
 	<br />
 	
-	<acme:select items="${recipes}" itemLabel="name" multiple ="true" code="menu.recipes" path="recipes"/>
+	
+	<h2><b><spring:message code="menu.recipes" /></b></h2>
+	<form:select path="recipes" multiple="true">
+		<form:options items="${recipes}" itemLabel="name" itemValue="id" />
+	</form:select>
+	<form:errors cssClass="error" path="recipes" />
+	<br /><br />
+	
 	
 	<acme:submit code="menu.save" name="update" />&nbsp;
 		
