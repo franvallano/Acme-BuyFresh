@@ -56,6 +56,7 @@ public class Menu extends DomainEntity{
 	}
 
 	@Past
+	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getCreationMoment() {
@@ -65,6 +66,7 @@ public class Menu extends DomainEntity{
 		this.creationMoment = creationMoment;
 	}
 
+	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getStartingMoment() {
@@ -76,6 +78,7 @@ public class Menu extends DomainEntity{
 	}
 	
 	//Es un campo opcional que se escribe al ser una o varias recetas alteradas por los alergenos.
+	
 	public String getType() {
 		return type;
 	}
@@ -83,6 +86,7 @@ public class Menu extends DomainEntity{
 		this.type = type;
 	}
 
+	@NotNull
 	@Min(0)
 	public Integer getPeople() {
 		return people;
@@ -91,6 +95,7 @@ public class Menu extends DomainEntity{
 		this.people = people;
 	}
 	
+	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getFinishMoment() {
