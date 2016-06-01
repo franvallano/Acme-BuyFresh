@@ -55,7 +55,7 @@ public class LoginService implements UserDetailsService {
 			
 			if(au.getAuthority().contains("CLERK")){
 				Clerk c = clerkService.findByUserName(result.getUsername());
-				Assert.isTrue(c.getDeleted());
+				Assert.isTrue(!c.getDeleted());
 				break;
 			}
 		}

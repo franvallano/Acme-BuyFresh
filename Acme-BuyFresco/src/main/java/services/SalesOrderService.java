@@ -25,6 +25,7 @@ import domain.Recipe;
 import domain.SalesOrder;
 import domain.Substitutes;
 import domain.User;
+import domain.Clerk;
 
 @Service
 @Transactional
@@ -82,6 +83,9 @@ public class SalesOrderService {
 			Assert.isTrue(!entity.getSent());
 		}
 		
+		if(a instanceof Clerk){
+			Assert.isTrue(findOne(entity.getId()).getClerk() == null);
+		}
 		return orderRepository.save(entity);
 		
 	}
