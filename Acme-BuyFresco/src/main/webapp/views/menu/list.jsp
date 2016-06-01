@@ -27,7 +27,18 @@
 		<acme:column_ref code="menu.recipes" ref="recipe/list.do?menuId=${menu.id}"/>
 		<security:authorize access="hasRole('ADMINISTRATOR')">
 			<acme:column_ref code="menu.edit" ref="menu/administrator/edit.do?menuId=${menu.id}"/>
-			<acme:column_ref_ConfirmDelete code="menu.delete" codeConfirm="menu.confirm.delete" ref="menu/administrator/delete.do?menuId=${menu.id}"/>
+			<jstl:choose>
+			<jstl:when test="${!menu.deleted }">
+				<display:column>
+					<acme:column_ref_ConfirmDelete code="menu.delete" codeConfirm="menu.confirm.delete" ref="menu/administrator/delete.do?menuId=${menu.id}"/>
+				</display:column>
+			</jstl:when>
+			<jstl:otherwise>
+				<display:column>
+					<spring:message code="menu.isDeleted"/>
+				</display:column>
+			</jstl:otherwise>
+			</jstl:choose>			
 		</security:authorize>
 		
 	</display:table>
