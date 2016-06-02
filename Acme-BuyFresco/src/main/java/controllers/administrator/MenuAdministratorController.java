@@ -84,7 +84,14 @@ public class MenuAdministratorController extends AbstractController {
 			result.addObject("recipes", recipes);
 		} else {
 			try {
-				menuService.save(menu);				
+				Menu m = menuService.save(menu);
+				
+				for(Recipe r: m.getRecipes()){
+					Collection<Menu> menus = r.getMenus();
+					menus.add(m);
+					r.setMenus(menus);
+					recipeService.save(r);
+				}
 				result = new ModelAndView("redirect:/menu/administrator/list.do");
 			} catch (Throwable oops) {
 				result = createModelAndView(menu, "menu.commit.error");
