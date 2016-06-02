@@ -2,17 +2,17 @@ package domain;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.Map;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -132,7 +132,7 @@ public class SalesOrder extends DomainEntity{
 	}
 
 	@Valid
-	@OneToMany(mappedBy = "order")
+	@OneToMany(mappedBy = "order",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	public Collection<Substitutes> getSubstitutes() {
 		return substitutes;
 	}

@@ -78,7 +78,13 @@ public class IngredientService {
 		
 		this.ingredientRepository.save(entity);
 	}
-
+	
+	public void save2(Ingredient entity){
+		Assert.notNull(entity);				
+		
+		this.ingredientRepository.save(entity);
+	}
+	
 	public void delete(Ingredient entity){
 		Administrator administrator;
 		

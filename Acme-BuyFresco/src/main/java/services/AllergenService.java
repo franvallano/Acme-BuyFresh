@@ -51,9 +51,9 @@ public class AllergenService {
 		administratorService.findByPrincipal();
 		
 		Collection<User>users = new ArrayList<User>();
-		Collection<Ingredient>substitutes = new HashSet<Ingredient>();
-		Collection<Ingredient>ingredients = new HashSet<Ingredient>();
-		Collection<Recipe>recipes = new HashSet<Recipe>();
+		Collection<Ingredient>substitutes = new ArrayList<Ingredient>();
+		Collection<Ingredient>ingredients = new ArrayList<Ingredient>();
+		Collection<Recipe>recipes = new ArrayList<Recipe>();
 		
 		newbye = new Allergen();
 		

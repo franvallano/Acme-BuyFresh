@@ -82,6 +82,7 @@ public class MenuAdministratorController extends AbstractController {
 			Collection<Recipe> recipes;
 			recipes = recipeService.findAll();
 			result.addObject("recipes", recipes);
+			System.out.println(binding.toString());
 		} else {
 			try {
 				Menu m = menuService.save(menu);
@@ -98,6 +99,7 @@ public class MenuAdministratorController extends AbstractController {
 				Collection<Recipe> recipes;
 				recipes = recipeService.findAll();
 				result.addObject("recipes", recipes);
+				System.out.println(oops);
 			}
 		}
 		
@@ -129,27 +131,50 @@ public class MenuAdministratorController extends AbstractController {
 			Collection<Recipe> recipes;
 			recipes = recipeService.findAll();
 			result.addObject("recipes", recipes);
+			
+			System.out.println(binding.toString());
 		} else {
 			try {
 				for(Recipe r: menu.getRecipes()){
 					System.out.println(r.getName());
 				}
-				Menu m = menuService.save(menu);
-				for(Recipe r: m.getRecipes()){
-					
-					Collection<Menu> menus = r.getMenus();
-					if(!menus.contains(m)){
-						menus.add(m);
-						r.setMenus(menus);
-						recipeService.save(r);
+				Menu m = menuService.findOne(menu.getId());
+				
+				if(menu.getRecipes()!=m.getRecipes()){
+					Collection<Recipe> rec = menu.getRecipes();
+					Collection<Recipe> re = m.getRecipes();
+					//Solo añade recetas
+					for(Recipe r: rec){
+						Collection<Menu> menus = r.getMenus();
+						if(!menus.contains(menu)){
+							menus.add(menu);
+							r.setMenus(menus);
+							recipeService.save(r);
+						}
 					}
-				}				
+					
+					//Para eliminar recetas
+					for(Recipe r: re){
+						Collection<Menu> menus = r.getMenus();
+						if(!rec.contains(r)){
+							
+							menus.remove(menu);
+							r.setMenus(menus);
+							recipeService.save(r);
+			
+						}
+					}
+					
+				}
+				
+				menuService.save(menu);
 				result = new ModelAndView("redirect:/menu/administrator/list.do");
 			} catch (Throwable oops) {
 				result = editModelAndView(menu, "menu.commit.error");
 				Collection<Recipe> recipes;
 				recipes = recipeService.findAll();
 				result.addObject("recipes", recipes);
+				System.out.println(oops);
 			}
 		}
 		
