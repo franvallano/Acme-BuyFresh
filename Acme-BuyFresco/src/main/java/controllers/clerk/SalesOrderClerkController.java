@@ -118,13 +118,14 @@ public class SalesOrderClerkController extends AbstractController {
 		SalesOrder order = salesOrderService.findOne(orderId);
 		Clerk c = clerkService.findByPrincipal();
 		order.setClerk(c);
-		try {
-			salesOrderService.save(order);
-			result = new ModelAndView("redirect:/order/clerk/myOrders.do");
-		} catch (Exception e) {
-			result = editModelAndView(order, "order.commit.error");
-		}
-
+//		try {
+//			salesOrderService.save(order);
+//			result = new ModelAndView("redirect:/order/clerk/myOrders.do");
+//		} catch (Exception e) {
+//			result = editModelAndView(order, "order.commit.error");
+//		}
+		salesOrderService.save(order);
+		result = new ModelAndView("redirect:/order/clerk/myOrders.do");
 		
 		
 		return result;
@@ -137,13 +138,14 @@ public class SalesOrderClerkController extends AbstractController {
 		ModelAndView result;
 		SalesOrder order = salesOrderService.findOne(orderId);
 		order.setSent(true);
-		try {
-			salesOrderService.save(order);
-			result = new ModelAndView("redirect:/order/clerk/myOrders.do");
-		} catch (Exception e) {
-			result = editModelAndView(order, "order.commit.error");
-		}
-
+//		try {
+//			salesOrderService.save(order);
+//			result = new ModelAndView("redirect:/order/clerk/myOrders.do");
+//		} catch (Exception e) {
+//			result = editModelAndView(order, "order.commit.error");
+//		}
+		salesOrderService.save(order);
+		result = new ModelAndView("redirect:/order/clerk/myOrders.do");
 		
 		
 		return result;
