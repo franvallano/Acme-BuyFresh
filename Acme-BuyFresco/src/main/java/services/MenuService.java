@@ -60,10 +60,10 @@ public class MenuService {
 		return newbye;
 	}
 
-	public void save(Menu entity){
+	public Menu save(Menu entity){
 		Assert.notNull(entity);
 		administratorService.findByPrincipal();
-		this.menuRepository.save(entity);
+		return this.menuRepository.save(entity);
 	}
 
 	public void delete(Menu entity){
