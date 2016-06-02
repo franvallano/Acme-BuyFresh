@@ -88,7 +88,7 @@ public class SalesOrderService {
 		}
 		
 		if(a instanceof Clerk){
-			Assert.isTrue(findOne(entity.getId()).getClerk() == null);
+			Assert.isTrue(findOne(entity.getId()).getClerk() != null);
 		}
 		return orderRepository.save(entity);
 		

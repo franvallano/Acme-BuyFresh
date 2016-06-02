@@ -606,8 +606,8 @@
 	
 	<bean id="order2" class="domain.SalesOrder">
 		<property name="address" value="C/ Vicente, nº20"/>
-<!-- 		<property name="shippingDate" value="21/05/2016 13:54"/>
-		<property name="arrivalDate" value="23/05/2016 16:50"/> -->
+ 		<property name="shippingDate" value="06/01/2016 13:54"/>
+		<!-- <property name="arrivalDate" value="23/05/2016 16:50"/> -->
 		<property name="notes" value="Enviar por la tarde."/>
 		<property name="totalPrice" value="25.50"/>
 		<property name="menu" ref="menu2"/>
