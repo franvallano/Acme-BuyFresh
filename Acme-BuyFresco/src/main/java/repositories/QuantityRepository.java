@@ -5,6 +5,7 @@
 package repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Quantity;
@@ -12,5 +13,7 @@ import domain.Quantity;
 @Repository
 public interface QuantityRepository extends JpaRepository<Quantity, Integer>{
 	
-
+	@Query("select q.value from Ingredient i join i.quantities q where q.recipe.id = ?1 and i.id = ?2")
+	public Integer findQuantityByRecipeIdAndIngredientId(int recipeId, int ingredientId);
+	
 }

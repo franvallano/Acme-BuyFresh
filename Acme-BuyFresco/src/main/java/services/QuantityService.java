@@ -94,6 +94,14 @@ public class QuantityService {
 
 	// Other business methods -------------------------------------------------
 
+	public Integer findQuantityByRecipeIdAndIngredientId(int recipeId, int ingredientId){
+		Integer result;
+		
+		result = quantityRepository.findQuantityByRecipeIdAndIngredientId(recipeId, ingredientId);
+		
+		return result;
+	}
+	
 	// Ancillary methods ------------------------------------------------------
 
 }

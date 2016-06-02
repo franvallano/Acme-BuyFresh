@@ -17,7 +17,9 @@ import services.ClerkService;
 import services.RecipeService;
 import services.SalesOrderService;
 import controllers.AbstractController;
+import domain.Allergen;
 import domain.Clerk;
+import domain.Ingredient;
 import domain.Menu;
 import domain.Recipe;
 import domain.SalesOrder;
@@ -90,6 +92,22 @@ public class SalesOrderClerkController extends AbstractController {
 		result.addObject("edit",true);
 		result.addObject("sizecero",sizenotcero);
 
+		return result;
+	}
+	
+	@RequestMapping(value = "/detailsClerk", method = RequestMethod.GET)
+	public ModelAndView detailsClerk(@RequestParam int orderId) {
+		ModelAndView result;
+		Collection<Object[]> formated; 
+		SalesOrder order;
+		
+		order = salesOrderService.findOne(orderId);
+		
+		formated = salesOrderService.detailsIngredientsQuantitiesFormated(order);
+		
+		result = new ModelAndView("order/detailsClerk");
+		result.addObject("formated", formated);
+		
 		return result;
 	}
 	
