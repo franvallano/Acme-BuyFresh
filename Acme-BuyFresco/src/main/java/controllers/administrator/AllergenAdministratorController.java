@@ -108,7 +108,7 @@ public class AllergenAdministratorController extends AbstractController {
 					r.add(a);
 					i.setAllergens(r);
 					
-					ingredientService.save(i);
+					ingredientService.save2(i);
 				}
 				
 				for(Ingredient i : subs){
@@ -116,7 +116,7 @@ public class AllergenAdministratorController extends AbstractController {
 					r.add(a);
 					i.setReplaceables(r);
 					
-					ingredientService.save(i);
+					ingredientService.save2(i);
 				}
 				
 				result = new ModelAndView("redirect:/allergen/administrator/list.do");
@@ -184,18 +184,32 @@ public class AllergenAdministratorController extends AbstractController {
 		else {
 			try {
 				
-				Allergen a = allergenService.findAllergenByName(b.getName());
+				Allergen a = allergenService.findOne(b.getId());
 
+				allergenService.save(b);
+				
 				if (a.getAllergenIngredients()!=b.getAllergenIngredients()){
 					Collection<Ingredient> ingre = b.getAllergenIngredients();
+					Collection<Ingredient> ingredi = a.getAllergenIngredients();
 					
+					//Añadir
 					for(Ingredient i : ingre){
-						if(!a.getAllergenIngredients().contains(i)){
-							Collection<Allergen> r = i.getAllergens();
+						if(!ingredi.contains(i)){
+							Collection<Allergen> r = i.getReplaceables();
 							r.add(b);
-							i.setAllergens(r);
+							i.setReplaceables(r);
 							
-							ingredientService.save(i);
+							ingredientService.save2(i);
+						}
+					}
+					
+					//Eliminar
+					for(Ingredient i : ingredi){
+						if(!ingre.contains(i)){
+							Collection<Allergen> r = i.getReplaceables();
+							r.remove(b);
+							i.setReplaceables(r);
+							ingredientService.save2(i);
 						}
 					}
 				}
@@ -203,20 +217,29 @@ public class AllergenAdministratorController extends AbstractController {
 				if (a.getSubstitutes()!=b.getSubstitutes()){
 				
 					Collection<Ingredient> subs = b.getSubstitutes();
+					Collection<Ingredient> su = a.getSubstitutes();
 					
+					//Añadir
 					for(Ingredient i : subs){
-						if(!a.getSubstitutes().contains(i)){
-							Collection<Allergen> r = i.getReplaceables();
+						if(!su.contains(i)){
+							Collection<Allergen> r = i.getAllergens();
 							r.add(b);
-							i.setReplaceables(r);
-							
-							ingredientService.save(i);
+							i.setAllergens(r);
+							ingredientService.save2(i);
+						}
+					}
+					
+					//Eliminar
+					for(Ingredient i : su){				
+						if(!subs.contains(i)){
+							Collection<Allergen> r = i.getAllergens();
+							r.remove(b);
+							i.setAllergens(r);
+							ingredientService.save2(i);
 						}
 					}
 				}
-				
-				allergenService.save(b);
-				
+			
 				
 				result = new ModelAndView("redirect:/allergen/administrator/list.do");
 				

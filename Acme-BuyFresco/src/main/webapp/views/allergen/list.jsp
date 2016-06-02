@@ -18,9 +18,9 @@
 	
 	<acme:column code="allergen.name" property="name"/>
 	
-	<acme:column code="ingredients" property="substitutesFormated"/>
+	<acme:column code="ingredients" property="ingredientsFormated"/>
 	
-	<acme:column code="substitutes" property="ingredientsFormated"/>
+	<acme:column code="substitutes" property="substitutesFormated"/>
 	
 	<security:authorize access="hasRole('ADMINISTRATOR')">	
 		<acme:column_ref code="allergen.edit" ref="allergen/administrator/edit.do?allergenId=${row.id}"/>
