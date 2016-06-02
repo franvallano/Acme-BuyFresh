@@ -23,6 +23,7 @@
 				
 				<security:authorize access="hasRole('CLERK')">
 					<acme:column_ref_condition code="order.edit" ref="order/clerk/edit.do?orderId=${order.id}" condition="${order.sent == false }"/>
+					<acme:column_ref code="order.details" ref="order/clerk/detailsClerk.do?orderId=${order.id}"/>
 					<acme:column_ref_condition code="order.sent" ref="order/clerk/sent.do?orderId=${order.id}" condition="${order.sent == false }"/>
 _
 				</security:authorize>

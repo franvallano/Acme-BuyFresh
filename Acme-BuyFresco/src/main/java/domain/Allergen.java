@@ -43,11 +43,11 @@ public class Allergen extends DomainEntity{
 		String result = "";
 		int i = 0;
 		for(Ingredient b : substitutes){
-			if(i < substitutes.size()){
-				result = result + b.getName() + ", " ; 
+			if(i == 0){
+				result = result + b.getName(); 
 				i++;
 			}else{
-				result = result + b.getName();
+				result = result + ", " + b.getName();
 			}
 		}
 		return result;
@@ -58,11 +58,11 @@ public class Allergen extends DomainEntity{
 		String result = "";
 		int i = 0;
 		for(Ingredient b : allergenIngredients){
-			if(i < allergenIngredients.size()){
-				result = result + b.getName() + ", " ; 
+			if(i == 00){
+				result = result + b.getName(); 
 				i++;
 			}else{
-				result = result + b.getName();
+				result = result + ", " + b.getName();
 			}
 		}
 		return result;

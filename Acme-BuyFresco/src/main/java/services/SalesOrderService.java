@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,8 @@ public class SalesOrderService {
 	@Autowired
 	private ActorService actorService;
 	
+	@Autowired
+	private QuantityService quantityService;
 	
 	
 	// Constructor ------------------------------------------------------------
@@ -176,6 +179,94 @@ public class SalesOrderService {
 		
 		return substitutes;
 	
+	}
+	
+	public Map<Ingredient, Integer> getTotalQuantities(Menu menu,  User user){
+		Map<Ingredient, Integer> result = null;
+		
+		Collection<Recipe> recipes = menu.getRecipes();
+		for(Recipe rec : recipes){
+			Collection<Ingredient> ingredients = ingredientService.findIngredientByRecipe(rec.getId());
+			for(Ingredient i : ingredients){
+				if(result.containsKey(i)){
+					Integer valor = result.get(i) + quantityService.findQuantityByRecipeIdAndIngredientId(rec.getId(), i.getId());
+					result.put(i, valor);
+				}else{
+					result.put(i, quantityService.findQuantityByRecipeIdAndIngredientId(rec.getId(), i.getId()));
+				}
+			}
+			
+		}
+		
+		//cambiamos los ingredientes por sus substitutos.
+		
+		List<Object[]> ingredient_recipe_allergen = ingredientService.getAllergenIngredientsByUserPerMenu(menu.getId(), user.getId());
+		for(Object[] o: ingredient_recipe_allergen){
+			Allergen a = (Allergen) o[2];
+			List<Ingredient> ing = new ArrayList<>(a.getSubstitutes());
+			Ingredient ing_substitute = ing.get(0);
+			for(Ingredient in : ing){
+				if(!in.getAllergens().contains(a)){
+					ing_substitute = in;
+					break;
+				}
+			}
+			if(result.containsKey((Ingredient)o[0])){
+				Integer valor = result.get((Ingredient)o[0]);
+				result.remove((Ingredient)o[0]);
+				result.put(ing_substitute, valor);
+			}
+		}
+		
+		
+		return result;
+	}
+	
+	public Collection<Ingredient> ingredientsForClerk(SalesOrder order){
+		Menu menu;
+		User user;
+		Collection<Ingredient> result;
+		
+		menu = order.getMenu();
+		user = order.getSubscription().getUser();
+		
+		Map<Ingredient, Integer> mapa = getTotalQuantities(menu, user);
+		
+		result = mapa.keySet();
+		
+		return result;
+		
+	}
+	
+	public Collection<Integer> quantitiesForClerk(SalesOrder order){
+		Menu menu;
+		User user;
+		Collection<Integer> result;
+		
+		menu = order.getMenu();
+		user = order.getSubscription().getUser();
+		
+		Map<Ingredient, Integer> mapa = getTotalQuantities(menu, user);
+		
+		result = mapa.values();
+		
+		return result;
+	}
+	
+	public Collection<Object[]>  detailsIngredientsQuantitiesFormated(SalesOrder order){
+		Collection<Object[]> result = null;
+		List<Ingredient> ingredients = new ArrayList<Ingredient>(ingredientsForClerk(order));
+		List<Integer> quantities = new ArrayList<Integer> (quantitiesForClerk(order));
+		
+		for(int i = 0; i < ingredients.size(); i++){
+			Object[] o = null;
+			o[0] = ingredients.get(i).getName();
+			o[1] = quantities.get(i);
+			o[2] = ingredients.get(i).getMetricUnit();
+			result.add(o);
+		}
+		
+		return result;
 	}
 
 }
