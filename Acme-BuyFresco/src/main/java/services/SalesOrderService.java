@@ -8,6 +8,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -182,7 +183,7 @@ public class SalesOrderService {
 	}
 	
 	public Map<Ingredient, Integer> getTotalQuantities(Menu menu,  User user){
-		Map<Ingredient, Integer> result = null;
+		Map<Ingredient, Integer> result = new HashMap<Ingredient, Integer>();
 		
 		Collection<Recipe> recipes = menu.getRecipes();
 		for(Recipe rec : recipes){
@@ -254,12 +255,12 @@ public class SalesOrderService {
 	}
 	
 	public Collection<Object[]>  detailsIngredientsQuantitiesFormated(SalesOrder order){
-		Collection<Object[]> result = null;
+		Collection<Object[]> result = new ArrayList<Object[]>();
 		List<Ingredient> ingredients = new ArrayList<Ingredient>(ingredientsForClerk(order));
 		List<Integer> quantities = new ArrayList<Integer> (quantitiesForClerk(order));
 		
 		for(int i = 0; i < ingredients.size(); i++){
-			Object[] o = null;
+			Object[] o = new Object[3];
 			o[0] = ingredients.get(i).getName();
 			o[1] = quantities.get(i);
 			o[2] = ingredients.get(i).getMetricUnit();
