@@ -144,6 +144,29 @@
 		</property>
 	</bean>
 	
+	<bean id="menu3" class="domain.Menu">
+		<property name="name" value="Menu Individual"/>
+		<property name="type" value="Lactosa"/>
+		<property name="creationMoment" value="06/02/2016 21:50"/>
+		<property name="startingMoment" value="06/02/2016 09:00"/>
+		<property name="finishMoment" value="06/06/2016 09:40"/>
+		<property name="price" value="32.50"/>
+		<property name="people" value="1"/>
+		<property name="deleted" value="false"/>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe3"/>
+				<ref bean="recipe4"/>
+				<ref bean="recipe5"/>
+			</list>		
+		</property>
+		<property name="orders">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
+	
 	
 	
 	<!-- RECIPES -->
@@ -170,7 +193,6 @@
 		</property>	
 	</bean>
 	
-	
 	<bean id="recipe2" class="domain.Recipe">
 		<property name="name" value="Sandwich"/>
 		<property name="elaboration" value="Elaboracion de sandwich."/>
@@ -193,15 +215,111 @@
 		</property>	
 	</bean>
 	
+	<bean id="recipe3" class="domain.Recipe">
+		<property name="name" value="Pastel de patata y espinacas con pollo especiado"/>
+		<property name="elaboration" value="Elaboracion de Pastel de patata y espinacas con pollo especiado."/>
+		<property name="time" value="25"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu3"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity5"/>
+				<ref bean="quantity6"/>
+				<ref bean="quantity7"/>
+				<ref bean="quantity8"/>
+				<ref bean="quantity9"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>	
+	</bean>
 	
+	<bean id="recipe4" class="domain.Recipe">
+		<property name="name" value="Garbanzos con espinacas, jamón y queso de cabra"/>
+		<property name="elaboration" value="Elaboracion de Garbanzos con espinacas, jamón y queso de cabra."/>
+		<property name="time" value="15"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu3"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity10"/>
+				<ref bean="quantity11"/>
+				<ref bean="quantity15"/>
+				<ref bean="quantity18"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>	
+	</bean>
+	
+	<bean id="recipe5" class="domain.Recipe">
+		<property name="name" value="Trigo tierno en grano con pechuga especiada"/>
+		<property name="elaboration" value="Elaboracion de Trigo tierno en grano con pechuga especiada."/>
+		<property name="time" value="35"/>
+		<property name="menus">
+			<list>
+				<ref bean="menu3"/>
+			</list>		
+		</property>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity12"/>
+				<ref bean="quantity13"/>
+				<ref bean="quantity14"/>
+				<ref bean="quantity16"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>	
+	</bean>
 	
 	<!-- ALLERGEN -->
+	
+	<bean id="allergen1" class="domain.Allergen">
+		<property name="name" value="Anhídrico sulfuroso"/>
+		<property name="allergenIngredients">
+			<list>
+				<ref bean="ingredient18"/>
+			</list>		
+		</property>
+		<property name="substitutes">
+			<list>
+				<ref bean="ingredient8"/>
+			</list>		
+		</property>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe3"/>
+			</list>		
+		</property>
+		<property name="users">
+			<list>
+			
+			</list>		
+		</property>
+	</bean>
 	
 	<bean id="allergen2" class="domain.Allergen">
 		<property name="name" value="Lactosa"/>
 		<property name="allergenIngredients">
 			<list>
-				<ref bean="ingredient2"/>
+				<ref bean="ingredient2"/>				
+				<ref bean="ingredient14"/>
 			</list>		
 		</property>
 		<property name="substitutes">
@@ -213,6 +331,7 @@
 			<list>
 				<ref bean="recipe1"/>
 				<ref bean="recipe2"/>
+				<ref bean="recipe3"/>
 			</list>		
 		</property>
 		<property name="users">
@@ -221,46 +340,7 @@
 			</list>		
 		</property>
 	</bean>
-	
-	
-	<!-- <bean id="allergen1" class="domain.Allergen">
-		<property name="name" value="Lactosa"/>
-		<property name="allergenIngredients">
-			<list>
-				<ref bean="ingredient1"/>
-			</list>		
-		</property>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe1"/>
-			</list>		
-		</property>
-		<property name="users">
-			<list>
-				<ref bean="user1" />
-			</list>		
-		</property>
-	</bean> -->
-	
-	<!-- <bean id="allergen3" class="domain.Allergen">
-		<property name="name" value="Gluten"/>
-		<property name="substitutes">
-			<list>
-				<ref bean="ingredient6"/>
-			</list>		
-		</property>
-		<property name="recipes">
-			<list>
-				<ref bean="recipe2"/>
-			</list>		
-		</property>
-		<property name="users">
-			<list>
-				<ref bean="user2" />
-			</list>		
-		</property>
-	</bean> -->
-	
+		
 	<bean id="allergen4" class="domain.Allergen">
 		<property name="name" value="Gluten"/>
 		<property name="substitutes">
@@ -281,6 +361,30 @@
 		<property name="users">
 			<list>
 				<ref bean="user2" />
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="allergen5" class="domain.Allergen">
+		<property name="name" value="Almidón"/>
+		<property name="substitutes">
+			<list>
+				<ref bean="ingredient13"/>
+			</list>		
+		</property>
+		<property name="allergenIngredients">
+			<list>
+				<ref bean="ingredient19"/>
+			</list>		
+		</property>
+		<property name="recipes">
+			<list>
+				<ref bean="recipe4"/>
+			</list>		
+		</property>
+		<property name="users">
+			<list>
+				
 			</list>		
 		</property>
 	</bean>
@@ -391,11 +495,6 @@
 				<ref bean="allergen4"/>
 			</list>		
 		</property>
-		<!-- <property name="allergens">
-			<list>
-				<ref bean="allergen2"/>
-			</list>		
-		</property> -->
 	</bean>
 	
 	<bean id="ingredient7" class="domain.Ingredient">
@@ -411,6 +510,223 @@
 		</property>
 	</bean>
 	
+	<bean id="ingredient8" class="domain.Ingredient">
+		<property name="name" value="Patata"/>
+		<property name="description" value="Patata Bintje"/>
+		<property name="picture" value="http://static.consumer.es/revista/imgs/20120901/patatas7.jpg"/>
+		<property name="metricUnit" value="Kilos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity5"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				<ref bean="allergen1"/>
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient9" class="domain.Ingredient">
+		<property name="name" value="Espinacas"/>
+		<property name="description" value="Espinaca Viking"/>
+		<property name="picture" value="http://www.intersemillas.es/uploads/horticolas/(2)EPI-9703.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity6"/>
+				<ref bean="quantity15"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient10" class="domain.Ingredient">
+		<property name="name" value="Pollo"/>
+		<property name="description" value="Pollo de corral"/>
+		<property name="picture" value="http://www.labonacarn.com/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/1/8/189_pollastre_de_pages_1.jpg"/>
+		<property name="metricUnit" value="Kilos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity7"/>
+				<ref bean="quantity15"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient11" class="domain.Ingredient">
+		<property name="name" value="Miel"/>
+		<property name="description" value="Mieles Honey"/>
+		<property name="picture" value="http://www.annavalero.com/wp-content/uploads/2016/03/packaging_miel_waitrose-honey.jpg"/>
+		<property name="metricUnit" value="Tarro"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity8"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient12" class="domain.Ingredient">
+		<property name="name" value="Oregano"/>
+		<property name="description" value="Oregano Kitano"/>
+		<property name="picture" value="http://www.kitano.com.br/Content/Imgs/produtos/grande/Oregano.png"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity9"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient13" class="domain.Ingredient">
+		<property name="name" value="Garbanzos"/>
+		<property name="description" value="Garbanzos Valle"/>
+		<property name="picture" value="https://mitalega.com/admin/homeadmin/imagenes/productos/2670.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity10"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				<ref bean="allergen5"/>
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient14" class="domain.Ingredient">
+		<property name="name" value="Queso de cabra"/>
+		<property name="description" value="Queso de cabra Pajarete"/>
+		<property name="picture" value="https://www.tierrasdecadiz.com/740-thickbox_default/queso-curado-de-cabra-pajarete.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity11"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				<ref bean="allergen2"/>
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient15" class="domain.Ingredient">
+		<property name="name" value="Zanahoria"/>
+		<property name="description" value="Zanahoria Imperator"/>
+		<property name="picture" value="http://cocina.ahorro.net/files/2012/09/Zanahorias1.jpg"/>
+		<property name="metricUnit" value="Kilos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity12"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient16" class="domain.Ingredient">
+		<property name="name" value="Maiz"/>
+		<property name="description" value="Maiz Bonduelle"/>
+		<property name="picture" value="http://www.distribucionesplata.com/tienda/14907-large/maiz-bonduelle-dulce-grano-300-gr.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity13"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient17" class="domain.Ingredient">
+		<property name="name" value="Hinojo"/>
+		<property name="description" value="Hinojo de Sajonia"/>
+		<property name="picture" value="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Fenouil.jpg/220px-Fenouil.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity14"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient18" class="domain.Ingredient">
+		<property name="name" value="Yuca"/>
+		<property name="description" value="Yuca"/>
+		<property name="picture" value="http://agricultura.uprm.edu/economia/presupuesto/media/yuca.png"/>
+		<property name="metricUnit" value="Kilos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity17"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
+	
+	<bean id="ingredient19" class="domain.Ingredient">
+		<property name="name" value="Habichuelas"/>
+		<property name="description" value="Habichuelas blancas"/>
+		<property name="picture" value="http://biotrendies.com/wp-content/uploads/2015/07/judias-blancas-1000x600.jpg"/>
+		<property name="metricUnit" value="Gramos"/>
+		<property name="deleted" value="false"/>
+		<property name="quantities">
+			<list>
+				<ref bean="quantity18"/>
+			</list>		
+		</property>
+		<property name="allergens">
+			<list>
+				
+			</list>		
+		</property>
+	</bean>
 	
 	<!-- QUANTITY -->	
 	
@@ -437,6 +753,90 @@
 		<property name="value" value="1200"/>
 		<property name="recipe" ref="recipe2"/>
 		<property name="ingredient" ref="ingredient7"/>
+	</bean>	
+	
+	<bean id="quantity5" class="domain.Quantity">
+		<property name="value" value="2"/>
+		<property name="recipe" ref="recipe3"/>
+		<property name="ingredient" ref="ingredient8"/>
+	</bean>
+	
+	<bean id="quantity6" class="domain.Quantity">
+		<property name="value" value="700"/>
+		<property name="recipe" ref="recipe3"/>
+		<property name="ingredient" ref="ingredient9"/>
+	</bean>	
+	
+	<bean id="quantity7" class="domain.Quantity">
+		<property name="value" value="1"/>
+		<property name="recipe" ref="recipe3"/>
+		<property name="ingredient" ref="ingredient10"/>
+	</bean>
+	
+	<bean id="quantity8" class="domain.Quantity">
+		<property name="value" value="1"/>
+		<property name="recipe" ref="recipe3"/>
+		<property name="ingredient" ref="ingredient11"/>
+	</bean>
+	
+	<bean id="quantity9" class="domain.Quantity">
+		<property name="value" value="10"/>
+		<property name="recipe" ref="recipe3"/>
+		<property name="ingredient" ref="ingredient12"/>
+	</bean>	
+	
+	<bean id="quantity10" class="domain.Quantity">
+		<property name="value" value="200"/>
+		<property name="recipe" ref="recipe4"/>
+		<property name="ingredient" ref="ingredient13"/>
+	</bean>	
+	
+	<bean id="quantity11" class="domain.Quantity">
+		<property name="value" value="175"/>
+		<property name="recipe" ref="recipe4"/>
+		<property name="ingredient" ref="ingredient14"/>
+	</bean>
+	
+	<bean id="quantity12" class="domain.Quantity">
+		<property name="value" value="300"/>
+		<property name="recipe" ref="recipe5"/>
+		<property name="ingredient" ref="ingredient15"/>
+	</bean>	
+	
+	<bean id="quantity13" class="domain.Quantity">
+		<property name="value" value="350"/>
+		<property name="recipe" ref="recipe5"/>
+		<property name="ingredient" ref="ingredient16"/>
+	</bean>
+	
+	<bean id="quantity14" class="domain.Quantity">
+		<property name="value" value="220"/>
+		<property name="recipe" ref="recipe5"/>
+		<property name="ingredient" ref="ingredient17"/>
+	</bean>
+	
+	<bean id="quantity15" class="domain.Quantity">
+		<property name="value" value="700"/>
+		<property name="recipe" ref="recipe4"/>
+		<property name="ingredient" ref="ingredient9"/>
+	</bean>	
+	
+	<bean id="quantity16" class="domain.Quantity">
+		<property name="value" value="1"/>
+		<property name="recipe" ref="recipe5"/>
+		<property name="ingredient" ref="ingredient10"/>
+	</bean>	
+	
+	<bean id="quantity17" class="domain.Quantity">
+		<property name="value" value="2"/>
+		<property name="recipe" ref="recipe3"/>
+		<property name="ingredient" ref="ingredient18"/>
+	</bean>
+	
+	<bean id="quantity18" class="domain.Quantity">
+		<property name="value" value="350"/>
+		<property name="recipe" ref="recipe4"/>
+		<property name="ingredient" ref="ingredient19"/>
 	</bean>	
 	
 		

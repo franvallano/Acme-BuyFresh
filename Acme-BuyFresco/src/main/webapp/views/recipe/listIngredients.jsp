@@ -48,5 +48,5 @@
 
 <security:authorize access="hasRole('ADMINISTRATOR')">
 	<input type="button" name="end" value="<spring:message code="recipe.end"/>" 
-			onclick="javascript: window.location.replace('recipe/administrator/list.do')"/>
+			onclick="javascript: window.location.replace('./recipe/administrator/list.do')"/>
 </security:authorize>
