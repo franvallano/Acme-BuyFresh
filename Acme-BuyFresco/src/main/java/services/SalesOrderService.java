@@ -243,13 +243,20 @@ public class SalesOrderService {
 		Menu menu;
 		User user;
 		Collection<Integer> result;
+		Integer people;
 		
 		menu = order.getMenu();
 		user = order.getSubscription().getUser();
+		people = menu.getPeople();
 		
 		Map<Ingredient, Integer> mapa = getTotalQuantities(menu, user);
 		
 		result = mapa.values();
+		
+		//implementamos en funcion del numero de personas del menú
+		for(Integer i : result){
+			i = i*people;
+		}
 		
 		return result;
 	}
